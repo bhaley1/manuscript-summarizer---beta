@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SciSummarize — Trilingual Scientific Manuscript Summarizer</title>
-<meta name="description" content="Upload a scientific manuscript and receive an accurate 2–3 paragraph summary and 10 key points in English, French, and Spanish — with precise scientific terminology.">
+<title>SciSummarize — Multilingual Scientific Manuscript Summarizer</title>
+<meta name="description" content="Upload a scientific manuscript and receive an accurate summary and 10 key points in English, French, Spanish, Portuguese, and Italian — with precise scientific terminology.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -354,7 +354,31 @@
   .num-pt { background: var(--accent-pt-light); color: var(--accent-pt); }
   .num-it { background: var(--accent-it-light); color: var(--accent-it); }
 
-  /* ── Footer ── */
+  /* ── Multilingual UI tickers ── */
+  .ml-ticker-wrap {
+    overflow: hidden; position: relative;
+    display: inline-block;
+  }
+  .ml-ticker {
+    display: inline-flex;
+    animation: mlScroll 20s linear infinite;
+    white-space: nowrap;
+  }
+  .ml-ticker span { padding-right: 2.5rem; }
+  @keyframes mlScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  /* Static elements that show all 5 translations stacked small */
+  .ml-stack {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .ml-stack .ml-primary {
+    font-weight: 500; color: var(--ink);
+  }
+  .ml-stack .ml-secondary {
+    font-size: 11px; color: var(--ink-3); line-height: 1.5;
+  }
   footer {
     border-top: 1px solid var(--rule);
     padding: 2rem;
@@ -382,9 +406,9 @@
 </header>
 
 <section class="hero">
-  <div class="hero-eyebrow">Scientific manuscript tool</div>
+  <div class="hero-eyebrow">Scientific manuscript tool · Outil pour manuscrits scientifiques · Herramienta para manuscritos científicos</div>
   <h1>Five languages.<br>One manuscript. Instant clarity.</h1>
-  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, Spanish, Portuguese, and Italian.</p>
+  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, Spanish, Portuguese, and Italian.<br><small style="font-size:13px;color:var(--ink-3)">Déposez votre manuscrit · Suba su manuscrito · Carregue o seu manuscrito · Carica il tuo manoscritto</small></p>
   <div class="lang-flags">
     <span class="lang-flag en">English</span>
     <span class="lang-flag fr">Français</span>
@@ -400,14 +424,22 @@
   <div class="upload-card">
     <div class="card-header">
       <div class="step">1</div>
-      <h2>Upload or paste your manuscript</h2>
+      <h2>
+        Upload or paste your manuscript
+        <span style="font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px">
+          Déposez ou collez votre manuscrit · Cargue o pegue su manuscrito · Carregue ou cole o manuscrito · Carica o incolla il manoscritto
+        </span>
+      </h2>
     </div>
     <div class="card-body">
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" accept=".pdf,.txt,.md" />
         <div class="drop-icon">📄</div>
         <div class="drop-label"><strong>Drop a PDF or text file here</strong></div>
-        <div class="drop-sub">Supported: .pdf, .txt, .md — or click to browse</div>
+        <div class="drop-sub">
+          Supported: .pdf, .txt, .md — or click to browse<br>
+          <span style="font-size:11px;color:var(--ink-3)">Glissez un fichier · Arrastre un archivo · Arraste um arquivo · Trascina un file</span>
+        </div>
       </div>
 
       <div class="file-pill" id="filePill">
@@ -416,9 +448,9 @@
         <span class="pill-remove" id="removeFile">✕</span>
       </div>
 
-      <div class="or-divider">or paste text</div>
+      <div class="or-divider">or paste text · ou coller le texte · o pegar texto · ou colar texto · o incolla il testo</div>
 
-      <textarea id="pasteArea" placeholder="Paste the full manuscript text here…"></textarea>
+      <textarea id="pasteArea" placeholder="Paste the full manuscript text here… / Collez le texte ici… / Pegue el texto aquí… / Cole o texto aqui… / Incolla il testo qui…"></textarea>
 
       <div class="error-box" id="errorBox"></div>
 
@@ -442,8 +474,11 @@
   <!-- Results -->
   <div class="results" id="results">
     <div class="results-header">
-      <div class="results-title">Results</div>
-      <button class="btn-copy-all" onclick="copyAll()">Copy all as text</button>
+      <div class="results-title">
+        Results
+        <span style="font-size:13px;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--ink-3);display:block;margin-top:2px">Résultats · Resultados · Resultados · Risultati</span>
+      </div>
+      <button class="btn-copy-all" onclick="copyAll()">Copy all as text · Copier · Copiar · Copiar · Copia</button>
     </div>
 
     <div class="section-label">Abstract · Résumé · Resumen · Resumo · Sommario</div>
@@ -574,6 +609,7 @@
 
 <footer>
   <p>SciSummarize uses the <a href="https://www.anthropic.com" target="_blank">Anthropic Claude API</a> to generate summaries. Always verify scientific content against the original manuscript. &nbsp;·&nbsp; Built by <a href="https://github.com/bhaley1" target="_blank">bhaley1</a></p>
+  <p style="margin-top:6px;font-size:11px;color:var(--ink-3)">Vérifiez toujours le contenu scientifique · Verifique siempre el contenido científico · Verifique sempre o conteúdo científico · Verificare sempre il contenuto scientifico</p>
 </footer>
 
 <script>
@@ -656,7 +692,7 @@
 
     const btn = document.getElementById('runBtn');
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span style="position:relative;z-index:1">Analyzing manuscript…</span>';
+    btn.innerHTML = '<span class="spinner"></span><span style="position:relative;z-index:1;margin-left:8px">Analyzing… · Analyse en cours… · Analizando… · Analisando… · Analisi in corso…</span>';
     document.getElementById('results').classList.remove('visible');
 
     try {
@@ -682,7 +718,7 @@
 
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
-        throw new Error(err.error || 'Server error ' + resp.status);
+        throw new Error((err.error || 'Server error ' + resp.status) + (err.detail ? ' — ' + err.detail : ''));
       }
 
       const parsed = await resp.json();
