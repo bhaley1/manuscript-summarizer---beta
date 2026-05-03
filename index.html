@@ -206,18 +206,43 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 15px; font-weight: 500; letter-spacing: 0.01em;
     cursor: pointer; transition: opacity 0.15s, transform 0.1s;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
+    overflow: hidden; position: relative;
+    height: 52px;
     margin-top: 1.5rem;
   }
   .btn-run:hover:not(:disabled) { opacity: 0.85; }
   .btn-run:active:not(:disabled) { transform: scale(0.99); }
   .btn-run:disabled { opacity: 0.35; cursor: not-allowed; }
 
+  /* Scrolling ticker inside button */
+  .btn-ticker {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    white-space: nowrap;
+    animation: tickerScroll 18s linear infinite;
+  }
+  .btn-ticker span {
+    padding: 0 2.5rem;
+    font-size: 15px; font-weight: 500;
+    opacity: 0.92;
+  }
+  .btn-ticker span + span::before {
+    content: '·';
+    margin-right: 2.5rem;
+    opacity: 0.4;
+  }
+  .btn-run:disabled .btn-ticker { animation-play-state: paused; }
+  @keyframes tickerScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   .spinner {
     width: 16px; height: 16px; border-radius: 50%;
     border: 2px solid rgba(255,255,255,0.3);
     border-top-color: white;
     animation: spin 0.7s linear infinite;
+    display: inline-block; vertical-align: middle; margin-right: 8px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -263,12 +288,19 @@
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule-2); }
 
   /* ── Language grid ── */
+  .lang-grid-wrap, .bullets-grid-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    margin-bottom: 1px;
+  }
   .lang-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1px; background: var(--rule);
-    border: 1px solid var(--rule); border-radius: var(--radius-lg);
-    overflow: hidden; margin-bottom: 1px;
+    grid-template-columns: repeat(5, minmax(280px, 1fr));
+    gap: 0;
+    min-width: 1400px;
+    background: var(--rule);
+    gap: 1px;
   }
   .lang-col {
     background: white; padding: 1.25rem 1.5rem;
@@ -299,10 +331,9 @@
   /* ── Bullets ── */
   .bullets-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(280px, 1fr));
     gap: 1px; background: var(--rule);
-    border: 1px solid var(--rule); border-radius: var(--radius-lg);
-    overflow: hidden;
+    min-width: 1400px;
   }
   .bullets-col { background: white; padding: 1.25rem 1.5rem; }
   .bullet-list { list-style: none; }
@@ -336,12 +367,8 @@
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .lang-grid, .bullets-grid { grid-template-columns: 1fr 1fr; }
     .hero h1 { font-size: 1.8rem; }
     main { padding: 2rem 1rem 4rem; }
-  }
-  @media (max-width: 540px) {
-    .lang-grid, .bullets-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -356,7 +383,7 @@
 
 <section class="hero">
   <div class="hero-eyebrow">Scientific manuscript tool</div>
-  <h1>Three languages.<br>One manuscript. Instant clarity.</h1>
+  <h1>Five languages.<br>One manuscript. Instant clarity.</h1>
   <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, Spanish, Portuguese, and Italian.</p>
   <div class="lang-flags">
     <span class="lang-flag en">English</span>
@@ -396,7 +423,18 @@
       <div class="error-box" id="errorBox"></div>
 
       <button class="btn-run" id="runBtn" onclick="runSummarize()">
-        <span>Summarize in three languages</span>
+        <div class="btn-ticker">
+          <span>Summarize in five languages</span>
+          <span>Résumer en cinq langues</span>
+          <span>Resumir en cinco idiomas</span>
+          <span>Resumir em cinco línguas</span>
+          <span>Riassumi in cinque lingue</span>
+          <span>Summarize in five languages</span>
+          <span>Résumer en cinq langues</span>
+          <span>Resumir en cinco idiomas</span>
+          <span>Resumir em cinco línguas</span>
+          <span>Riassumi in cinque lingue</span>
+        </div>
       </button>
     </div>
   </div>
@@ -408,7 +446,8 @@
       <button class="btn-copy-all" onclick="copyAll()">Copy all as text</button>
     </div>
 
-    <div class="section-label">Abstract</div>
+    <div class="section-label">Abstract · Résumé · Resumen · Resumo · Sommario</div>
+    <div class="lang-grid-wrap">
     <div class="lang-grid">
       <div class="lang-col">
         <div class="lang-col-header">
@@ -446,8 +485,10 @@
         <div class="summary-text" id="abstractIt"></div>
       </div>
     </div>
+    </div><!-- end abstract wrap -->
 
-    <div class="section-label">2–3 paragraph summary</div>
+    <div class="section-label">Summary · Résumé · Resumen · Resumo · Riassunto</div>
+    <div class="lang-grid-wrap">
     <div class="lang-grid">
       <div class="lang-col">
         <div class="lang-col-header">
@@ -485,8 +526,10 @@
         <div class="summary-text" id="summaryIt"></div>
       </div>
     </div>
+    </div><!-- end summary wrap -->
 
-    <div class="section-label">10 key points</div>
+    <div class="section-label">10 Key Points · 10 Points Clés · 10 Puntos Clave · 10 Pontos Principais · 10 Punti Chiave</div>
+    <div class="bullets-grid-wrap">
     <div class="bullets-grid">
       <div class="bullets-col">
         <div class="lang-col-header">
@@ -524,6 +567,7 @@
         <ul class="bullet-list" id="bulletsIt"></ul>
       </div>
     </div>
+    </div><!-- end bullets wrap -->
   </div>
 
 </main>
@@ -612,7 +656,7 @@
 
     const btn = document.getElementById('runBtn');
     btn.disabled = true;
-    btn.innerHTML = '<div class="spinner"></div><span>Analyzing manuscript…</span>';
+    btn.innerHTML = '<span class="spinner"></span><span style="position:relative;z-index:1">Analyzing manuscript…</span>';
     document.getElementById('results').classList.remove('visible');
 
     try {
@@ -666,7 +710,18 @@
       showError('Error: ' + e.message + '. Check your Worker URL is configured in index.html.');
     } finally {
       btn.disabled = false;
-      btn.innerHTML = '<span>Summarize in three languages</span>';
+      btn.innerHTML = `<div class="btn-ticker">
+        <span>Summarize in five languages</span>
+        <span>Résumer en cinq langues</span>
+        <span>Resumir en cinco idiomas</span>
+        <span>Resumir em cinco línguas</span>
+        <span>Riassumi in cinque lingue</span>
+        <span>Summarize in five languages</span>
+        <span>Résumer en cinq langues</span>
+        <span>Resumir en cinco idiomas</span>
+        <span>Resumir em cinco línguas</span>
+        <span>Riassumi in cinque lingue</span>
+      </div>`;
     }
   }
 
