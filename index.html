@@ -24,9 +24,13 @@
     --accent-en: #1a4d8f;
     --accent-fr: #7c2d3e;
     --accent-es: #2d6b42;
+    --accent-pt: #8b5e00;
+    --accent-it: #5c2d7c;
     --accent-en-light: #e8eff8;
     --accent-fr-light: #f7eaec;
     --accent-es-light: #e8f4ec;
+    --accent-pt-light: #fdf3e0;
+    --accent-it-light: #f3eaf8;
     --radius: 4px;
     --radius-lg: 8px;
   }
@@ -99,6 +103,8 @@
   .lang-flag.en { background: var(--accent-en-light); color: var(--accent-en); border-color: rgba(26,77,143,0.2); }
   .lang-flag.fr { background: var(--accent-fr-light); color: var(--accent-fr); border-color: rgba(124,45,62,0.2); }
   .lang-flag.es { background: var(--accent-es-light); color: var(--accent-es); border-color: rgba(45,107,66,0.2); }
+  .lang-flag.pt { background: var(--accent-pt-light); color: var(--accent-pt); border-color: rgba(139,94,0,0.2); }
+  .lang-flag.it { background: var(--accent-it-light); color: var(--accent-it); border-color: rgba(92,45,124,0.2); }
 
   /* ── Main layout ── */
   main { max-width: 880px; margin: 0 auto; padding: 3rem 2rem 6rem; }
@@ -259,7 +265,7 @@
   /* ── Language grid ── */
   .lang-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1px; background: var(--rule);
     border: 1px solid var(--rule); border-radius: var(--radius-lg);
     overflow: hidden; margin-bottom: 1px;
@@ -275,10 +281,14 @@
   .dot-en { background: var(--accent-en); }
   .dot-fr { background: var(--accent-fr); }
   .dot-es { background: var(--accent-es); }
+  .dot-pt { background: var(--accent-pt); }
+  .dot-it { background: var(--accent-it); }
   .lang-name { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
   .name-en { color: var(--accent-en); }
   .name-fr { color: var(--accent-fr); }
   .name-es { color: var(--accent-es); }
+  .name-pt { color: var(--accent-pt); }
+  .name-it { color: var(--accent-it); }
 
   .summary-text {
     font-size: 14px; color: var(--ink-2); line-height: 1.8;
@@ -289,7 +299,7 @@
   /* ── Bullets ── */
   .bullets-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1px; background: var(--rule);
     border: 1px solid var(--rule); border-radius: var(--radius-lg);
     overflow: hidden;
@@ -310,6 +320,8 @@
   .num-en { background: var(--accent-en-light); color: var(--accent-en); }
   .num-fr { background: var(--accent-fr-light); color: var(--accent-fr); }
   .num-es { background: var(--accent-es-light); color: var(--accent-es); }
+  .num-pt { background: var(--accent-pt-light); color: var(--accent-pt); }
+  .num-it { background: var(--accent-it-light); color: var(--accent-it); }
 
   /* ── Footer ── */
   footer {
@@ -323,10 +335,13 @@
   footer a:hover { color: var(--ink-2); }
 
   /* ── Responsive ── */
-  @media (max-width: 700px) {
-    .lang-grid, .bullets-grid { grid-template-columns: 1fr; }
+  @media (max-width: 900px) {
+    .lang-grid, .bullets-grid { grid-template-columns: 1fr 1fr; }
     .hero h1 { font-size: 1.8rem; }
     main { padding: 2rem 1rem 4rem; }
+  }
+  @media (max-width: 540px) {
+    .lang-grid, .bullets-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -335,18 +350,20 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="#">Sci<span>Summarize</span></a>
-    <span class="header-meta">English · Français · Español</span>
+    <span class="header-meta">English · Français · Español · Português · Italiano</span>
   </div>
 </header>
 
 <section class="hero">
   <div class="hero-eyebrow">Scientific manuscript tool</div>
   <h1>Three languages.<br>One manuscript. Instant clarity.</h1>
-  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, and Spanish.</p>
+  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, Spanish, Portuguese, and Italian.</p>
   <div class="lang-flags">
     <span class="lang-flag en">English</span>
     <span class="lang-flag fr">Français</span>
     <span class="lang-flag es">Español</span>
+    <span class="lang-flag pt">Português</span>
+    <span class="lang-flag it">Italiano</span>
   </div>
 </section>
 
@@ -414,6 +431,20 @@
         </div>
         <div class="summary-text" id="abstractEs"></div>
       </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-pt"></div>
+          <span class="lang-name name-pt">Português</span>
+        </div>
+        <div class="summary-text" id="abstractPt"></div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-it"></div>
+          <span class="lang-name name-it">Italiano</span>
+        </div>
+        <div class="summary-text" id="abstractIt"></div>
+      </div>
     </div>
 
     <div class="section-label">2–3 paragraph summary</div>
@@ -439,6 +470,20 @@
         </div>
         <div class="summary-text" id="summaryEs"></div>
       </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-pt"></div>
+          <span class="lang-name name-pt">Português</span>
+        </div>
+        <div class="summary-text" id="summaryPt"></div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-it"></div>
+          <span class="lang-name name-it">Italiano</span>
+        </div>
+        <div class="summary-text" id="summaryIt"></div>
+      </div>
     </div>
 
     <div class="section-label">10 key points</div>
@@ -463,6 +508,20 @@
           <span class="lang-name name-es">Español</span>
         </div>
         <ul class="bullet-list" id="bulletsEs"></ul>
+      </div>
+      <div class="bullets-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-pt"></div>
+          <span class="lang-name name-pt">Português</span>
+        </div>
+        <ul class="bullet-list" id="bulletsPt"></ul>
+      </div>
+      <div class="bullets-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-it"></div>
+          <span class="lang-name name-it">Italiano</span>
+        </div>
+        <ul class="bullet-list" id="bulletsIt"></ul>
       </div>
     </div>
   </div>
@@ -587,12 +646,18 @@
       setParagraphs('abstractEn', parsed.abstract_en);
       setParagraphs('abstractFr', parsed.abstract_fr);
       setParagraphs('abstractEs', parsed.abstract_es);
+      setParagraphs('abstractPt', parsed.abstract_pt);
+      setParagraphs('abstractIt', parsed.abstract_it);
       setParagraphs('summaryEn', parsed.summary_en);
       setParagraphs('summaryFr', parsed.summary_fr);
       setParagraphs('summaryEs', parsed.summary_es);
+      setParagraphs('summaryPt', parsed.summary_pt);
+      setParagraphs('summaryIt', parsed.summary_it);
       renderBullets('bulletsEn', parsed.bullets_en, 'num-en');
       renderBullets('bulletsFr', parsed.bullets_fr, 'num-fr');
       renderBullets('bulletsEs', parsed.bullets_es, 'num-es');
+      renderBullets('bulletsPt', parsed.bullets_pt, 'num-pt');
+      renderBullets('bulletsIt', parsed.bullets_it, 'num-it');
 
       document.getElementById('results').classList.add('visible');
       document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -611,12 +676,18 @@
       ['ABSTRACT — ENGLISH (ORIGINAL)', document.getElementById('abstractEn').innerText],
       ['ABSTRACT — FRANÇAIS', document.getElementById('abstractFr').innerText],
       ['ABSTRACT — ESPAÑOL', document.getElementById('abstractEs').innerText],
+      ['ABSTRACT — PORTUGUÊS', document.getElementById('abstractPt').innerText],
+      ['ABSTRACT — ITALIANO', document.getElementById('abstractIt').innerText],
       ['SUMMARY — ENGLISH', document.getElementById('summaryEn').innerText],
       ['SUMMARY — FRANÇAIS', document.getElementById('summaryFr').innerText],
       ['SUMMARY — ESPAÑOL', document.getElementById('summaryEs').innerText],
+      ['SUMMARY — PORTUGUÊS', document.getElementById('summaryPt').innerText],
+      ['SUMMARY — ITALIANO', document.getElementById('summaryIt').innerText],
       ['KEY POINTS — ENGLISH', [...document.querySelectorAll('#bulletsEn .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
       ['KEY POINTS — FRANÇAIS', [...document.querySelectorAll('#bulletsFr .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
       ['KEY POINTS — ESPAÑOL', [...document.querySelectorAll('#bulletsEs .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
+      ['KEY POINTS — PORTUGUÊS', [...document.querySelectorAll('#bulletsPt .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
+      ['KEY POINTS — ITALIANO', [...document.querySelectorAll('#bulletsIt .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
     ];
     const text = sections.map(([h, b]) => `── ${h} ──\n\n${b}`).join('\n\n\n');
     navigator.clipboard.writeText(text).then(() => {
