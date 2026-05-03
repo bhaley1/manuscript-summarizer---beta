@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SciSummarize — Trilingual Scientific Manuscript Summarizer</title>
+<meta name="description" content="Upload a scientific manuscript and receive an accurate 2–3 paragraph summary and 10 key points in English, French, and Spanish — with precise scientific terminology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1814;
+    --ink-2: #4a4640;
+    --ink-3: #8a8480;
+    --paper: #faf8f4;
+    --paper-2: #f2efe8;
+    --paper-3: #e8e4db;
+    --rule: rgba(26,24,20,0.12);
+    --rule-2: rgba(26,24,20,0.06);
+    --accent-en: #1a4d8f;
+    --accent-fr: #7c2d3e;
+    --accent-es: #2d6b42;
+    --accent-en-light: #e8eff8;
+    --accent-fr-light: #f7eaec;
+    --accent-es-light: #e8f4ec;
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    background: var(--paper);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .logo {
+    font-family: 'Lora', serif;
+    font-size: 19px; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--ink); text-decoration: none;
+  }
+  .logo span { color: var(--accent-fr); }
+  .header-meta { font-size: 12px; color: var(--ink-3); letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ── Hero ── */
+  .hero {
+    border-bottom: 1px solid var(--rule);
+    padding: 4rem 2rem 3.5rem;
+    background: var(--paper-2);
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 1rem;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 32px; height: 1px; background: var(--rule);
+  }
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600; line-height: 1.2;
+    letter-spacing: -0.02em; margin-bottom: 1rem;
+    max-width: 680px; margin-left: auto; margin-right: auto;
+  }
+  .hero p {
+    font-size: 16px; color: var(--ink-2);
+    max-width: 520px; margin: 0 auto 2rem;
+    font-weight: 300; line-height: 1.8;
+  }
+  .lang-flags {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+  }
+  .lang-flag {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 4px 14px; border-radius: 99px; border: 1px solid;
+  }
+  .lang-flag.en { background: var(--accent-en-light); color: var(--accent-en); border-color: rgba(26,77,143,0.2); }
+  .lang-flag.fr { background: var(--accent-fr-light); color: var(--accent-fr); border-color: rgba(124,45,62,0.2); }
+  .lang-flag.es { background: var(--accent-es-light); color: var(--accent-es); border-color: rgba(45,107,66,0.2); }
+
+  /* ── Main layout ── */
+  main { max-width: 880px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+  /* ── Upload card ── */
+  .upload-card {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    background: white;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--rule-2);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-header .step {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); color: white;
+    font-size: 11px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-header h2 { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .card-body { padding: 1.5rem; }
+
+  /* ── Drop zone ── */
+  .drop-zone {
+    border: 1.5px dashed var(--paper-3);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: var(--paper-2);
+    position: relative; margin-bottom: 1.25rem;
+  }
+  .drop-zone:hover, .drop-zone.drag {
+    border-color: var(--ink-3);
+    background: var(--paper-3);
+  }
+  .drop-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0;
+    cursor: pointer; width: 100%; height: 100%;
+  }
+  .drop-icon {
+    width: 40px; height: 40px; margin: 0 auto 12px;
+    background: var(--paper-3); border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .drop-label { font-size: 14px; color: var(--ink-2); }
+  .drop-label strong { color: var(--ink); font-weight: 500; }
+  .drop-sub { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+  .file-pill {
+    display: none;
+    align-items: center; gap: 8px;
+    background: var(--paper-2); border: 1px solid var(--rule);
+    border-radius: 99px; padding: 5px 14px 5px 10px;
+    font-size: 13px; color: var(--ink-2);
+    margin-bottom: 1.25rem; width: fit-content;
+  }
+  .file-pill.visible { display: flex; }
+  .file-pill .pill-remove {
+    cursor: pointer; color: var(--ink-3); font-size: 14px; margin-left: 4px;
+    transition: color 0.1s;
+  }
+  .file-pill .pill-remove:hover { color: var(--ink); }
+
+  .or-divider {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--ink-3); font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 1.25rem;
+  }
+  .or-divider::before, .or-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--rule-2);
+  }
+
+  textarea {
+    width: 100%; min-height: 180px; resize: vertical;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; padding: 14px; line-height: 1.7;
+    transition: border-color 0.15s;
+  }
+  textarea:focus { outline: none; border-color: var(--ink-3); background: white; }
+  textarea::placeholder { color: var(--ink-3); }
+
+  /* ── Run button ── */
+  .btn-run {
+    width: 100%; padding: 14px;
+    background: var(--ink); color: white;
+    border: none; border-radius: var(--radius-lg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500; letter-spacing: 0.01em;
+    cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 1.5rem;
+  }
+  .btn-run:hover:not(:disabled) { opacity: 0.85; }
+  .btn-run:active:not(:disabled) { transform: scale(0.99); }
+  .btn-run:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  .spinner {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Error ── */
+  .error-box {
+    display: none;
+    background: #fdf0f0; border: 1px solid #f0c0c0;
+    border-radius: var(--radius-lg); padding: 12px 16px;
+    font-size: 13px; color: #8b2020; margin-top: 1rem;
+    line-height: 1.5;
+  }
+  .error-box.visible { display: block; }
+
+  /* ── Results ── */
+  .results { display: none; margin-top: 2.5rem; }
+  .results.visible { display: block; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .results-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .results-title {
+    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
+  }
+  .btn-copy-all {
+    font-size: 12px; color: var(--ink-3);
+    background: none; border: 1px solid var(--rule);
+    border-radius: var(--radius); padding: 5px 12px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.1s, border-color 0.1s;
+  }
+  .btn-copy-all:hover { color: var(--ink); border-color: var(--ink-3); }
+
+  /* ── Section tabs ── */
+  .section-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 500;
+    margin-bottom: 1rem; margin-top: 2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule-2); }
+
+  /* ── Language grid ── */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: var(--radius-lg);
+    overflow: hidden; margin-bottom: 1px;
+  }
+  .lang-col {
+    background: white; padding: 1.25rem 1.5rem;
+  }
+  .lang-col-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--rule-2);
+  }
+  .lang-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-en { background: var(--accent-en); }
+  .dot-fr { background: var(--accent-fr); }
+  .dot-es { background: var(--accent-es); }
+  .lang-name { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+  .name-en { color: var(--accent-en); }
+  .name-fr { color: var(--accent-fr); }
+  .name-es { color: var(--accent-es); }
+
+  .summary-text {
+    font-size: 14px; color: var(--ink-2); line-height: 1.8;
+    font-family: 'Lora', serif; font-weight: 400;
+  }
+  .summary-text p + p { margin-top: 0.85em; }
+
+  /* ── Bullets ── */
+  .bullets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .bullets-col { background: white; padding: 1.25rem 1.5rem; }
+  .bullet-list { list-style: none; }
+  .bullet-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--ink-2); line-height: 1.65;
+    padding: 8px 0; border-bottom: 1px solid var(--rule-2);
+  }
+  .bullet-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .bullet-num {
+    flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
+    font-size: 10px; font-weight: 500; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .num-en { background: var(--accent-en-light); color: var(--accent-en); }
+  .num-fr { background: var(--accent-fr-light); color: var(--accent-fr); }
+  .num-es { background: var(--accent-es-light); color: var(--accent-es); }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem;
+    text-align: center;
+    font-size: 12px; color: var(--ink-3);
+    background: var(--paper-2);
+  }
+  footer a { color: var(--ink-3); text-decoration: underline; text-underline-offset: 3px; }
+  footer a:hover { color: var(--ink-2); }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .lang-grid, .bullets-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.8rem; }
+    main { padding: 2rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">Sci<span>Summarize</span></a>
+    <span class="header-meta">English · Français · Español</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Scientific manuscript tool</div>
+  <h1>Three languages.<br>One manuscript. Instant clarity.</h1>
+  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, and Spanish.</p>
+  <div class="lang-flags">
+    <span class="lang-flag en">English</span>
+    <span class="lang-flag fr">Français</span>
+    <span class="lang-flag es">Español</span>
+  </div>
+</section>
+
+<main>
+
+  <!-- Step 1: Upload -->
+  <div class="upload-card">
+    <div class="card-header">
+      <div class="step">1</div>
+      <h2>Upload or paste your manuscript</h2>
+    </div>
+    <div class="card-body">
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept=".pdf,.txt,.md" />
+        <div class="drop-icon">📄</div>
+        <div class="drop-label"><strong>Drop a PDF or text file here</strong></div>
+        <div class="drop-sub">Supported: .pdf, .txt, .md — or click to browse</div>
+      </div>
+
+      <div class="file-pill" id="filePill">
+        <span>📎</span>
+        <span id="fileNameDisplay"></span>
+        <span class="pill-remove" id="removeFile">✕</span>
+      </div>
+
+      <div class="or-divider">or paste text</div>
+
+      <textarea id="pasteArea" placeholder="Paste the full manuscript text here…"></textarea>
+
+      <div class="error-box" id="errorBox"></div>
+
+      <button class="btn-run" id="runBtn" onclick="runSummarize()">
+        <span>Summarize in three languages</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="results-header">
+      <div class="results-title">Results</div>
+      <button class="btn-copy-all" onclick="copyAll()">Copy all as text</button>
+    </div>
+
+    <div class="section-label">2–3 paragraph summary</div>
+    <div class="lang-grid">
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-en"></div>
+          <span class="lang-name name-en">English</span>
+        </div>
+        <div class="summary-text" id="summaryEn"></div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-fr"></div>
+          <span class="lang-name name-fr">Français</span>
+        </div>
+        <div class="summary-text" id="summaryFr"></div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-es"></div>
+          <span class="lang-name name-es">Español</span>
+        </div>
+        <div class="summary-text" id="summaryEs"></div>
+      </div>
+    </div>
+
+    <div class="section-label">10 key points</div>
+    <div class="bullets-grid">
+      <div class="bullets-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-en"></div>
+          <span class="lang-name name-en">English</span>
+        </div>
+        <ul class="bullet-list" id="bulletsEn"></ul>
+      </div>
+      <div class="bullets-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-fr"></div>
+          <span class="lang-name name-fr">Français</span>
+        </div>
+        <ul class="bullet-list" id="bulletsFr"></ul>
+      </div>
+      <div class="bullets-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-es"></div>
+          <span class="lang-name name-es">Español</span>
+        </div>
+        <ul class="bullet-list" id="bulletsEs"></ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>SciSummarize uses the <a href="https://www.anthropic.com" target="_blank">Anthropic Claude API</a> to generate summaries. Always verify scientific content against the original manuscript. &nbsp;·&nbsp; Built by <a href="https://github.com/bhaley1" target="_blank">bhaley1</a></p>
+</footer>
+
+<script>
+  // ── Config ──────────────────────────────────────────────────
+  // Point this at your Cloudflare Worker URL after deploying worker.js
+  // Example: const API_ENDPOINT = 'https://scisummarize.YOUR-SUBDOMAIN.workers.dev/summarize';
+  const API_ENDPOINT = 'https://scisummarize.YOUR-SUBDOMAIN.workers.dev/summarize';
+
+  // ── File handling ────────────────────────────────────────────
+  let fileBase64 = null, fileType = null;
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag');
+    const f = e.dataTransfer.files[0];
+    if (f) handleFile(f);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  document.getElementById('removeFile').addEventListener('click', () => {
+    fileBase64 = null; fileType = null;
+    document.getElementById('filePill').classList.remove('visible');
+    fileInput.value = '';
+  });
+
+  function handleFile(f) {
+    fileType = f.type || (f.name.endsWith('.pdf') ? 'application/pdf' : 'text/plain');
+    const reader = new FileReader();
+    reader.onload = e => {
+      fileBase64 = e.target.result.split(',')[1];
+      document.getElementById('fileNameDisplay').textContent = f.name;
+      document.getElementById('filePill').classList.add('visible');
+    };
+    reader.readAsDataURL(f);
+  }
+
+  // ── UI helpers ────────────────────────────────────────────────
+  function showError(msg) {
+    const b = document.getElementById('errorBox');
+    b.textContent = msg; b.classList.add('visible');
+  }
+  function clearError() {
+    document.getElementById('errorBox').classList.remove('visible');
+  }
+
+  function renderBullets(listId, items, numClass) {
+    const ul = document.getElementById(listId);
+    ul.innerHTML = '';
+    (items || []).forEach((item, i) => {
+      const li = document.createElement('li');
+      li.className = 'bullet-item';
+      li.innerHTML = `<span class="bullet-num ${numClass}">${i + 1}</span><span>${item}</span>`;
+      ul.appendChild(li);
+    });
+  }
+
+  function setParagraphs(elId, text) {
+    const el = document.getElementById(elId);
+    el.innerHTML = '';
+    (text || '').split(/\n+/).filter(p => p.trim()).forEach(p => {
+      const para = document.createElement('p');
+      para.textContent = p.trim();
+      el.appendChild(para);
+    });
+  }
+
+  // ── Main summarize function ───────────────────────────────────
+  async function runSummarize() {
+    clearError();
+    const pasteText = document.getElementById('pasteArea').value.trim();
+
+    if (!fileBase64 && !pasteText) {
+      showError('Please upload a file or paste manuscript text before summarizing.');
+      return;
+    }
+
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner"></div><span>Analyzing manuscript…</span>';
+    document.getElementById('results').classList.remove('visible');
+
+    try {
+      // Build the payload to send to the Worker
+      const payload = {};
+      if (fileBase64 && fileType === 'application/pdf') {
+        payload.type = 'pdf';
+        payload.data = fileBase64;
+      } else if (fileBase64) {
+        // Text file — decode base64 to string
+        payload.type = 'text';
+        payload.text = decodeURIComponent(escape(atob(fileBase64)));
+      } else {
+        payload.type = 'text';
+        payload.text = pasteText;
+      }
+
+      const resp = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error || 'Server error ' + resp.status);
+      }
+
+      const parsed = await resp.json();
+
+      setParagraphs('summaryEn', parsed.summary_en);
+      setParagraphs('summaryFr', parsed.summary_fr);
+      setParagraphs('summaryEs', parsed.summary_es);
+      renderBullets('bulletsEn', parsed.bullets_en, 'num-en');
+      renderBullets('bulletsFr', parsed.bullets_fr, 'num-fr');
+      renderBullets('bulletsEs', parsed.bullets_es, 'num-es');
+
+      document.getElementById('results').classList.add('visible');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (e) {
+      showError('Error: ' + e.message + '. Check your Worker URL is configured in index.html.');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<span>Summarize in three languages</span>';
+    }
+  }
+
+  // ── Copy all ──────────────────────────────────────────────────
+  function copyAll() {
+    const sections = [
+      ['SUMMARY — ENGLISH', document.getElementById('summaryEn').innerText],
+      ['SUMMARY — FRANÇAIS', document.getElementById('summaryFr').innerText],
+      ['SUMMARY — ESPAÑOL', document.getElementById('summaryEs').innerText],
+      ['KEY POINTS — ENGLISH', [...document.querySelectorAll('#bulletsEn .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
+      ['KEY POINTS — FRANÇAIS', [...document.querySelectorAll('#bulletsFr .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
+      ['KEY POINTS — ESPAÑOL', [...document.querySelectorAll('#bulletsEs .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
+    ];
+    const text = sections.map(([h, b]) => `── ${h} ──\n\n${b}`).join('\n\n\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.btn-copy-all');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy all as text', 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
