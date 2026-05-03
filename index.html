@@ -391,6 +391,31 @@
       <button class="btn-copy-all" onclick="copyAll()">Copy all as text</button>
     </div>
 
+    <div class="section-label">Abstract</div>
+    <div class="lang-grid">
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-en"></div>
+          <span class="lang-name name-en">English (original)</span>
+        </div>
+        <div class="summary-text" id="abstractEn"></div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-fr"></div>
+          <span class="lang-name name-fr">Français</span>
+        </div>
+        <div class="summary-text" id="abstractFr"></div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-col-header">
+          <div class="lang-dot dot-es"></div>
+          <span class="lang-name name-es">Español</span>
+        </div>
+        <div class="summary-text" id="abstractEs"></div>
+      </div>
+    </div>
+
     <div class="section-label">2–3 paragraph summary</div>
     <div class="lang-grid">
       <div class="lang-col">
@@ -559,6 +584,9 @@
 
       const parsed = await resp.json();
 
+      setParagraphs('abstractEn', parsed.abstract_en);
+      setParagraphs('abstractFr', parsed.abstract_fr);
+      setParagraphs('abstractEs', parsed.abstract_es);
       setParagraphs('summaryEn', parsed.summary_en);
       setParagraphs('summaryFr', parsed.summary_fr);
       setParagraphs('summaryEs', parsed.summary_es);
@@ -580,6 +608,9 @@
   // ── Copy all ──────────────────────────────────────────────────
   function copyAll() {
     const sections = [
+      ['ABSTRACT — ENGLISH (ORIGINAL)', document.getElementById('abstractEn').innerText],
+      ['ABSTRACT — FRANÇAIS', document.getElementById('abstractFr').innerText],
+      ['ABSTRACT — ESPAÑOL', document.getElementById('abstractEs').innerText],
       ['SUMMARY — ENGLISH', document.getElementById('summaryEn').innerText],
       ['SUMMARY — FRANÇAIS', document.getElementById('summaryFr').innerText],
       ['SUMMARY — ESPAÑOL', document.getElementById('summaryEs').innerText],
