@@ -377,21 +377,17 @@
     user-select: none;
   }
   .lang-toggle:hover { border-color: var(--ink-3); }
-  .lang-toggle.locked {
-    opacity: 0.7; cursor: default;
-    background: var(--accent-en-light);
-    border-color: rgba(26,77,143,0.3);
-    color: var(--accent-en);
-  }
+  .lang-toggle.selected-en { background: var(--accent-en-light); border-color: rgba(26,77,143,0.5); color: var(--accent-en); }
   .lang-toggle.selected-fr { background: var(--accent-fr-light); border-color: rgba(124,45,62,0.5); color: var(--accent-fr); }
   .lang-toggle.selected-es { background: var(--accent-es-light); border-color: rgba(45,107,66,0.5); color: var(--accent-es); }
   .lang-toggle.selected-pt { background: var(--accent-pt-light); border-color: rgba(139,94,0,0.5); color: var(--accent-pt); }
   .lang-toggle.selected-it { background: var(--accent-it-light); border-color: rgba(92,45,124,0.5); color: var(--accent-it); }
   .lang-toggle .toggle-dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: currentColor; opacity: 0.5; flex-shrink: 0;
+    background: currentColor; opacity: 0.3; flex-shrink: 0;
     transition: opacity 0.15s;
   }
+  .lang-toggle.selected-en .toggle-dot,
   .lang-toggle.selected-fr .toggle-dot,
   .lang-toggle.selected-es .toggle-dot,
   .lang-toggle.selected-pt .toggle-dot,
@@ -517,17 +513,16 @@
       <h2>
         Select translation languages
         <span style="font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px">
-          English is always included · Sélectionnez une langue · Seleccione un idioma · Selecione um idioma · Seleziona una lingua
+          Sélectionnez une langue · Seleccione un idioma · Selecione um idioma · Seleziona una lingua · Select one language
         </span>
       </h2>
     </div>
     <div class="lang-selector-body">
-      <div class="lang-selector-note">English is always included. Select one additional language to translate into:</div>
+      <div class="lang-selector-note">Select one language. Results will be shown in English alongside your chosen language.</div>
       <div class="lang-toggle-row">
-        <div class="lang-toggle locked" title="Always included">
+        <div class="lang-toggle" id="toggle-en" onclick="toggleLang('en')">
           <span class="toggle-dot"></span>
           English
-          <span class="lang-toggle-check">✓</span>
         </div>
         <div class="lang-toggle" id="toggle-fr" onclick="toggleLang('fr')">
           <span class="toggle-dot"></span>
@@ -707,14 +702,13 @@
 <script>
   const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
 
-  // ── Language selection — radio mode (one at a time) ──────────
-  let selectedLang = null; // null means English only
+  // ── Language selection — one at a time, any of 5 ─────────────
+  let selectedLang = null;
+  const allToggleLangs = ['en', 'fr', 'es', 'pt', 'it'];
 
   function toggleLang(lang) {
-    const allLangs = ['fr', 'es', 'pt', 'it'];
-
     if (selectedLang === lang) {
-      // Clicking the active one deselects it → English only
+      // Clicking active deselects
       selectedLang = null;
       document.getElementById('toggle-' + lang).classList.remove('selected-' + lang);
     } else {
@@ -722,7 +716,6 @@
       if (selectedLang) {
         document.getElementById('toggle-' + selectedLang).classList.remove('selected-' + selectedLang);
       }
-      // Select new
       selectedLang = lang;
       document.getElementById('toggle-' + lang).classList.add('selected-' + lang);
     }
@@ -812,7 +805,13 @@
       return;
     }
 
-    const langs = selectedLang ? ['en', selectedLang] : ['en'];
+    if (!selectedLang) {
+      showError('Please select a language before summarizing.');
+      return;
+    }
+
+    // Always send English + selected language (even if English is selected, just show one column)
+    const langs = selectedLang === 'en' ? ['en'] : ['en', selectedLang];
 
     const btn = document.getElementById('runBtn');
     btn.disabled = true;
@@ -895,7 +894,7 @@
       { code: 'pt', label: 'PORTUGUÊS' },
       { code: 'it', label: 'ITALIANO' },
     ];
-    const activeLangs = selectedLang ? ['en', selectedLang] : ['en'];
+    const activeLangs = selectedLang === 'en' ? ['en'] : ['en', selectedLang];
     const active = allLangs.filter(l => activeLangs.includes(l.code));
 
     const sections = [];
