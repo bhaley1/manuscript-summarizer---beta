@@ -1,7 +1,7 @@
 # SciSummarize
 
 **Free multilingual scientific manuscript summarizer**  
-🌐 https://bhaley1.github.io/manuscript-summarizer
+🌐 https://bhaley1.github.io/manuscript-summarizer---beta
 
 ---
 
@@ -14,7 +14,7 @@ SciSummarize reads any English-language scientific manuscript and produces an ac
 
 **Step-by-step instructions:**
 
-1. **Open the tool** — go to https://bhaley1.github.io/manuscript-summarizer
+1. **Open the tool** — go to https://bhaley1.github.io/manuscript-summarizer---beta
 2. **Upload your manuscript** — drag and drop a PDF onto the upload area, or click to browse your files. You can also paste the manuscript text directly into the text box.
 3. **Select your language** — click one of the five language buttons: English, Français, Español, Português, or Italiano. Results will always appear in English alongside your chosen language.
 4. **Click Summarize** — the button will show a loading animation while the manuscript is being analyzed. This typically takes 15–45 seconds depending on the length of the paper.
@@ -43,7 +43,7 @@ SciSummarize analyse tout manuscrit scientifique en anglais et produit une tradu
 
 **Instructions étape par étape :**
 
-1. **Ouvrez l'outil** — accédez à https://bhaley1.github.io/manuscript-summarizer
+1. **Ouvrez l'outil** — accédez à https://bhaley1.github.io/manuscript-summarizer---beta
 2. **Déposez votre manuscrit** — glissez-déposez un fichier PDF dans la zone de dépôt, ou cliquez pour parcourir vos fichiers. Vous pouvez également coller le texte du manuscrit directement dans la zone de texte.
 3. **Sélectionnez votre langue** — cliquez sur l'un des cinq boutons de langue : English, Français, Español, Português ou Italiano. Les résultats s'afficheront toujours en anglais et dans la langue choisie.
 4. **Cliquez sur Résumer** — le bouton affichera une animation de chargement pendant l'analyse du manuscrit. Cela prend généralement 15 à 45 secondes selon la longueur de l'article.
@@ -72,7 +72,7 @@ SciSummarize analiza cualquier manuscrito científico en inglés y produce una t
 
 **Instrucciones paso a paso:**
 
-1. **Abra la herramienta** — acceda a https://bhaley1.github.io/manuscript-summarizer
+1. **Abra la herramienta** — acceda a https://bhaley1.github.io/manuscript-summarizer---beta
 2. **Cargue su manuscrito** — arrastre y suelte un archivo PDF en el área de carga, o haga clic para buscar sus archivos. También puede pegar el texto del manuscrito directamente en el cuadro de texto.
 3. **Seleccione su idioma** — haga clic en uno de los cinco botones de idioma: English, Français, Español, Português o Italiano. Los resultados siempre aparecerán en inglés junto con el idioma elegido.
 4. **Haga clic en Resumir** — el botón mostrará una animación de carga mientras se analiza el manuscrito. Esto generalmente toma entre 15 y 45 segundos según la extensión del artículo.
@@ -101,7 +101,7 @@ O SciSummarize analisa qualquer manuscrito científico em inglês e produz uma t
 
 **Instruções passo a passo:**
 
-1. **Abra a ferramenta** — acesse https://bhaley1.github.io/manuscript-summarizer
+1. **Abra a ferramenta** — acesse https://bhaley1.github.io/manuscript-summarizer---beta
 2. **Carregue o seu manuscrito** — arraste e solte um ficheiro PDF na área de carregamento, ou clique para procurar os seus ficheiros. Também pode colar o texto do manuscrito diretamente na caixa de texto.
 3. **Selecione o seu idioma** — clique num dos cinco botões de idioma: English, Français, Español, Português ou Italiano. Os resultados aparecerão sempre em inglês ao lado do idioma escolhido.
 4. **Clique em Resumir** — o botão mostrará uma animação de carregamento enquanto o manuscrito é analisado. Isto demora normalmente entre 15 e 45 segundos, dependendo da extensão do artigo.
@@ -130,7 +130,7 @@ SciSummarize analizza qualsiasi manoscritto scientifico in inglese e produce una
 
 **Istruzioni passo dopo passo:**
 
-1. **Apri lo strumento** — vai su https://bhaley1.github.io/manuscript-summarizer
+1. **Apri lo strumento** — vai su https://bhaley1.github.io/manuscript-summarizer---beta
 2. **Carica il tuo manoscritto** — trascina e rilascia un file PDF nell'area di caricamento, oppure fai clic per sfogliare i tuoi file. Puoi anche incollare il testo del manoscritto direttamente nella casella di testo.
 3. **Seleziona la tua lingua** — fai clic su uno dei cinque pulsanti lingua: English, Français, Español, Português o Italiano. I risultati appariranno sempre in inglese accanto alla lingua scelta.
 4. **Clicca su Riassumi** — il pulsante mostrerà un'animazione di caricamento mentre il manoscritto viene analizzato. Di solito richiede tra 15 e 45 secondi a seconda della lunghezza dell'articolo.
@@ -169,4 +169,4 @@ SciSummarize is open source. The architecture uses a static GitHub Pages fronten
 
 ---
 
-*Built by Bradd J. Haley [bhaley1](https://github.com/bhaley1) · © 2026*
+*Built by [bhaley1](https://github.com/bhaley1) · Powered by [Anthropic Claude](https://anthropic.com) · © 2026*
