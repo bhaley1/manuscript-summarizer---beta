@@ -1,1015 +1,785 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Primary SEO -->
 <title>SciSummarize (Beta) — Multilingual Scientific Manuscript Summarizer</title>
-<meta name="description" content="Free AI-powered tool for scientists. Upload any English-language scientific manuscript and receive an accurate abstract translation, summary, and 10 key findings in French, Spanish, Portuguese, or Italian — with precise scientific terminology. Beta version.">
-<meta name="keywords" content="scientific manuscript summarizer, science translation tool, research paper translation, abstract translation, French Spanish Portuguese Italian science, multilingual research tool, AI science summarizer, manuscript summary, scientific terminology translation, open access science tool">
+<meta name="description" content="Free AI-powered multilingual scientific manuscript summarizer. Upload any English-language scientific paper and receive an accurate abstract translation, summary, and 10 key findings in your language.">
+<meta name="keywords" content="scientific manuscript summarizer, science translation, research paper translation, multilingual science tool, LMIC science access">
 <meta name="author" content="bhaley1">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://bhaley1.github.io/manuscript-summarizer---beta/">
-
-<!-- Open Graph (LinkedIn, Facebook, WhatsApp previews) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bhaley1.github.io/manuscript-summarizer---beta/">
 <meta property="og:title" content="SciSummarize (Beta) — Multilingual Scientific Manuscript Summarizer">
-<meta property="og:description" content="Free AI-powered tool for scientists. Upload a scientific manuscript and receive an accurate abstract translation, summary, and 10 key findings in French, Spanish, Portuguese, or Italian — with precise scientific terminology.">
-<meta property="og:site_name" content="SciSummarize">
-<meta property="og:locale" content="en_US">
-
-<!-- Twitter/X card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SciSummarize (Beta) — Multilingual Scientific Manuscript Summarizer">
-<meta name="twitter:description" content="Free AI-powered tool for scientists. Upload a scientific paper and get an accurate abstract translation, summary, and 10 key findings in your language.">
-
-<!-- Structured data (tells Google exactly what this tool is) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "SciSummarize",
-  "url": "https://bhaley1.github.io/manuscript-summarizer---beta/",
-  "description": "Free AI-powered multilingual scientific manuscript summarizer. Upload any English-language scientific paper and receive an accurate abstract translation, 2-3 paragraph summary, and 10 key findings in French, Spanish, Portuguese, or Italian with precise scientific terminology.",
-  "applicationCategory": "ScienceApplication",
-  "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Bradd Haley",
-    "url": "https://github.com/bhaley1"
-  },
-  "inLanguage": ["en", "fr", "es", "pt", "it"],
-  "keywords": "scientific manuscript, translation, summarizer, multilingual, research paper, abstract translation"
-}
-</script>
-
-<!-- Google Analytics -->
+<meta property="og:description" content="Free AI tool for scientists. Upload a scientific paper and get an accurate summary in your language — French, Spanish, Arabic, Swahili, Hindi, and 17 more.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SciSummarize","url":"https://bhaley1.github.io/manuscript-summarizer---beta/","description":"Free AI-powered multilingual scientific manuscript summarizer supporting 22 languages.","applicationCategory":"ScienceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bradd Haley","url":"https://github.com/bhaley1"}}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1V3KSK1G4Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-1V3KSK1G4Y');
-</script>
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1V3KSK1G4Y');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#1a1814;--ink-2:#4a4640;--ink-3:#8a8480;
+  --paper:#faf8f4;--paper-2:#f2efe8;--paper-3:#e8e4db;
+  --rule:rgba(26,24,20,0.12);--rule-2:rgba(26,24,20,0.06);
+  --radius:4px;--radius-lg:8px;
+  --accent:#1a4d8f;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;min-height:100vh;}
 
-  :root {
-    --ink: #1a1814;
-    --ink-2: #4a4640;
-    --ink-3: #8a8480;
-    --paper: #faf8f4;
-    --paper-2: #f2efe8;
-    --paper-3: #e8e4db;
-    --rule: rgba(26,24,20,0.12);
-    --rule-2: rgba(26,24,20,0.06);
-    --accent-en: #1a4d8f;
-    --accent-fr: #7c2d3e;
-    --accent-es: #2d6b42;
-    --accent-pt: #8b5e00;
-    --accent-it: #5c2d7c;
-    --accent-en-light: #e8eff8;
-    --accent-fr-light: #f7eaec;
-    --accent-es-light: #e8f4ec;
-    --accent-pt-light: #fdf3e0;
-    --accent-it-light: #f3eaf8;
-    --radius: 4px;
-    --radius-lg: 8px;
-  }
+/* ── Beta notice ── */
+.beta-bar{background:#fffbeb;border-bottom:1px solid #f0c040;padding:8px 1.5rem;text-align:center;font-size:12px;color:#7d5a00;}
+.beta-bar a{color:#7d5a00;font-weight:500;}
 
-  html { scroll-behavior: smooth; }
+/* ── Header ── */
+header{border-bottom:1px solid var(--rule);padding:0 2rem;background:var(--paper);position:sticky;top:0;z-index:200;}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.logo{font-family:'Lora',serif;font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.logo span{color:#7c2d3e;}
+.beta-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:#fff3cd;color:#7d5a00;border:1px solid #f0c040;border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:middle;}
+.header-lang{font-size:12px;color:var(--ink-3);letter-spacing:0.04em;}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
+/* ── HERO ── */
+.hero{padding:4rem 2rem 3rem;background:var(--paper-2);border-bottom:1px solid var(--rule);text-align:center;}
+.hero-eyebrow{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:10px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:var(--rule);}
+.hero h1{font-family:'Lora',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:600;line-height:1.15;letter-spacing:-0.025em;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto;}
+.hero-sub{font-size:15px;color:var(--ink-2);max-width:500px;margin:0 auto 2.5rem;font-weight:300;line-height:1.8;}
 
-  /* ── Header ── */
-  header {
-    border-bottom: 1px solid var(--rule);
-    padding: 0 2rem;
-    background: var(--paper);
-    position: sticky; top: 0; z-index: 100;
-  }
-  .header-inner {
-    max-width: 1400px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 60px;
-  }
-  .logo {
-    font-family: 'Lora', serif;
-    font-size: 19px; font-weight: 600; letter-spacing: -0.02em;
-    color: var(--ink); text-decoration: none;
-  }
-  .logo span { color: var(--accent-fr); }
-  .beta-badge {
-    display: inline-block;
-    font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: #fff3cd; color: #7d5a00;
-    border: 1px solid #f0c040;
-    border-radius: 99px; padding: 2px 8px;
-    margin-left: 8px; vertical-align: middle;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .beta-notice {
-    background: #fffbeb; border-bottom: 1px solid #f0c040;
-    padding: 10px 2rem; text-align: center;
-    font-size: 13px; color: #7d5a00;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .beta-notice a { color: #7d5a00; font-weight: 500; }
-  .header-meta { font-size: 12px; color: var(--ink-3); letter-spacing: 0.04em; text-transform: uppercase; }
+/* ── Language picker ── */
+.lang-picker-section{padding:2.5rem 2rem;background:var(--paper);border-bottom:1px solid var(--rule);}
+.lang-picker-inner{max-width:1000px;margin:0 auto;}
+.lang-picker-prompt{text-align:center;font-size:13px;color:var(--ink-3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem;}
+.lang-grid-picker{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.lang-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:99px;
+  border:1.5px solid var(--rule);
+  background:white;color:var(--ink-2);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;transition:all 0.15s;
+  white-space:nowrap;
+}
+.lang-btn:hover{border-color:var(--ink-3);color:var(--ink);background:var(--paper-2);}
+.lang-btn.selected{background:var(--ink);color:white;border-color:var(--ink);}
+.lang-btn .lang-native{font-size:13px;opacity:0.85;}
+.lang-btn .lang-dot-sm{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 
-  /* ── Hero ── */
-  .hero {
-    border-bottom: 1px solid var(--rule);
-    padding: 4rem 2rem 3.5rem;
-    background: var(--paper-2);
-    text-align: center;
-  }
-  .hero-eyebrow {
-    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink-3); margin-bottom: 1rem;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .hero-eyebrow::before, .hero-eyebrow::after {
-    content: ''; width: 32px; height: 1px; background: var(--rule);
-  }
-  .hero h1 {
-    font-family: 'Lora', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 600; line-height: 1.2;
-    letter-spacing: -0.02em; margin-bottom: 1rem;
-    max-width: 680px; margin-left: auto; margin-right: auto;
-  }
-  .hero p {
-    font-size: 16px; color: var(--ink-2);
-    max-width: 520px; margin: 0 auto 2rem;
-    font-weight: 300; line-height: 1.8;
-  }
-  .lang-flags {
-    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
-  }
-  .lang-flag {
-    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
-    padding: 4px 14px; border-radius: 99px; border: 1px solid;
-  }
-  .lang-flag.en { background: var(--accent-en-light); color: var(--accent-en); border-color: rgba(26,77,143,0.2); }
-  .lang-flag.fr { background: var(--accent-fr-light); color: var(--accent-fr); border-color: rgba(124,45,62,0.2); }
-  .lang-flag.es { background: var(--accent-es-light); color: var(--accent-es); border-color: rgba(45,107,66,0.2); }
-  .lang-flag.pt { background: var(--accent-pt-light); color: var(--accent-pt); border-color: rgba(139,94,0,0.2); }
-  .lang-flag.it { background: var(--accent-it-light); color: var(--accent-it); border-color: rgba(92,45,124,0.2); }
+/* ── Main app ── */
+#appSection{display:none;max-width:1400px;margin:0 auto;padding:2.5rem 2rem 6rem;}
+#appSection.visible{display:block;animation:fadeUp 0.3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-  /* ── Main layout ── */
-  main { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+.selected-lang-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--ink);color:white;
+  border-radius:var(--radius-lg);padding:12px 20px;
+  margin-bottom:1.5rem;
+}
+.selected-lang-bar .lang-name-display{font-size:15px;font-weight:500;}
+.btn-change-lang{
+  font-size:12px;color:rgba(255,255,255,0.7);
+  background:none;border:1px solid rgba(255,255,255,0.3);
+  border-radius:var(--radius);padding:4px 12px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all 0.15s;
+}
+.btn-change-lang:hover{color:white;border-color:rgba(255,255,255,0.6);}
 
-  /* ── Upload card ── */
-  .upload-card {
-    border: 1px solid var(--rule);
-    border-radius: var(--radius-lg);
-    background: white;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-  }
-  .card-header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--rule-2);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .card-header .step {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--ink); color: white;
-    font-size: 11px; font-weight: 500;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .card-header h2 { font-size: 14px; font-weight: 500; color: var(--ink); }
-  .card-body { padding: 1.5rem; }
+/* ── Cards ── */
+.card{border:1px solid var(--rule);border-radius:var(--radius-lg);background:white;overflow:hidden;margin-bottom:1.5rem;}
+.card-header{padding:1rem 1.5rem;border-bottom:1px solid var(--rule-2);display:flex;align-items:center;gap:10px;}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.card-header h2{font-size:14px;font-weight:500;color:var(--ink);}
+.card-header .card-sub{font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px;}
+.card-body{padding:1.5rem;}
 
-  /* ── Drop zone ── */
-  .drop-zone {
-    border: 1.5px dashed var(--paper-3);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    background: var(--paper-2);
-    position: relative; margin-bottom: 1.25rem;
-  }
-  .drop-zone:hover, .drop-zone.drag {
-    border-color: var(--ink-3);
-    background: var(--paper-3);
-  }
-  .drop-zone input[type="file"] {
-    position: absolute; inset: 0; opacity: 0;
-    cursor: pointer; width: 100%; height: 100%;
-  }
-  .drop-icon {
-    width: 40px; height: 40px; margin: 0 auto 12px;
-    background: var(--paper-3); border-radius: var(--radius);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-  }
-  .drop-label { font-size: 14px; color: var(--ink-2); }
-  .drop-label strong { color: var(--ink); font-weight: 500; }
-  .drop-sub { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+/* ── Drop zone ── */
+.drop-zone{border:1.5px dashed var(--paper-3);border-radius:var(--radius-lg);padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.15s,background 0.15s;background:var(--paper-2);position:relative;margin-bottom:1.25rem;}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--ink-3);background:var(--paper-3);}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{width:38px;height:38px;margin:0 auto 10px;background:var(--paper-3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.drop-label{font-size:14px;color:var(--ink-2);}
+.drop-label strong{color:var(--ink);font-weight:500;}
+.drop-sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+.file-pill{display:none;align-items:center;gap:8px;background:var(--paper-2);border:1px solid var(--rule);border-radius:99px;padding:5px 14px 5px 10px;font-size:13px;color:var(--ink-2);margin-bottom:1.25rem;width:fit-content;}
+.file-pill.visible{display:flex;}
+.pill-remove{cursor:pointer;color:var(--ink-3);font-size:14px;margin-left:4px;}
+.pill-remove:hover{color:var(--ink);}
+.or-divider{display:flex;align-items:center;gap:12px;color:var(--ink-3);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.25rem;}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--rule-2);}
+textarea{width:100%;min-height:160px;resize:vertical;border:1px solid var(--rule);border-radius:var(--radius-lg);background:var(--paper-2);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px;line-height:1.7;transition:border-color 0.15s;}
+textarea:focus{outline:none;border-color:var(--ink-3);background:white;}
+textarea::placeholder{color:var(--ink-3);}
 
-  .file-pill {
-    display: none;
-    align-items: center; gap: 8px;
-    background: var(--paper-2); border: 1px solid var(--rule);
-    border-radius: 99px; padding: 5px 14px 5px 10px;
-    font-size: 13px; color: var(--ink-2);
-    margin-bottom: 1.25rem; width: fit-content;
-  }
-  .file-pill.visible { display: flex; }
-  .file-pill .pill-remove {
-    cursor: pointer; color: var(--ink-3); font-size: 14px; margin-left: 4px;
-    transition: color 0.1s;
-  }
-  .file-pill .pill-remove:hover { color: var(--ink); }
+/* ── Mode toggle ── */
+.mode-card{border:1px solid var(--rule);border-radius:var(--radius-lg);background:white;margin-bottom:1.5rem;overflow:hidden;}
+.mode-card-header{padding:1rem 1.5rem;border-bottom:1px solid var(--rule-2);display:flex;align-items:center;gap:10px;}
+.mode-options{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.mode-option{
+  padding:1.25rem 1.5rem;cursor:pointer;
+  border-right:1px solid var(--rule-2);
+  transition:background 0.15s;
+  position:relative;
+}
+.mode-option:last-child{border-right:none;}
+.mode-option:hover{background:var(--paper-2);}
+.mode-option.active-expert{background:#f0f4ff;}
+.mode-option.active-plain{background:#f0fff4;}
+.mode-option input[type="radio"]{position:absolute;opacity:0;}
+.mode-icon{font-size:22px;margin-bottom:6px;}
+.mode-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px;}
+.mode-desc{font-size:12px;color:var(--ink-3);line-height:1.5;}
+.mode-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-top:6px;}
+.tag-expert{background:#e8eff8;color:#1a4d8f;}
+.tag-plain{background:#e8f4ec;color:#2d6b42;}
 
-  .or-divider {
-    display: flex; align-items: center; gap: 12px;
-    color: var(--ink-3); font-size: 12px; letter-spacing: 0.06em;
-    text-transform: uppercase; margin-bottom: 1.25rem;
-  }
-  .or-divider::before, .or-divider::after {
-    content: ''; flex: 1; height: 1px; background: var(--rule-2);
-  }
+/* ── Run button ── */
+.btn-run{
+  width:60%;margin:0 auto;display:block;padding:12px;
+  background:var(--ink);color:white;border:none;border-radius:var(--radius-lg);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;transition:opacity 0.15s;overflow:hidden;position:relative;height:46px;
+}
+.btn-run:hover:not(:disabled){opacity:0.85;}
+.btn-run:disabled{opacity:0.35;cursor:not-allowed;}
+.btn-ticker{position:absolute;inset:0;display:flex;align-items:center;white-space:nowrap;animation:tickerScroll 8s linear infinite;}
+.btn-ticker span{padding:0 1.5rem;font-size:14px;font-weight:500;opacity:0.92;}
+.btn-run:disabled .btn-ticker{animation-play-state:paused;}
+@keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);border-top-color:white;animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-  textarea {
-    width: 100%; min-height: 180px; resize: vertical;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius-lg);
-    background: var(--paper-2);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px; padding: 14px; line-height: 1.7;
-    transition: border-color 0.15s;
-  }
-  textarea:focus { outline: none; border-color: var(--ink-3); background: white; }
-  textarea::placeholder { color: var(--ink-3); }
+/* ── Error ── */
+.error-box{display:none;background:#fdf0f0;border:1px solid #f0c0c0;border-radius:var(--radius-lg);padding:12px 16px;font-size:13px;color:#8b2020;margin-top:1rem;line-height:1.5;}
+.error-box.visible{display:block;}
 
-  /* ── Run button ── */
-  .btn-run {
-    width: 100%; padding: 14px;
-    background: var(--ink); color: white;
-    border: none; border-radius: var(--radius-lg);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px; font-weight: 500; letter-spacing: 0.01em;
-    cursor: pointer; transition: opacity 0.15s, transform 0.1s;
-    overflow: hidden; position: relative;
-    height: 52px;
-    margin-top: 1.5rem;
-  }
-  .btn-run:hover:not(:disabled) { opacity: 0.85; }
-  .btn-run:active:not(:disabled) { transform: scale(0.99); }
-  .btn-run:disabled { opacity: 0.35; cursor: not-allowed; }
+/* ── Results ── */
+.results{display:none;margin-top:2rem;}
+.results.visible{display:block;animation:fadeUp 0.35s ease;}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--rule);}
+.results-title{font-family:'Lora',serif;font-size:20px;font-weight:600;}
+.results-title span{font-size:13px;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--ink-3);display:block;margin-top:2px;}
+.btn-copy-all{font-size:12px;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:var(--radius);padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-copy-all:hover{color:var(--ink);}
 
-  /* Scrolling ticker inside button */
-  .btn-ticker {
-    position: absolute; inset: 0;
-    display: flex; align-items: center;
-    white-space: nowrap;
-    animation: tickerScroll 18s linear infinite;
-  }
-  .btn-ticker span {
-    padding: 0 2.5rem;
-    font-size: 15px; font-weight: 500;
-    opacity: 0.92;
-  }
-  .btn-ticker span + span::before {
-    content: '·';
-    margin-right: 2.5rem;
-    opacity: 0.4;
-  }
-  .btn-run:disabled .btn-ticker { animation-play-state: paused; }
-  @keyframes tickerScroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+/* ── Section label ── */
+.section-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:1rem;margin-top:2rem;display:flex;align-items:center;gap:10px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule-2);}
 
-  .spinner {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    animation: spin 0.7s linear infinite;
-    display: inline-block; vertical-align: middle; margin-right: 8px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ── Two-column result grid ── */
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2px;}
+.result-col{background:white;padding:1.5rem 2rem;}
+.result-col.rtl{direction:rtl;text-align:right;}
+.result-col.rtl .col-header{flex-direction:row-reverse;}
+.col-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--rule-2);}
+.col-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.col-lang-name{font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;}
+.summary-text{font-size:14px;color:var(--ink-2);line-height:1.8;font-family:'Lora',serif;}
+.summary-text p+p{margin-top:0.85em;}
+.bullet-list{list-style:none;}
+.bullet-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);line-height:1.65;padding:8px 0;border-bottom:1px solid var(--rule-2);}
+.bullet-item:last-child{border-bottom:none;padding-bottom:0;}
+.bullet-num{flex-shrink:0;width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:500;margin-top:2px;display:flex;align-items:center;justify-content:center;}
 
-  /* ── Error ── */
-  .error-box {
-    display: none;
-    background: #fdf0f0; border: 1px solid #f0c0c0;
-    border-radius: var(--radius-lg); padding: 12px 16px;
-    font-size: 13px; color: #8b2020; margin-top: 1rem;
-    line-height: 1.5;
-  }
-  .error-box.visible { display: block; }
+/* ── Glossary ── */
+.glossary-wrap{border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2px;}
+.glossary-table{width:100%;border-collapse:collapse;}
+.glossary-table th{background:var(--paper-2);padding:10px 16px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule);text-align:left;}
+.glossary-table td{padding:10px 16px;font-size:14px;color:var(--ink-2);border-bottom:1px solid var(--rule-2);vertical-align:top;}
+.glossary-table tr:last-child td{border-bottom:none;}
+.glossary-table tr:hover td{background:var(--paper-2);}
+.g-term{font-weight:500;color:var(--ink);}
+.g-def{color:var(--ink-3);font-size:12px;margin-top:2px;}
 
-  /* ── Results ── */
-  .results { display: none; margin-top: 2.5rem; }
-  .results.visible { display: block; animation: fadeUp 0.35s ease; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+/* ── Citation ── */
+.citation-wrap{border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;}
+.citation-tabs{display:flex;border-bottom:1px solid var(--rule);background:var(--paper-2);}
+.cit-tab{padding:10px 20px;font-size:13px;font-weight:500;color:var(--ink-3);cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;transition:all 0.15s;}
+.cit-tab.active{color:var(--ink);border-bottom-color:var(--ink);}
+.citation-body{padding:1.25rem 1.5rem;}
+.citation-text{font-family:'Lora',serif;font-size:14px;color:var(--ink-2);line-height:1.8;background:var(--paper-2);border-radius:var(--radius);padding:12px 16px;margin-bottom:8px;}
+.citation-note{font-size:12px;color:var(--ink-3);}
+.btn-copy-cite{font-size:12px;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:var(--radius);padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;float:right;margin-top:-2px;}
+.btn-copy-cite:hover{color:var(--ink);}
 
-  .results-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 1.5rem; padding-bottom: 1rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .results-title {
-    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
-  }
-  .btn-copy-all {
-    font-size: 12px; color: var(--ink-3);
-    background: none; border: 1px solid var(--rule);
-    border-radius: var(--radius); padding: 5px 12px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: color 0.1s, border-color 0.1s;
-  }
-  .btn-copy-all:hover { color: var(--ink); border-color: var(--ink-3); }
+/* ── Footer ── */
+footer{border-top:1px solid var(--rule);padding:2rem;text-align:center;font-size:12px;color:var(--ink-3);background:var(--paper-2);}
+footer a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;}
 
-  /* ── Section tabs ── */
-  .section-label {
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink-3); font-weight: 500;
-    margin-bottom: 1rem; margin-top: 2rem;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule-2); }
+/* ── Language accent colors ── */
+.c-en{color:#1a4d8f;}.bg-en{background:#e8eff8;}.dot-en{background:#1a4d8f;}
+.c-fr{color:#7c2d3e;}.bg-fr{background:#f7eaec;}.dot-fr{background:#7c2d3e;}
+.c-es{color:#2d6b42;}.bg-es{background:#e8f4ec;}.dot-es{background:#2d6b42;}
+.c-pt{color:#8b5e00;}.bg-pt{background:#fdf3e0;}.dot-pt{background:#8b5e00;}
+.c-it{color:#5c2d7c;}.bg-it{background:#f3eaf8;}.dot-it{background:#5c2d7c;}
+.c-ar{color:#8b1a1a;}.bg-ar{background:#fdf0f0;}.dot-ar{background:#8b1a1a;}
+.c-zh{color:#8b0000;}.bg-zh{background:#fff0f0;}.dot-zh{background:#8b0000;}
+.c-sw{color:#1a6b5c;}.bg-sw{background:#e8f5f2;}.dot-sw{background:#1a6b5c;}
+.c-am{color:#6b3a1a;}.bg-am{background:#fdf3ec;}.dot-am{background:#6b3a1a;}
+.c-hi{color:#b35900;}.bg-hi{background:#fff3e0;}.dot-hi{background:#b35900;}
+.c-bn{color:#005c8b;}.bg-bn{background:#e0f3ff;}.dot-bn{background:#005c8b;}
+.c-id{color:#8b0033;}.bg-id{background:#ffe0ec;}.dot-id{background:#8b0033;}
+.c-uk{color:#003f8b;}.bg-uk{background:#e0ecff;}.dot-uk{background:#003f8b;}
+.c-ha{color:#5c4a00;}.bg-ha{background:#fffbe0;}.dot-ha{background:#5c4a00;}
+.c-yo{color:#3d005c;}.bg-yo{background:#f5e8ff;}.dot-yo{background:#3d005c;}
+.c-ln{color:#005c3d;}.bg-ln{background:#e0fff4;}.dot-ln{background:#005c3d;}
+.c-mg{color:#005c8b;}.bg-mg{background:#e0f3ff;}.dot-mg{background:#005c8b;}
+.c-ne{color:#8b1a00;}.bg-ne{background:#fff0ee;}.dot-ne{background:#8b1a00;}
+.c-tl{color:#005c5c;}.bg-tl{background:#e0fafa;}.dot-tl{background:#005c5c;}
+.c-rw{color:#3d5c00;}.bg-rw{background:#f0ffe0;}.dot-rw{background:#3d5c00;}
+.c-rn{color:#5c3d00;}.bg-rn{background:#fff3e0;}.dot-rn{background:#5c3d00;}
+.c-ny{color:#00405c;}.bg-ny{background:#e0f0ff;}.dot-ny{background:#00405c;}
 
-  /* ── Language grid ── */
-  .lang-grid-wrap, .bullets-grid-wrap {
-    border: 1px solid var(--rule);
-    border-radius: var(--radius-lg);
-    margin-bottom: 1px;
-    overflow: hidden;
-  }
-  .lang-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--rule);
-  }
-  .lang-col {
-    background: white; padding: 1.5rem 2rem;
-  }
-  .lang-col-header {
-    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
-    padding-bottom: 10px; border-bottom: 1px solid var(--rule-2);
-  }
-  .lang-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .dot-en { background: var(--accent-en); }
-  .dot-fr { background: var(--accent-fr); }
-  .dot-es { background: var(--accent-es); }
-  .dot-pt { background: var(--accent-pt); }
-  .dot-it { background: var(--accent-it); }
-  .lang-name { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-  .name-en { color: var(--accent-en); }
-  .name-fr { color: var(--accent-fr); }
-  .name-es { color: var(--accent-es); }
-  .name-pt { color: var(--accent-pt); }
-  .name-it { color: var(--accent-it); }
-
-  .summary-text {
-    font-size: 14px; color: var(--ink-2); line-height: 1.8;
-    font-family: 'Lora', serif; font-weight: 400;
-  }
-  .summary-text p + p { margin-top: 0.85em; }
-
-  /* ── Bullets ── */
-  .bullets-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--rule);
-  }
-  .bullets-col { background: white; padding: 1.5rem 2rem; }
-  .bullet-list { list-style: none; }
-  .bullet-item {
-    display: flex; gap: 10px; align-items: flex-start;
-    font-size: 13px; color: var(--ink-2); line-height: 1.65;
-    padding: 8px 0; border-bottom: 1px solid var(--rule-2);
-  }
-  .bullet-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .bullet-num {
-    flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
-    font-size: 10px; font-weight: 500; margin-top: 2px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .num-en { background: var(--accent-en-light); color: var(--accent-en); }
-  .num-fr { background: var(--accent-fr-light); color: var(--accent-fr); }
-  .num-es { background: var(--accent-es-light); color: var(--accent-es); }
-  .num-pt { background: var(--accent-pt-light); color: var(--accent-pt); }
-  .num-it { background: var(--accent-it-light); color: var(--accent-it); }
-
-  /* ── Language selector (Step 2) ── */
-  .lang-selector-card {
-    border: 1px solid var(--rule);
-    border-radius: var(--radius-lg);
-    background: white;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-  }
-  .lang-selector-body { padding: 1.25rem 1.5rem; }
-  .lang-selector-note {
-    font-size: 12px; color: var(--ink-3); margin-bottom: 1rem;
-  }
-  .lang-toggle-row {
-    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
-  }
-  .lang-toggle {
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 18px; border-radius: 99px;
-    border: 1.5px solid var(--rule);
-    background: var(--paper-2);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px; font-weight: 500;
-    cursor: pointer; transition: all 0.15s;
-    user-select: none;
-  }
-  .lang-toggle:hover { border-color: var(--ink-3); }
-  .lang-toggle.selected-en { background: var(--accent-en-light); border-color: rgba(26,77,143,0.5); color: var(--accent-en); }
-  .lang-toggle.selected-fr { background: var(--accent-fr-light); border-color: rgba(124,45,62,0.5); color: var(--accent-fr); }
-  .lang-toggle.selected-es { background: var(--accent-es-light); border-color: rgba(45,107,66,0.5); color: var(--accent-es); }
-  .lang-toggle.selected-pt { background: var(--accent-pt-light); border-color: rgba(139,94,0,0.5); color: var(--accent-pt); }
-  .lang-toggle.selected-it { background: var(--accent-it-light); border-color: rgba(92,45,124,0.5); color: var(--accent-it); }
-  .lang-toggle .toggle-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: currentColor; opacity: 0.3; flex-shrink: 0;
-    transition: opacity 0.15s;
-  }
-  .lang-toggle.selected-en .toggle-dot,
-  .lang-toggle.selected-fr .toggle-dot,
-  .lang-toggle.selected-es .toggle-dot,
-  .lang-toggle.selected-pt .toggle-dot,
-  .lang-toggle.selected-it .toggle-dot { opacity: 1; }
-  .lang-toggle-check {
-    font-size: 12px; margin-left: 2px;
-  }
-  .ml-ticker-wrap {
-    overflow: hidden; position: relative;
-    display: inline-block;
-  }
-  .ml-ticker {
-    display: inline-flex;
-    animation: mlScroll 20s linear infinite;
-    white-space: nowrap;
-  }
-  .ml-ticker span { padding-right: 2.5rem; }
-  @keyframes mlScroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  /* Static elements that show all 5 translations stacked small */
-  .ml-stack {
-    display: flex; flex-direction: column; gap: 2px;
-  }
-  .ml-stack .ml-primary {
-    font-weight: 500; color: var(--ink);
-  }
-  .ml-stack .ml-secondary {
-    font-size: 11px; color: var(--ink-3); line-height: 1.5;
-  }
-  footer {
-    border-top: 1px solid var(--rule);
-    padding: 2rem;
-    text-align: center;
-    font-size: 12px; color: var(--ink-3);
-    background: var(--paper-2);
-  }
-  footer a { color: var(--ink-3); text-decoration: underline; text-underline-offset: 3px; }
-  footer a:hover { color: var(--ink-2); }
-
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .hero h1 { font-size: 1.8rem; }
-    main { padding: 2rem 1rem 4rem; }
-  }
+/* ── Responsive ── */
+@media(max-width:700px){
+  .result-grid{grid-template-columns:1fr;}
+  .mode-options{grid-template-columns:1fr;}
+  .mode-option{border-right:none;border-bottom:1px solid var(--rule-2);}
+  .hero h1{font-size:2rem;}
+  .btn-run{width:90%;}
+}
 </style>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1V3KSK1G4Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-1V3KSK1G4Y');
-</script>
-
 </head>
 <body>
+
+<div class="beta-bar">
+  🧪 <strong>Beta</strong> — AI-generated content. Always verify against the original manuscript. &nbsp;·&nbsp;
+  <a href="https://github.com/bhaley1/manuscript-summarizer---beta/issues" target="_blank">Feedback</a>
+</div>
 
 <header>
   <div class="header-inner">
     <a class="logo" href="#">Sci<span>Summarize</span><span class="beta-badge">Beta</span></a>
-    <span class="header-meta">English · Français · Español · Português · Italiano</span>
+    <span class="header-lang" id="headerLangDisplay"></span>
   </div>
 </header>
 
-<div class="beta-notice">
-  🧪 <strong>Beta version</strong> — SciSummarize is under active development. Results are AI-generated; always verify scientific content against the original manuscript. Feedback welcome at <a href="https://github.com/bhaley1/manuscript-summarizer/issues" target="_blank">GitHub Issues</a>.
-  &nbsp;·&nbsp; <em>Version bêta</em> · <em>Versión beta</em> · <em>Versão beta</em> · <em>Versione beta</em>
-</div>
-
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Scientific manuscript tool · Outil pour manuscrits scientifiques · Herramienta para manuscritos científicos</div>
-  <h1>Your language.<br>One manuscript. Instant clarity.</h1>
-  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings in English plus your chosen language — with precise scientific terminology.</p>
-  <div class="lang-flags">
-    <span class="lang-flag en">English</span>
-    <span class="lang-flag fr">Français</span>
-    <span class="lang-flag es">Español</span>
-    <span class="lang-flag pt">Português</span>
-    <span class="lang-flag it">Italiano</span>
+  <div class="hero-eyebrow" id="heroEyebrow">Scientific Manuscript Tool</div>
+  <h1 id="heroTitle">Your language.<br>One manuscript.<br>Instant clarity.</h1>
+  <p class="hero-sub" id="heroSub">Upload any English-language scientific paper and receive an accurate summary and key findings in your language — with precise scientific terminology.</p>
+</section>
+
+<!-- LANGUAGE PICKER -->
+<section class="lang-picker-section">
+  <div class="lang-picker-inner">
+    <div class="lang-picker-prompt" id="pickerPrompt">SELECT YOUR LANGUAGE · CHOISISSEZ VOTRE LANGUE · SELECCIONE SU IDIOMA</div>
+    <div class="lang-grid-picker" id="langGridPicker">
+      <!-- Buttons injected by JS -->
+    </div>
   </div>
 </section>
 
-<main>
+<!-- APP (shown after language selected) -->
+<div id="appSection">
+
+  <!-- Selected language bar -->
+  <div class="selected-lang-bar">
+    <span class="lang-name-display" id="selectedLangDisplay"></span>
+    <button class="btn-change-lang" id="btnChangeLang" onclick="changeLang()"></button>
+  </div>
 
   <!-- Step 1: Upload -->
-  <div class="upload-card">
+  <div class="card">
     <div class="card-header">
-      <div class="step">1</div>
-      <h2>
-        Upload or paste your manuscript
-        <span style="font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px">
-          Déposez ou collez votre manuscrit · Cargue o pegue su manuscrito · Carregue ou cole o manuscrito · Carica o incolla il manoscritto
-        </span>
-      </h2>
+      <div class="step-num">1</div>
+      <h2 id="step1Title">Upload or paste your manuscript<span class="card-sub" id="step1Sub">PDF, .txt, or .md file — or paste text below</span></h2>
     </div>
     <div class="card-body">
       <div class="drop-zone" id="dropZone">
-        <input type="file" id="fileInput" accept=".pdf,.txt,.md" />
+        <input type="file" id="fileInput" accept=".pdf,.txt,.md">
         <div class="drop-icon">📄</div>
-        <div class="drop-label"><strong>Drop a PDF or text file here</strong></div>
-        <div class="drop-sub">
-          Supported: .pdf, .txt, .md — or click to browse<br>
-          <span style="font-size:11px;color:var(--ink-3)">Glissez un fichier · Arrastre un archivo · Arraste um arquivo · Trascina un file</span>
-        </div>
+        <div class="drop-label" id="dropLabel"><strong>Drop a file here</strong></div>
+        <div class="drop-sub" id="dropSub">Supported: .pdf, .txt, .md — or click to browse</div>
       </div>
-
       <div class="file-pill" id="filePill">
-        <span>📎</span>
-        <span id="fileNameDisplay"></span>
+        <span>📎</span><span id="fileNameDisplay"></span>
         <span class="pill-remove" id="removeFile">✕</span>
       </div>
-
-      <div class="or-divider">or paste text · ou coller le texte · o pegar texto · ou colar texto · o incolla il testo</div>
-
-      <textarea id="pasteArea" placeholder="Paste the full manuscript text here… / Collez le texte ici… / Pegue el texto aquí… / Cole o texto aqui… / Incolla il testo qui…"></textarea>
-
+      <div class="or-divider" id="orDivider">or paste text</div>
+      <textarea id="pasteArea" placeholder="Paste the full manuscript text here…"></textarea>
       <div class="error-box" id="errorBox"></div>
     </div>
   </div>
 
-  <!-- Step 2: Language selector -->
-  <div class="lang-selector-card">
-    <div class="card-header">
-      <div class="step">2</div>
-      <h2>
-        Select translation languages
-        <span style="font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px">
-          Sélectionnez une langue · Seleccione un idioma · Selecione um idioma · Seleziona una lingua · Select one language
-        </span>
-      </h2>
+  <!-- Step 2: Mode -->
+  <div class="mode-card">
+    <div class="mode-card-header">
+      <div class="step-num">2</div>
+      <h2 id="step2Title">Choose your summary style<span class="card-sub" id="step2Sub">Select how detailed you want the results</span></h2>
     </div>
-    <div class="lang-selector-body">
-      <div class="lang-selector-note">Select one language. Results will be shown in English alongside your chosen language.</div>
-      <div class="lang-toggle-row">
-        <div class="lang-toggle" id="toggle-en" onclick="toggleLang('en')">
-          <span class="toggle-dot"></span>
-          English
-        </div>
-        <div class="lang-toggle" id="toggle-fr" onclick="toggleLang('fr')">
-          <span class="toggle-dot"></span>
-          Français
-        </div>
-        <div class="lang-toggle" id="toggle-es" onclick="toggleLang('es')">
-          <span class="toggle-dot"></span>
-          Español
-        </div>
-        <div class="lang-toggle" id="toggle-pt" onclick="toggleLang('pt')">
-          <span class="toggle-dot"></span>
-          Português
-        </div>
-        <div class="lang-toggle" id="toggle-it" onclick="toggleLang('it')">
-          <span class="toggle-dot"></span>
-          Italiano
-        </div>
+    <div class="mode-options">
+      <div class="mode-option active-expert" id="modeExpert" onclick="setMode('expert')">
+        <div class="mode-icon">🎓</div>
+        <div class="mode-title" id="expertTitle">Expert</div>
+        <div class="mode-desc" id="expertDesc">Technical language · 10 key points · For researchers</div>
+        <span class="mode-tag tag-expert" id="expertTag">Researchers</span>
+      </div>
+      <div class="mode-option" id="modePlain" onclick="setMode('plain')">
+        <div class="mode-icon">👥</div>
+        <div class="mode-title" id="plainTitle">General Public</div>
+        <div class="mode-desc" id="plainDesc">Plain language · 3 key takeaways · For everyone</div>
+        <span class="mode-tag tag-plain" id="plainTag">Everyone</span>
       </div>
     </div>
   </div>
 
   <!-- Step 3: Run -->
-  <button class="btn-run" id="runBtn" onclick="runSummarize()" style="margin-bottom:2rem;">
-    <div class="btn-ticker">
-      <span>Summarize in English + selected language</span>
-      <span>Résumer en anglais + langue choisie</span>
-      <span>Resumir en inglés + idioma elegido</span>
-      <span>Resumir em inglês + língua escolhida</span>
-      <span>Riassumi in inglese + lingua scelta</span>
-      <span>Summarize in English + selected language</span>
-      <span>Résumer en anglais + langue choisie</span>
-      <span>Resumir en inglés + idioma elegido</span>
-      <span>Resumir em inglês + língua escolhida</span>
-      <span>Riassumi in inglese + lingua scelta</span>
+  <button class="btn-run" id="runBtn" onclick="runSummarize()">
+    <div class="btn-ticker" id="btnTicker">
+      <!-- filled by JS -->
     </div>
   </button>
+
+  <!-- Results -->
   <div class="results" id="results">
     <div class="results-header">
       <div class="results-title">
-        Results
-        <span style="font-size:13px;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--ink-3);display:block;margin-top:2px">Résultats · Resultados · Resultados · Risultati</span>
+        <span id="resultsTitle">Results</span>
+        <span id="resultsSubtitle">Résultats · Resultados · نتائج</span>
       </div>
-      <button class="btn-copy-all" onclick="copyAll()">Copy all as text · Copier · Copiar · Copiar · Copia</button>
+      <button class="btn-copy-all" onclick="copyAll()" id="btnCopyAll">Copy all as text</button>
     </div>
 
-    <div class="section-label">Abstract · Résumé · Resumen · Resumo · Sommario</div>
-    <div class="lang-grid-wrap">
-    <div class="lang-grid">
-      <div class="lang-col" data-lang="en">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-en"></div>
-          <span class="lang-name name-en">English (original)</span>
-        </div>
+    <!-- Abstract -->
+    <div class="section-label" id="labelAbstract">Abstract</div>
+    <div class="result-grid">
+      <div class="result-col">
+        <div class="col-header"><div class="col-dot dot-en"></div><span class="col-lang-name c-en">English (original)</span></div>
         <div class="summary-text" id="abstractEn"></div>
       </div>
-      <div class="lang-col" data-lang="fr">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-fr"></div>
-          <span class="lang-name name-fr">Français</span>
-        </div>
-        <div class="summary-text" id="abstractFr"></div>
-      </div>
-      <div class="lang-col" data-lang="es">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-es"></div>
-          <span class="lang-name name-es">Español</span>
-        </div>
-        <div class="summary-text" id="abstractEs"></div>
-      </div>
-      <div class="lang-col" data-lang="pt">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-pt"></div>
-          <span class="lang-name name-pt">Português</span>
-        </div>
-        <div class="summary-text" id="abstractPt"></div>
-      </div>
-      <div class="lang-col" data-lang="it">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-it"></div>
-          <span class="lang-name name-it">Italiano</span>
-        </div>
-        <div class="summary-text" id="abstractIt"></div>
+      <div class="result-col" id="colAbstractLang">
+        <div class="col-header"><div class="col-dot" id="dotAbstractLang"></div><span class="col-lang-name" id="nameAbstractLang"></span></div>
+        <div class="summary-text" id="abstractLang"></div>
       </div>
     </div>
-    </div><!-- end abstract wrap -->
 
-    <div class="section-label">Summary · Résumé · Resumen · Resumo · Riassunto</div>
-    <div class="lang-grid-wrap">
-    <div class="lang-grid">
-      <div class="lang-col" data-lang="en">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-en"></div>
-          <span class="lang-name name-en">English</span>
-        </div>
+    <!-- Summary -->
+    <div class="section-label" id="labelSummary">Summary</div>
+    <div class="result-grid">
+      <div class="result-col">
+        <div class="col-header"><div class="col-dot dot-en"></div><span class="col-lang-name c-en">English</span></div>
         <div class="summary-text" id="summaryEn"></div>
       </div>
-      <div class="lang-col" data-lang="fr">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-fr"></div>
-          <span class="lang-name name-fr">Français</span>
-        </div>
-        <div class="summary-text" id="summaryFr"></div>
-      </div>
-      <div class="lang-col" data-lang="es">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-es"></div>
-          <span class="lang-name name-es">Español</span>
-        </div>
-        <div class="summary-text" id="summaryEs"></div>
-      </div>
-      <div class="lang-col" data-lang="pt">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-pt"></div>
-          <span class="lang-name name-pt">Português</span>
-        </div>
-        <div class="summary-text" id="summaryPt"></div>
-      </div>
-      <div class="lang-col" data-lang="it">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-it"></div>
-          <span class="lang-name name-it">Italiano</span>
-        </div>
-        <div class="summary-text" id="summaryIt"></div>
+      <div class="result-col" id="colSummaryLang">
+        <div class="col-header"><div class="col-dot" id="dotSummaryLang"></div><span class="col-lang-name" id="nameSummaryLang"></span></div>
+        <div class="summary-text" id="summaryLang"></div>
       </div>
     </div>
-    </div><!-- end summary wrap -->
 
-    <div class="section-label">10 Key Points · 10 Points Clés · 10 Puntos Clave · 10 Pontos Principais · 10 Punti Chiave</div>
-    <div class="bullets-grid-wrap">
-    <div class="bullets-grid">
-      <div class="bullets-col" data-lang="en">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-en"></div>
-          <span class="lang-name name-en">English</span>
-        </div>
+    <!-- Key Points -->
+    <div class="section-label" id="labelBullets">Key Points</div>
+    <div class="result-grid">
+      <div class="result-col">
+        <div class="col-header"><div class="col-dot dot-en"></div><span class="col-lang-name c-en">English</span></div>
         <ul class="bullet-list" id="bulletsEn"></ul>
       </div>
-      <div class="bullets-col">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-fr"></div>
-          <span class="lang-name name-fr">Français</span>
-        </div>
-        <ul class="bullet-list" id="bulletsFr"></ul>
-      </div>
-      <div class="bullets-col">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-es"></div>
-          <span class="lang-name name-es">Español</span>
-        </div>
-        <ul class="bullet-list" id="bulletsEs"></ul>
-      </div>
-      <div class="bullets-col">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-pt"></div>
-          <span class="lang-name name-pt">Português</span>
-        </div>
-        <ul class="bullet-list" id="bulletsPt"></ul>
-      </div>
-      <div class="bullets-col">
-        <div class="lang-col-header">
-          <div class="lang-dot dot-it"></div>
-          <span class="lang-name name-it">Italiano</span>
-        </div>
-        <ul class="bullet-list" id="bulletsIt"></ul>
+      <div class="result-col" id="colBulletsLang">
+        <div class="col-header"><div class="col-dot" id="dotBulletsLang"></div><span class="col-lang-name" id="nameBulletsLang"></span></div>
+        <ul class="bullet-list" id="bulletsLang"></ul>
       </div>
     </div>
-    </div><!-- end bullets wrap -->
-  </div>
 
-</main>
+    <!-- Glossary -->
+    <div class="section-label" id="labelGlossary">🔑 Key Terms</div>
+    <div class="glossary-wrap" id="glossaryWrap">
+      <table class="glossary-table">
+        <thead><tr>
+          <th id="glossaryH1">Scientific Term</th>
+          <th id="glossaryH2">Plain English Definition</th>
+          <th id="glossaryH3">Translation</th>
+        </tr></thead>
+        <tbody id="glossaryBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Citation -->
+    <div class="section-label" id="labelCitation">📎 Cite This Paper</div>
+    <div class="citation-wrap">
+      <div class="citation-tabs">
+        <button class="cit-tab active" onclick="showCitation('apa')">APA</button>
+        <button class="cit-tab" onclick="showCitation('vancouver')">Vancouver</button>
+        <button class="cit-tab" onclick="showCitation('harvard')">Harvard</button>
+      </div>
+      <div class="citation-body">
+        <button class="btn-copy-cite" onclick="copyCitation()" id="btnCopyCite">Copy</button>
+        <div class="citation-text" id="citationText"></div>
+        <div class="citation-note" id="citationNote"></div>
+      </div>
+    </div>
+
+  </div><!-- /results -->
+</div><!-- /appSection -->
 
 <footer>
-  <p>SciSummarize uses the <a href="https://www.anthropic.com" target="_blank">Anthropic Claude API</a> to generate summaries. Always verify scientific content against the original manuscript. &nbsp;·&nbsp; Built by <a href="https://github.com/bhaley1" target="_blank">bhaley1</a></p>
-  <p style="margin-top:6px;font-size:11px;color:var(--ink-3)">Vérifiez toujours le contenu scientifique · Verifique siempre el contenido científico · Verifique sempre o conteúdo científico · Verificare sempre il contenuto scientifico</p>
+  <p>SciSummarize uses the <a href="https://www.anthropic.com" target="_blank">Anthropic Claude API</a>.
+  Always verify scientific content against the original manuscript. &nbsp;·&nbsp;
+  Built by <a href="https://github.com/bhaley1" target="_blank">bhaley1</a> &nbsp;·&nbsp;
+  <a href="https://github.com/bhaley1/manuscript-summarizer---beta" target="_blank">GitHub</a></p>
 </footer>
 
 <script>
-  const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
+const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
 
-  // ── Language selection — one at a time, any of 5 ─────────────
-  let selectedLang = null;
-  const allToggleLangs = ['en', 'fr', 'es', 'pt', 'it'];
+// ── Language definitions ──────────────────────────────────────────────────
+const LANGS = [
+  {code:'en', native:'English',      english:'English',         dir:'ltr', color:'en'},
+  {code:'fr', native:'Français',     english:'French',          dir:'ltr', color:'fr'},
+  {code:'es', native:'Español',      english:'Spanish',         dir:'ltr', color:'es'},
+  {code:'pt', native:'Português',    english:'Portuguese',      dir:'ltr', color:'pt'},
+  {code:'it', native:'Italiano',     english:'Italian',         dir:'ltr', color:'it'},
+  {code:'ar', native:'العربية',      english:'Arabic',          dir:'rtl', color:'ar'},
+  {code:'zh', native:'中文',          english:'Mandarin',        dir:'ltr', color:'zh'},
+  {code:'sw', native:'Kiswahili',    english:'Swahili',         dir:'ltr', color:'sw'},
+  {code:'am', native:'አማርኛ',         english:'Amharic',         dir:'ltr', color:'am'},
+  {code:'hi', native:'हिन्दी',        english:'Hindi',           dir:'ltr', color:'hi'},
+  {code:'bn', native:'বাংলা',         english:'Bengali',         dir:'ltr', color:'bn'},
+  {code:'id', native:'Bahasa Indonesia', english:'Indonesian',  dir:'ltr', color:'id'},
+  {code:'uk', native:'Українська',   english:'Ukrainian',       dir:'ltr', color:'uk'},
+  {code:'ha', native:'Hausa',        english:'Hausa',           dir:'ltr', color:'ha'},
+  {code:'yo', native:'Yorùbá',       english:'Yoruba',          dir:'ltr', color:'yo'},
+  {code:'ln', native:'Lingála',      english:'Lingala',         dir:'ltr', color:'ln'},
+  {code:'mg', native:'Malagasy',     english:'Malagasy',        dir:'ltr', color:'mg'},
+  {code:'ne', native:'नेपाली',        english:'Nepali',          dir:'ltr', color:'ne'},
+  {code:'tl', native:'Tagalog',      english:'Tagalog',         dir:'ltr', color:'tl'},
+  {code:'rw', native:'Kinyarwanda',  english:'Kinyarwanda',     dir:'ltr', color:'rw'},
+  {code:'rn', native:'Ikirundi',     english:'Kirundi',         dir:'ltr', color:'rn'},
+  {code:'ny', native:'Chichewa',     english:'Chichewa',        dir:'ltr', color:'ny'},
+];
 
-  function toggleLang(lang) {
-    if (selectedLang === lang) {
-      // Clicking active deselects
-      selectedLang = null;
-      document.getElementById('toggle-' + lang).classList.remove('selected-' + lang);
-    } else {
-      // Deselect previous
-      if (selectedLang) {
-        document.getElementById('toggle-' + selectedLang).classList.remove('selected-' + selectedLang);
-      }
-      selectedLang = lang;
-      document.getElementById('toggle-' + lang).classList.add('selected-' + lang);
-    }
-  }
+// ── UI translations ───────────────────────────────────────────────────────
+// Each language has translations for every UI string
+const UI = {
+  en:{heroEyebrow:'Scientific Manuscript Tool',heroTitle:'Your language.<br>One manuscript.<br>Instant clarity.',heroSub:'Upload any English-language scientific paper and receive an accurate summary and key findings in your language — with precise scientific terminology.',pickerPrompt:'SELECT YOUR LANGUAGE',step1Title:'Upload or paste your manuscript',step1Sub:'PDF, .txt, or .md — or paste text below',dropLabel:'Drop a file here',dropSub:'Supported: .pdf, .txt, .md — or click to browse',orDivider:'or paste text',pastePlaceholder:'Paste the full manuscript text here…',step2Title:'Choose your summary style',step2Sub:'Select how detailed you want the results',expertTitle:'Expert',expertDesc:'Technical language · 10 key points · For researchers',expertTag:'Researchers',plainTitle:'General Public',plainDesc:'Plain language · 3 key takeaways · For everyone',plainTag:'Everyone',btnRun:'Summarize in English + {lang}',btnAnalyzing:'Analyzing manuscript…',btnChange:'Change language',resultsTitle:'Results',labelAbstract:'Abstract',labelSummary:'Summary',labelBullets:'Key Points',labelGlossary:'🔑 Key Terms',labelCitation:'📎 Cite This Paper',glossaryH1:'Scientific Term',glossaryH2:'Plain Definition',glossaryH3:'Translation',btnCopyAll:'Copy all as text',btnCopyCite:'Copy',errNoFile:'Please upload a file or paste manuscript text.',errNoLang:'Please select a language first.'},
+  fr:{heroEyebrow:'Outil pour manuscrits scientifiques',heroTitle:'Votre langue.<br>Un manuscrit.<br>Une clarté instantanée.',heroSub:'Déposez tout article scientifique en anglais et recevez un résumé précis et les points clés dans votre langue.',pickerPrompt:'SÉLECTIONNEZ VOTRE LANGUE',step1Title:'Déposez ou collez votre manuscrit',step1Sub:'PDF, .txt ou .md — ou collez le texte ci-dessous',dropLabel:'Déposez un fichier ici',dropSub:'Formats : .pdf, .txt, .md — ou cliquez pour parcourir',orDivider:'ou coller le texte',pastePlaceholder:'Collez le texte complet du manuscrit ici…',step2Title:'Choisissez votre style de résumé',step2Sub:'Sélectionnez le niveau de détail souhaité',expertTitle:'Expert',expertDesc:'Langage technique · 10 points clés · Pour les chercheurs',expertTag:'Chercheurs',plainTitle:'Grand public',plainDesc:'Langage simple · 3 points essentiels · Pour tous',plainTag:'Pour tous',btnRun:'Résumer en anglais + français',btnAnalyzing:'Analyse en cours…',btnChange:'Changer de langue',resultsTitle:'Résultats',labelAbstract:'Résumé (Abstract)',labelSummary:'Sommaire',labelBullets:'Points clés',labelGlossary:'🔑 Termes clés',labelCitation:'📎 Citer cet article',glossaryH1:'Terme scientifique',glossaryH2:'Définition simple',glossaryH3:'Traduction',btnCopyAll:'Tout copier',btnCopyCite:'Copier',errNoFile:'Veuillez déposer un fichier ou coller le texte du manuscrit.',errNoLang:'Veuillez d\'abord sélectionner une langue.'},
+  es:{heroEyebrow:'Herramienta para manuscritos científicos',heroTitle:'Su idioma.<br>Un manuscrito.<br>Claridad instantánea.',heroSub:'Cargue cualquier artículo científico en inglés y reciba un resumen preciso y los hallazgos clave en su idioma.',pickerPrompt:'SELECCIONE SU IDIOMA',step1Title:'Cargue o pegue su manuscrito',step1Sub:'PDF, .txt o .md — o pegue el texto abajo',dropLabel:'Suelte un archivo aquí',dropSub:'Compatible: .pdf, .txt, .md — o haga clic para buscar',orDivider:'o pegar texto',pastePlaceholder:'Pegue el texto completo del manuscrito aquí…',step2Title:'Elija su estilo de resumen',step2Sub:'Seleccione el nivel de detalle que desea',expertTitle:'Experto',expertDesc:'Lenguaje técnico · 10 puntos clave · Para investigadores',expertTag:'Investigadores',plainTitle:'Público general',plainDesc:'Lenguaje sencillo · 3 conclusiones · Para todos',plainTag:'Para todos',btnRun:'Resumir en inglés + español',btnAnalyzing:'Analizando…',btnChange:'Cambiar idioma',resultsTitle:'Resultados',labelAbstract:'Resumen (Abstract)',labelSummary:'Sumario',labelBullets:'Puntos clave',labelGlossary:'🔑 Términos clave',labelCitation:'📎 Citar este artículo',glossaryH1:'Término científico',glossaryH2:'Definición simple',glossaryH3:'Traducción',btnCopyAll:'Copiar todo',btnCopyCite:'Copiar',errNoFile:'Por favor cargue un archivo o pegue el texto.',errNoLang:'Por favor seleccione un idioma primero.'},
+  pt:{heroEyebrow:'Ferramenta para manuscritos científicos',heroTitle:'A sua língua.<br>Um manuscrito.<br>Clareza imediata.',heroSub:'Carregue qualquer artigo científico em inglês e receba um resumo preciso e os pontos-chave na sua língua.',pickerPrompt:'SELECIONE O SEU IDIOMA',step1Title:'Carregue ou cole o seu manuscrito',step1Sub:'PDF, .txt ou .md — ou cole o texto abaixo',dropLabel:'Largue um ficheiro aqui',dropSub:'Suportado: .pdf, .txt, .md — ou clique para procurar',orDivider:'ou colar texto',pastePlaceholder:'Cole o texto completo do manuscrito aqui…',step2Title:'Escolha o seu estilo de resumo',step2Sub:'Selecione o nível de detalhe pretendido',expertTitle:'Especialista',expertDesc:'Linguagem técnica · 10 pontos-chave · Para investigadores',expertTag:'Investigadores',plainTitle:'Público geral',plainDesc:'Linguagem simples · 3 conclusões · Para todos',plainTag:'Para todos',btnRun:'Resumir em inglês + português',btnAnalyzing:'A analisar…',btnChange:'Mudar de idioma',resultsTitle:'Resultados',labelAbstract:'Resumo (Abstract)',labelSummary:'Sumário',labelBullets:'Pontos-chave',labelGlossary:'🔑 Termos-chave',labelCitation:'📎 Citar este artigo',glossaryH1:'Termo científico',glossaryH2:'Definição simples',glossaryH3:'Tradução',btnCopyAll:'Copiar tudo',btnCopyCite:'Copiar',errNoFile:'Por favor carregue um ficheiro ou cole o texto.',errNoLang:'Por favor selecione um idioma primeiro.'},
+  it:{heroEyebrow:'Strumento per manoscritti scientifici',heroTitle:'La tua lingua.<br>Un manoscritto.<br>Chiarezza immediata.',heroSub:'Carica qualsiasi articolo scientifico in inglese e ricevi un riassunto accurato e i punti chiave nella tua lingua.',pickerPrompt:'SELEZIONA LA TUA LINGUA',step1Title:'Carica o incolla il tuo manoscritto',step1Sub:'PDF, .txt o .md — o incolla il testo sotto',dropLabel:'Trascina un file qui',dropSub:'Supportati: .pdf, .txt, .md — o clicca per sfogliare',orDivider:'o incolla il testo',pastePlaceholder:'Incolla qui il testo completo del manoscritto…',step2Title:'Scegli il tuo stile di riassunto',step2Sub:'Seleziona il livello di dettaglio desiderato',expertTitle:'Esperto',expertDesc:'Linguaggio tecnico · 10 punti chiave · Per ricercatori',expertTag:'Ricercatori',plainTitle:'Pubblico generale',plainDesc:'Linguaggio semplice · 3 punti principali · Per tutti',plainTag:'Per tutti',btnRun:'Riassumi in inglese + italiano',btnAnalyzing:'Analisi in corso…',btnChange:'Cambia lingua',resultsTitle:'Risultati',labelAbstract:'Abstract',labelSummary:'Riassunto',labelBullets:'Punti chiave',labelGlossary:'🔑 Termini chiave',labelCitation:'📎 Cita questo articolo',glossaryH1:'Termine scientifico',glossaryH2:'Definizione semplice',glossaryH3:'Traduzione',btnCopyAll:'Copia tutto',btnCopyCite:'Copia',errNoFile:'Carica un file o incolla il testo del manoscritto.',errNoLang:'Seleziona prima una lingua.'},
+  ar:{heroEyebrow:'أداة للمخطوطات العلمية',heroTitle:'لغتك.<br>مخطوطة واحدة.<br>وضوح فوري.',heroSub:'قم بتحميل أي ورقة علمية باللغة الإنجليزية واحصل على ملخص دقيق والنتائج الرئيسية بلغتك.',pickerPrompt:'اختر لغتك',step1Title:'حمّل أو الصق مخطوطتك',step1Sub:'PDF أو .txt أو .md — أو الصق النص أدناه',dropLabel:'أسقط الملف هنا',dropSub:'المدعوم: .pdf, .txt, .md — أو انقر للتصفح',orDivider:'أو الصق النص',pastePlaceholder:'الصق النص الكامل للمخطوطة هنا…',step2Title:'اختر أسلوب الملخص',step2Sub:'حدد مستوى التفاصيل المطلوب',expertTitle:'خبير',expertDesc:'لغة تقنية · ١٠ نقاط رئيسية · للباحثين',expertTag:'للباحثين',plainTitle:'عموم الجمهور',plainDesc:'لغة بسيطة · ٣ نقاط أساسية · للجميع',plainTag:'للجميع',btnRun:'تلخيص بالإنجليزية + العربية',btnAnalyzing:'جارٍ التحليل…',btnChange:'تغيير اللغة',resultsTitle:'النتائج',labelAbstract:'الملخص',labelSummary:'الملخص التفصيلي',labelBullets:'النقاط الرئيسية',labelGlossary:'🔑 المصطلحات الرئيسية',labelCitation:'📎 الاستشهاد بهذه الورقة',glossaryH1:'المصطلح العلمي',glossaryH2:'تعريف مبسط',glossaryH3:'الترجمة',btnCopyAll:'نسخ الكل',btnCopyCite:'نسخ',errNoFile:'يرجى تحميل ملف أو لصق نص المخطوطة.',errNoLang:'يرجى اختيار لغة أولاً.'},
+  zh:{heroEyebrow:'科学手稿工具',heroTitle:'您的语言。<br>一篇论文。<br>即时清晰。',heroSub:'上传任何英文科学论文，以您选择的语言获得准确的摘要和关键发现。',pickerPrompt:'请选择您的语言',step1Title:'上传或粘贴您的手稿',step1Sub:'支持PDF、.txt或.md格式——或在下方粘贴文本',dropLabel:'将文件拖放到此处',dropSub:'支持：.pdf, .txt, .md——或点击浏览',orDivider:'或粘贴文本',pastePlaceholder:'请在此粘贴完整的手稿文本…',step2Title:'选择摘要风格',step2Sub:'选择您需要的详细程度',expertTitle:'专家模式',expertDesc:'专业术语 · 10个要点 · 面向研究人员',expertTag:'研究人员',plainTitle:'大众模式',plainDesc:'通俗语言 · 3个要点 · 面向所有人',plainTag:'所有人',btnRun:'生成英文+中文摘要',btnAnalyzing:'正在分析…',btnChange:'更换语言',resultsTitle:'结果',labelAbstract:'摘要',labelSummary:'总结',labelBullets:'要点',labelGlossary:'🔑 关键术语',labelCitation:'📎 引用此论文',glossaryH1:'科学术语',glossaryH2:'简明定义',glossaryH3:'翻译',btnCopyAll:'复制全部',btnCopyCite:'复制',errNoFile:'请上传文件或粘贴手稿文本。',errNoLang:'请先选择语言。'},
+  sw:{heroEyebrow:'Zana ya Maandishi ya Kisayansi',heroTitle:'Lugha yako.<br>Maandishi moja.<br>Uwazi wa haraka.',heroSub:'Pakia makala yoyote ya kisayansi kwa Kiingereza na upokee muhtasari sahihi na matokeo muhimu kwa lugha yako.',pickerPrompt:'CHAGUA LUGHA YAKO',step1Title:'Pakia au bandika maandishi yako',step1Sub:'PDF, .txt au .md — au bandika maandishi hapa chini',dropLabel:'Buruta faili hapa',dropSub:'Inayoungwa mkono: .pdf, .txt, .md — au bonyeza kuvinjari',orDivider:'au bandika maandishi',pastePlaceholder:'Bandika maandishi kamili ya makala hapa…',step2Title:'Chagua mtindo wa muhtasari',step2Sub:'Chagua kiwango cha undani unacotaka',expertTitle:'Mtaalamu',expertDesc:'Lugha ya kitaalamu · Pointi 10 · Kwa watafiti',expertTag:'Watafiti',plainTitle:'Umma wa Watu',plainDesc:'Lugha rahisi · Pointi 3 · Kwa kila mtu',plainTag:'Kwa wote',btnRun:'Fanya muhtasari kwa Kiingereza + Kiswahili',btnAnalyzing:'Inachambua…',btnChange:'Badilisha lugha',resultsTitle:'Matokeo',labelAbstract:'Muhtasari',labelSummary:'Maelezo',labelBullets:'Pointi Muhimu',labelGlossary:'🔑 Maneno Muhimu',labelCitation:'📎 Taja Makala Hii',glossaryH1:'Neno la kisayansi',glossaryH2:'Maelezo rahisi',glossaryH3:'Tafsiri',btnCopyAll:'Nakili yote',btnCopyCite:'Nakili',errNoFile:'Tafadhali pakia faili au bandika maandishi.',errNoLang:'Tafadhali chagua lugha kwanza.'},
+  am:{heroEyebrow:'የሳይንሳዊ ጽሑፍ መሣሪያ',heroTitle:'ቋንቋዎ።<br>አንድ ጽሑፍ።<br>ፈጣን ግልፅነት።',heroSub:'ማንኛውም የእንግሊዝኛ ሳይንሳዊ ጽሑፍ ሰቅለው በቋንቋዎ ትክክለኛ ማጠቃለያ ያግኙ።',pickerPrompt:'ቋንቋዎን ይምረጡ',step1Title:'ጽሑፍዎን ይስቀሉ ወይም ይለጥፉ',step1Sub:'PDF, .txt ወይም .md — ወይም ጽሑፍ ከዚህ በታች ይለጥፉ',dropLabel:'ፋይሉን እዚህ ይጣሉ',dropSub:'የሚደገፉ: .pdf, .txt, .md — ወይም ለማሰሰ ጠቅ ያድርጉ',orDivider:'ወይም ጽሑፍ ይለጥፉ',pastePlaceholder:'የጽሑፉን ሙሉ ጽሑፍ እዚህ ይለጥፉ…',step2Title:'የማጠቃለያ ዘዴ ይምረጡ',step2Sub:'የሚፈልጉትን የዝርዝር ደረጃ ይምረጡ',expertTitle:'ባለሙያ',expertDesc:'ቴክኒካዊ ቋንቋ · 10 ነጥቦች · ለተመራማሪዎች',expertTag:'ተመራማሪዎች',plainTitle:'ለሁሉም',plainDesc:'ቀላል ቋንቋ · 3 ዋና ነጥቦች · ለሁሉም',plainTag:'ለሁሉም',btnRun:'በእንግሊዝኛ + አማርኛ ያጠቃልሉ',btnAnalyzing:'እየተተነተነ ነው…',btnChange:'ቋንቋ ይቀይሩ',resultsTitle:'ውጤቶች',labelAbstract:'ማጠቃለያ',labelSummary:'ዝርዝር ማጠቃለያ',labelBullets:'ዋና ነጥቦች',labelGlossary:'🔑 ዋና ቃላት',labelCitation:'📎 ይህን ጽሑፍ ይጥቀሱ',glossaryH1:'ሳይንሳዊ ቃል',glossaryH2:'ቀላል ትርጉም',glossaryH3:'ትርጉም',btnCopyAll:'ሁሉንም ቅዳ',btnCopyCite:'ቅዳ',errNoFile:'እባክዎ ፋይል ይስቀሉ ወይም ጽሑፍ ይለጥፉ።',errNoLang:'እባክዎ መጀመሪያ ቋንቋ ይምረጡ።'},
+  hi:{heroEyebrow:'वैज्ञानिक पांडुलिपि उपकरण',heroTitle:'आपकी भाषा।<br>एक पांडुलिपि।<br>तत्काल स्पष्टता।',heroSub:'कोई भी अंग्रेजी वैज्ञानिक पेपर अपलोड करें और अपनी भाषा में सटीक सारांश और मुख्य निष्कर्ष प्राप्त करें।',pickerPrompt:'अपनी भाषा चुनें',step1Title:'अपनी पांडुलिपि अपलोड करें या पेस्ट करें',step1Sub:'PDF, .txt या .md — या नीचे टेक्स्ट पेस्ट करें',dropLabel:'यहाँ फ़ाइल छोड़ें',dropSub:'समर्थित: .pdf, .txt, .md — या ब्राउज़ करने के लिए क्लिक करें',orDivider:'या टेक्स्ट पेस्ट करें',pastePlaceholder:'यहाँ पांडुलिपि का पूरा टेक्स्ट पेस्ट करें…',step2Title:'अपना सारांश शैली चुनें',step2Sub:'वांछित विस्तार स्तर चुनें',expertTitle:'विशेषज्ञ',expertDesc:'तकनीकी भाषा · 10 मुख्य बिंदु · शोधकर्ताओं के लिए',expertTag:'शोधकर्ता',plainTitle:'सामान्य जन',plainDesc:'सरल भाषा · 3 मुख्य निष्कर्ष · सभी के लिए',plainTag:'सभी के लिए',btnRun:'अंग्रेजी + हिंदी में सारांश',btnAnalyzing:'विश्लेषण हो रहा है…',btnChange:'भाषा बदलें',resultsTitle:'परिणाम',labelAbstract:'सार (Abstract)',labelSummary:'सारांश',labelBullets:'मुख्य बिंदु',labelGlossary:'🔑 मुख्य शब्द',labelCitation:'📎 इस पेपर को उद्धृत करें',glossaryH1:'वैज्ञानिक शब्द',glossaryH2:'सरल परिभाषा',glossaryH3:'अनुवाद',btnCopyAll:'सब कुछ कॉपी करें',btnCopyCite:'कॉपी',errNoFile:'कृपया फ़ाइल अपलोड करें या टेक्स्ट पेस्ट करें।',errNoLang:'कृपया पहले एक भाषा चुनें।'},
+  bn:{heroEyebrow:'বৈজ্ঞানিক পাণ্ডুলিপি সরঞ্জাম',heroTitle:'আপনার ভাষা।<br>একটি পাণ্ডুলিপি।<br>তাৎক্ষণিক স্পষ্টতা।',heroSub:'যেকোনো ইংরেজি বৈজ্ঞানিক পেপার আপলোড করুন এবং আপনার ভাষায় সঠিক সারসংক্ষেপ ও মূল ফলাফল পান।',pickerPrompt:'আপনার ভাষা নির্বাচন করুন',step1Title:'আপনার পাণ্ডুলিপি আপলোড বা পেস্ট করুন',step1Sub:'PDF, .txt বা .md — অথবা নিচে টেক্সট পেস্ট করুন',dropLabel:'এখানে ফাইল ছেড়ে দিন',dropSub:'সমর্থিত: .pdf, .txt, .md — বা ব্রাউজ করতে ক্লিক করুন',orDivider:'অথবা টেক্সট পেস্ট করুন',pastePlaceholder:'এখানে পাণ্ডুলিপির সম্পূর্ণ টেক্সট পেস্ট করুন…',step2Title:'আপনার সারসংক্ষেপ শৈলী বেছে নিন',step2Sub:'আপনি যে বিস্তারিত স্তর চান তা নির্বাচন করুন',expertTitle:'বিশেষজ্ঞ',expertDesc:'প্রযুক্তিগত ভাষা · ১০টি মূল বিষয় · গবেষকদের জন্য',expertTag:'গবেষকরা',plainTitle:'সাধারণ জনগণ',plainDesc:'সহজ ভাষা · ৩টি মূল বিষয় · সবার জন্য',plainTag:'সবার জন্য',btnRun:'ইংরেজি + বাংলায় সারসংক্ষেপ',btnAnalyzing:'বিশ্লেষণ হচ্ছে…',btnChange:'ভাষা পরিবর্তন করুন',resultsTitle:'ফলাফল',labelAbstract:'সার (Abstract)',labelSummary:'সারসংক্ষেপ',labelBullets:'মূল বিষয়',labelGlossary:'🔑 মূল শব্দ',labelCitation:'📎 এই পেপার উদ্ধৃত করুন',glossaryH1:'বৈজ্ঞানিক শব্দ',glossaryH2:'সহজ সংজ্ঞা',glossaryH3:'অনুবাদ',btnCopyAll:'সব কপি করুন',btnCopyCite:'কপি',errNoFile:'অনুগ্রহ করে একটি ফাইল আপলোড করুন বা টেক্সট পেস্ট করুন।',errNoLang:'অনুগ্রহ করে প্রথমে একটি ভাষা নির্বাচন করুন।'},
+  id:{heroEyebrow:'Alat Manuskrip Ilmiah',heroTitle:'Bahasa Anda.<br>Satu manuskrip.<br>Kejelasan instan.',heroSub:'Unggah makalah ilmiah berbahasa Inggris apa pun dan terima ringkasan akurat serta temuan utama dalam bahasa Anda.',pickerPrompt:'PILIH BAHASA ANDA',step1Title:'Unggah atau tempel manuskrip Anda',step1Sub:'PDF, .txt, atau .md — atau tempel teks di bawah',dropLabel:'Seret file ke sini',dropSub:'Didukung: .pdf, .txt, .md — atau klik untuk menelusuri',orDivider:'atau tempel teks',pastePlaceholder:'Tempel teks lengkap manuskrip di sini…',step2Title:'Pilih gaya ringkasan Anda',step2Sub:'Pilih tingkat detail yang Anda inginkan',expertTitle:'Ahli',expertDesc:'Bahasa teknis · 10 poin utama · Untuk peneliti',expertTag:'Peneliti',plainTitle:'Umum',plainDesc:'Bahasa sederhana · 3 poin utama · Untuk semua',plainTag:'Untuk semua',btnRun:'Rangkum dalam Bahasa Inggris + Indonesia',btnAnalyzing:'Sedang menganalisis…',btnChange:'Ganti bahasa',resultsTitle:'Hasil',labelAbstract:'Abstrak',labelSummary:'Ringkasan',labelBullets:'Poin Utama',labelGlossary:'🔑 Istilah Utama',labelCitation:'📎 Kutip Makalah Ini',glossaryH1:'Istilah ilmiah',glossaryH2:'Definisi sederhana',glossaryH3:'Terjemahan',btnCopyAll:'Salin semua',btnCopyCite:'Salin',errNoFile:'Harap unggah file atau tempel teks manuskrip.',errNoLang:'Harap pilih bahasa terlebih dahulu.'},
+  uk:{heroEyebrow:'Інструмент для наукових рукописів',heroTitle:'Ваша мова.<br>Один рукопис.<br>Миттєва ясність.',heroSub:'Завантажте будь-яку англомовну наукову статтю та отримайте точний підсумок і ключові висновки вашою мовою.',pickerPrompt:'ОБЕРІТЬ ВАШУ МОВУ',step1Title:'Завантажте або вставте ваш рукопис',step1Sub:'PDF, .txt або .md — або вставте текст нижче',dropLabel:'Перетягніть файл сюди',dropSub:'Підтримується: .pdf, .txt, .md — або натисніть для перегляду',orDivider:'або вставте текст',pastePlaceholder:'Вставте повний текст рукопису тут…',step2Title:'Оберіть стиль підсумку',step2Sub:'Виберіть рівень деталізації',expertTitle:'Експерт',expertDesc:'Технічна мова · 10 ключових пунктів · Для дослідників',expertTag:'Дослідники',plainTitle:'Широка аудиторія',plainDesc:'Проста мова · 3 ключові висновки · Для всіх',plainTag:'Для всіх',btnRun:'Підсумувати англійською + українською',btnAnalyzing:'Аналізується…',btnChange:'Змінити мову',resultsTitle:'Результати',labelAbstract:'Реферат',labelSummary:'Підсумок',labelBullets:'Ключові пункти',labelGlossary:'🔑 Ключові терміни',labelCitation:'📎 Цитувати цю статтю',glossaryH1:'Науковий термін',glossaryH2:'Просте визначення',glossaryH3:'Переклад',btnCopyAll:'Копіювати все',btnCopyCite:'Копіювати',errNoFile:'Будь ласка, завантажте файл або вставте текст.',errNoLang:'Будь ласка, спочатку оберіть мову.'},
+};
 
-  // ── File handling ────────────────────────────────────────────
-  let fileBase64 = null, fileType = null;
+// Fallback to English for languages without full UI translation
+const FALLBACK_CODES = ['ha','yo','ln','mg','ne','tl','rw','rn','ny'];
+FALLBACK_CODES.forEach(code => { UI[code] = {...UI.en}; });
+// Set run button text for each
+UI.ha.btnRun = 'Taƙaita a Turanci + Hausa';
+UI.yo.btnRun = 'Ṣe akopọ ni Gẹẹsi + Yorùbá';
+UI.ln.btnRun = 'Kotia na Lingelesi + Lingála';
+UI.mg.btnRun = 'Manambara amin\'ny Anglisy + Malagasy';
+UI.ne.btnRun = 'अंग्रेजी + नेपालीमा सारांश';
+UI.tl.btnRun = 'I-summarize sa Ingles + Tagalog';
+UI.rw.btnRun = 'Gusobanura mu Cyongereza + Kinyarwanda';
+UI.rn.btnRun = 'Gusobanura mu Giingereza + Ikirundi';
+UI.ny.btnRun = 'Fupikitsa mu Chingerezi + Chichewa';
 
-  const dropZone = document.getElementById('dropZone');
-  const fileInput = document.getElementById('fileInput');
+// ── State ─────────────────────────────────────────────────────────────────
+let selectedLang = null;
+let currentMode  = 'expert';
+let fileBase64   = null;
+let fileType     = null;
+let citations    = {apa:'',vancouver:'',harvard:'',authors:''};
+let activeCiteStyle = 'apa';
 
-  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag'); });
-  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
-  dropZone.addEventListener('drop', e => {
-    e.preventDefault(); dropZone.classList.remove('drag');
-    const f = e.dataTransfer.files[0];
-    if (f) handleFile(f);
+// ── Build language picker ─────────────────────────────────────────────────
+function buildPicker() {
+  const grid = document.getElementById('langGridPicker');
+  LANGS.forEach(lang => {
+    const btn = document.createElement('button');
+    btn.className = 'lang-btn';
+    btn.id = 'langBtn-' + lang.code;
+    btn.innerHTML = `<span class="lang-dot-sm dot-${lang.code}"></span><span class="lang-native">${lang.native}</span>`;
+    btn.onclick = () => selectLang(lang.code);
+    grid.appendChild(btn);
   });
-  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+}
 
-  document.getElementById('removeFile').addEventListener('click', () => {
-    fileBase64 = null; fileType = null;
-    document.getElementById('filePill').classList.remove('visible');
-    fileInput.value = '';
+// ── Apply UI language ─────────────────────────────────────────────────────
+function applyUI(code) {
+  const u = UI[code] || UI.en;
+  const lang = LANGS.find(l => l.code === code);
+
+  // Page direction
+  document.documentElement.lang = code;
+  document.documentElement.dir = lang.dir;
+
+  // Hero
+  setText('heroEyebrow', u.heroEyebrow);
+  setHTML('heroTitle', u.heroTitle);
+  setText('heroSub', u.heroSub);
+  setText('pickerPrompt', u.pickerPrompt);
+
+  // App section
+  setText('step1Title', u.step1Title);
+  setText('step1Sub', u.step1Sub);
+  setHTML('dropLabel', `<strong>${u.dropLabel}</strong>`);
+  setText('dropSub', u.dropSub);
+  setText('orDivider', u.orDivider);
+  document.getElementById('pasteArea').placeholder = u.pastePlaceholder;
+  setText('step2Title', u.step2Title);
+  setText('step2Sub', u.step2Sub);
+  setText('expertTitle', u.expertTitle);
+  setText('expertDesc', u.expertDesc);
+  setText('expertTag', u.expertTag);
+  setText('plainTitle', u.plainTitle);
+  setText('plainDesc', u.plainDesc);
+  setText('plainTag', u.plainTag);
+  setText('btnChangeLang', u.btnChange);
+  setText('headerLangDisplay', lang.native);
+  setText('selectedLangDisplay', `${lang.native} — ${lang.english}`);
+
+  // Results labels
+  setText('resultsTitle', u.resultsTitle);
+  setText('labelAbstract', u.labelAbstract);
+  setText('labelSummary', u.labelSummary);
+  setText('labelBullets', u.labelBullets);
+  setText('labelGlossary', u.labelGlossary);
+  setText('labelCitation', u.labelCitation);
+  setText('glossaryH1', u.glossaryH1);
+  setText('glossaryH2', u.glossaryH2);
+  setText('glossaryH3', u.glossaryH3);
+  setText('btnCopyAll', u.btnCopyAll);
+  setText('btnCopyCite', u.btnCopyCite);
+
+  // Language column headers for result columns
+  const dotClass = `dot-${lang.color}`;
+  const nameClass = `col-lang-name c-${lang.color}`;
+  ['Abstract','Summary','Bullets'].forEach(section => {
+    const dot  = document.getElementById(`dot${section}Lang`);
+    const name = document.getElementById(`name${section}Lang`);
+    const col  = document.getElementById(`col${section}Lang`);
+    if (dot)  { dot.className  = 'col-dot ' + dotClass; }
+    if (name) { name.className = nameClass; name.textContent = lang.native; }
+    if (col && lang.dir === 'rtl') col.classList.add('rtl');
+    else if (col) col.classList.remove('rtl');
   });
 
-  function handleFile(f) {
-    fileType = f.type || (f.name.endsWith('.pdf') ? 'application/pdf' : 'text/plain');
-    const reader = new FileReader();
-    reader.onload = e => {
-      fileBase64 = e.target.result.split(',')[1];
-      document.getElementById('fileNameDisplay').textContent = f.name;
-      document.getElementById('filePill').classList.add('visible');
-    };
-    reader.readAsDataURL(f);
+  // Glossary translation header
+  const gh3 = document.getElementById('glossaryH3');
+  if (gh3) gh3.textContent = code !== 'en' ? `${u.glossaryH3} (${lang.native})` : u.glossaryH3;
+
+  // Run button ticker
+  buildRunButton(u, lang);
+}
+
+function buildRunButton(u, lang) {
+  const ticker = document.getElementById('btnTicker');
+  const text = u.btnRun.replace('{lang}', lang.native);
+  // Duplicate for seamless loop
+  ticker.innerHTML = `<span>${text}</span><span>${text}</span>`;
+}
+
+function setText(id, text) { const el = document.getElementById(id); if (el) el.textContent = text; }
+function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
+
+// ── Select language ───────────────────────────────────────────────────────
+function selectLang(code) {
+  selectedLang = code;
+
+  // Update button states
+  LANGS.forEach(l => {
+    const btn = document.getElementById('langBtn-' + l.code);
+    if (btn) btn.classList.toggle('selected', l.code === code);
+  });
+
+  // Apply UI
+  applyUI(code);
+
+  // Show app section
+  const app = document.getElementById('appSection');
+  app.classList.add('visible');
+  app.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function changeLang() {
+  document.getElementById('appSection').classList.remove('visible');
+  document.getElementById('results').classList.remove('visible');
+  document.querySelector('.lang-picker-section').scrollIntoView({behavior:'smooth', block:'start'});
+  LANGS.forEach(l => {
+    const btn = document.getElementById('langBtn-' + l.code);
+    if (btn) btn.classList.remove('selected');
+  });
+  selectedLang = null;
+}
+
+// ── Mode toggle ───────────────────────────────────────────────────────────
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('modeExpert').className = 'mode-option' + (mode === 'expert' ? ' active-expert' : '');
+  document.getElementById('modePlain').className  = 'mode-option' + (mode === 'plain'  ? ' active-plain'  : '');
+}
+
+// ── File handling ─────────────────────────────────────────────────────────
+const dropZone  = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
+dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+document.getElementById('removeFile').addEventListener('click', () => {
+  fileBase64 = null; fileType = null;
+  document.getElementById('filePill').classList.remove('visible');
+  fileInput.value = '';
+});
+function handleFile(f) {
+  fileType = f.type || (f.name.endsWith('.pdf') ? 'application/pdf' : 'text/plain');
+  const reader = new FileReader();
+  reader.onload = e => { fileBase64 = e.target.result.split(',')[1]; document.getElementById('fileNameDisplay').textContent = f.name; document.getElementById('filePill').classList.add('visible'); };
+  reader.readAsDataURL(f);
+}
+
+// ── UI helpers ────────────────────────────────────────────────────────────
+function showError(msg) { const b = document.getElementById('errorBox'); b.textContent = msg; b.classList.add('visible'); }
+function clearError()   { document.getElementById('errorBox').classList.remove('visible'); }
+
+function setParagraphs(id, text) {
+  const el = document.getElementById(id); if (!el) return;
+  el.innerHTML = '';
+  (text||'').split(/\n+/).filter(p=>p.trim()).forEach(p => { const para = document.createElement('p'); para.textContent = p.trim(); el.appendChild(para); });
+}
+
+function renderBullets(id, items, colorCode) {
+  const ul = document.getElementById(id); if (!ul) return;
+  ul.innerHTML = '';
+  (items||[]).forEach((item, i) => {
+    const li = document.createElement('li'); li.className = 'bullet-item';
+    const num = document.createElement('span'); num.className = `bullet-num bg-${colorCode} c-${colorCode}`; num.textContent = i+1;
+    const txt = document.createElement('span'); txt.textContent = item;
+    li.appendChild(num); li.appendChild(txt); ul.appendChild(li);
+  });
+}
+
+function renderGlossary(glossaryEn, glossaryLang) {
+  const tbody = document.getElementById('glossaryBody'); if (!tbody) return;
+  tbody.innerHTML = '';
+  (glossaryEn||[]).forEach((item, i) => {
+    const tr = document.createElement('tr');
+    const trans = (glossaryLang&&glossaryLang[i]) ? (glossaryLang[i].translation||'') : '';
+    tr.innerHTML = `<td><div class="g-term">${item.term||''}</div><div class="g-def">${item.definition||''}</div></td><td>${item.definition||''}</td><td>${trans}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── Citation ──────────────────────────────────────────────────────────────
+function showCitation(style) {
+  activeCiteStyle = style;
+  document.querySelectorAll('.cit-tab').forEach(t => t.classList.toggle('active', t.textContent.toLowerCase() === style));
+  const el = document.getElementById('citationText'); if (el) el.textContent = citations[style]||'';
+  const note = document.getElementById('citationNote'); if (note&&citations.authors) note.textContent = `In-text: (${citations.authors})`;
+}
+function copyCitation() {
+  navigator.clipboard.writeText(citations[activeCiteStyle]||'').then(() => {
+    const btn = document.getElementById('btnCopyCite'); btn.textContent = '✓'; setTimeout(() => { if(selectedLang) btn.textContent = (UI[selectedLang]||UI.en).btnCopyCite; }, 1500);
+  });
+}
+
+// ── Main summarize ────────────────────────────────────────────────────────
+async function runSummarize() {
+  clearError();
+  const u = UI[selectedLang] || UI.en;
+  const pasteText = document.getElementById('pasteArea').value.trim();
+  if (!fileBase64 && !pasteText) { showError(u.errNoFile); return; }
+  if (!selectedLang) { showError(u.errNoLang); return; }
+
+  const langs = selectedLang === 'en' ? ['en'] : ['en', selectedLang];
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<span style="display:flex;align-items:center;justify-content:center;height:100%;gap:8px"><span class="spinner"></span><span>${u.btnAnalyzing}</span></span>`;
+  document.getElementById('results').classList.remove('visible');
+
+  try {
+    const payload = {languages: langs};
+    if (fileBase64 && fileType === 'application/pdf') { payload.type='pdf'; payload.data=fileBase64; }
+    else if (fileBase64) { payload.type='text'; payload.text=decodeURIComponent(escape(atob(fileBase64))); }
+    else { payload.type='text'; payload.text=pasteText; }
+
+    const resp = await fetch(API_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+    if (!resp.ok) { const err = await resp.json().catch(()=>({})); throw new Error((err.error||'Error '+resp.status)+(err.detail?' — '+err.detail:'')); }
+    const p = await resp.json();
+
+    const lang = LANGS.find(l => l.code === selectedLang);
+    const isExpert = currentMode === 'expert';
+    const colorCode = lang ? lang.color : selectedLang;
+
+    // Abstract
+    setParagraphs('abstractEn', p.abstract_en);
+    setParagraphs('abstractLang', selectedLang !== 'en' ? p['abstract_'+selectedLang] : p.abstract_en);
+
+    // Summary (expert or plain)
+    const sumEnKey  = isExpert ? 'summary_expert_en'           : 'summary_plain_en';
+    const sumLangKey= isExpert ? 'summary_expert_'+selectedLang : 'summary_plain_'+selectedLang;
+    setParagraphs('summaryEn',   p[sumEnKey]);
+    setParagraphs('summaryLang', selectedLang !== 'en' ? p[sumLangKey] : p[sumEnKey]);
+
+    // Bullets (expert or plain)
+    const bulEnKey  = isExpert ? 'bullets_expert_en'           : 'bullets_plain_en';
+    const bulLangKey= isExpert ? 'bullets_expert_'+selectedLang : 'bullets_plain_'+selectedLang;
+    renderBullets('bulletsEn',   p[bulEnKey],   'en');
+    renderBullets('bulletsLang', selectedLang !== 'en' ? p[bulLangKey] : p[bulEnKey], colorCode);
+
+    // Glossary
+    renderGlossary(p.glossary_en, selectedLang !== 'en' ? p['glossary_'+selectedLang] : null);
+
+    // Citations
+    citations = {apa:p.citation_apa||'', vancouver:p.citation_vancouver||'', harvard:p.citation_harvard||'', authors:p.citation_authors||''};
+    showCitation('apa');
+
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+
+  } catch(e) {
+    showError('Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    const u2 = UI[selectedLang]||UI.en;
+    const lang2 = LANGS.find(l=>l.code===selectedLang);
+    buildRunButton(u2, lang2||LANGS[0]);
   }
+}
 
-  // ── UI helpers ────────────────────────────────────────────────
-  function showError(msg) {
-    const b = document.getElementById('errorBox');
-    b.textContent = msg; b.classList.add('visible');
-  }
-  function clearError() {
-    document.getElementById('errorBox').classList.remove('visible');
-  }
+// ── Copy all ──────────────────────────────────────────────────────────────
+function copyAll() {
+  const isExpert = currentMode === 'expert';
+  const lang = LANGS.find(l=>l.code===selectedLang);
+  const sections = [];
+  const absEn   = document.getElementById('abstractEn')?.innerText||'';
+  const absLang = document.getElementById('abstractLang')?.innerText||'';
+  const sumEn   = document.getElementById('summaryEn')?.innerText||'';
+  const sumLang = document.getElementById('summaryLang')?.innerText||'';
+  const bulEn   = [...(document.getElementById('bulletsEn')?.querySelectorAll('.bullet-item span:last-child')||[])].map((el,i)=>`${i+1}. ${el.textContent}`).join('\n');
+  const bulLang = [...(document.getElementById('bulletsLang')?.querySelectorAll('.bullet-item span:last-child')||[])].map((el,i)=>`${i+1}. ${el.textContent}`).join('\n');
 
-  function renderBullets(listId, items, numClass) {
-    const ul = document.getElementById(listId);
-    ul.innerHTML = '';
-    (items || []).forEach((item, i) => {
-      const li = document.createElement('li');
-      li.className = 'bullet-item';
-      li.innerHTML = `<span class="bullet-num ${numClass}">${i + 1}</span><span>${item}</span>`;
-      ul.appendChild(li);
-    });
-  }
+  if (absEn)   sections.push(`── ABSTRACT (English) ──\n\n${absEn}`);
+  if (absLang && selectedLang!=='en') sections.push(`── ABSTRACT (${lang?.native}) ──\n\n${absLang}`);
+  if (sumEn)   sections.push(`── SUMMARY (English) ──\n\n${sumEn}`);
+  if (sumLang && selectedLang!=='en') sections.push(`── SUMMARY (${lang?.native}) ──\n\n${sumLang}`);
+  if (bulEn)   sections.push(`── KEY POINTS (English) ──\n\n${bulEn}`);
+  if (bulLang && selectedLang!=='en') sections.push(`── KEY POINTS (${lang?.native}) ──\n\n${bulLang}`);
+  if (citations.apa) sections.push(`── CITATION (APA) ──\n\n${citations.apa}\n\nVancouver: ${citations.vancouver}\n\nHarvard: ${citations.harvard}`);
 
-  function setParagraphs(elId, text) {
-    const el = document.getElementById(elId);
-    if (!el) return;
-    el.innerHTML = '';
-    (text || '').split(/\n+/).filter(p => p.trim()).forEach(p => {
-      const para = document.createElement('p');
-      para.textContent = p.trim();
-      el.appendChild(para);
-    });
-  }
+  navigator.clipboard.writeText(sections.join('\n\n\n')).then(() => {
+    const btn = document.getElementById('btnCopyAll');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = (UI[selectedLang]||UI.en).btnCopyAll, 2000);
+  });
+}
 
-  // Show only English + selected language columns
-  function updateResultColumns(langs) {
-    const allLangs = ['en', 'fr', 'es', 'pt', 'it'];
-    allLangs.forEach(lang => {
-      const show = langs.includes(lang);
-      // Hide/show lang-col divs
-      document.querySelectorAll('.lang-col').forEach(el => {
-        if (el.querySelector('.dot-' + lang)) {
-          el.style.display = show ? '' : 'none';
-        }
-      });
-      // Hide/show bullets-col divs
-      document.querySelectorAll('.bullets-col').forEach(el => {
-        if (el.querySelector('.dot-' + lang)) {
-          el.style.display = show ? '' : 'none';
-        }
-      });
-    });
-
-    // Update grid to show correct number of columns
-    const colCount = langs.length;
-    document.querySelectorAll('.lang-grid').forEach(el => {
-      el.style.gridTemplateColumns = `repeat(${colCount}, 1fr)`;
-    });
-    document.querySelectorAll('.bullets-grid').forEach(el => {
-      el.style.gridTemplateColumns = `repeat(${colCount}, 1fr)`;
-    });
-  }
-
-  // ── Main summarize function ───────────────────────────────────
-  async function runSummarize() {
-    clearError();
-    const pasteText = document.getElementById('pasteArea').value.trim();
-
-    if (!fileBase64 && !pasteText) {
-      showError('Please upload a file or paste manuscript text before summarizing.');
-      return;
-    }
-
-    if (!selectedLang) {
-      showError('Please select a language before summarizing.');
-      return;
-    }
-
-    // Always send English + selected language (even if English is selected, just show one column)
-    const langs = selectedLang === 'en' ? ['en'] : ['en', selectedLang];
-
-    const btn = document.getElementById('runBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span style="position:relative;z-index:1;margin-left:8px">Analyzing… · Analyse en cours… · Analizando… · Analisando… · Analisi in corso…</span>';
-    document.getElementById('results').classList.remove('visible');
-
-    try {
-      const payload = { languages: langs };
-      if (fileBase64 && fileType === 'application/pdf') {
-        payload.type = 'pdf';
-        payload.data = fileBase64;
-      } else if (fileBase64) {
-        payload.type = 'text';
-        payload.text = decodeURIComponent(escape(atob(fileBase64)));
-      } else {
-        payload.type = 'text';
-        payload.text = pasteText;
-      }
-
-      const resp = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!resp.ok) {
-        const err = await resp.json().catch(() => ({}));
-        throw new Error((err.error || 'Server error ' + resp.status) + (err.detail ? ' — ' + err.detail : ''));
-      }
-
-      const parsed = await resp.json();
-
-      // Render all sections, show only selected language columns
-      setParagraphs('abstractEn', parsed.abstract_en);
-      setParagraphs('abstractFr', parsed.abstract_fr);
-      setParagraphs('abstractEs', parsed.abstract_es);
-      setParagraphs('abstractPt', parsed.abstract_pt);
-      setParagraphs('abstractIt', parsed.abstract_it);
-      setParagraphs('summaryEn', parsed.summary_en);
-      setParagraphs('summaryFr', parsed.summary_fr);
-      setParagraphs('summaryEs', parsed.summary_es);
-      setParagraphs('summaryPt', parsed.summary_pt);
-      setParagraphs('summaryIt', parsed.summary_it);
-      renderBullets('bulletsEn', parsed.bullets_en, 'num-en');
-      renderBullets('bulletsFr', parsed.bullets_fr, 'num-fr');
-      renderBullets('bulletsEs', parsed.bullets_es, 'num-es');
-      renderBullets('bulletsPt', parsed.bullets_pt, 'num-pt');
-      renderBullets('bulletsIt', parsed.bullets_it, 'num-it');
-
-      updateResultColumns(langs);
-
-      document.getElementById('results').classList.add('visible');
-      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    } catch (e) {
-      showError('Error: ' + e.message);
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = `<div class="btn-ticker">
-        <span>Summarize in English + selected language</span>
-        <span>Résumer en anglais + langue choisie</span>
-        <span>Resumir en inglés + idioma elegido</span>
-        <span>Resumir em inglês + língua escolhida</span>
-        <span>Riassumi in inglese + lingua scelta</span>
-        <span>Summarize in English + selected language</span>
-        <span>Résumer en anglais + langue choisie</span>
-        <span>Resumir en inglés + idioma elegido</span>
-        <span>Resumir em inglês + língua escolhida</span>
-        <span>Riassumi in inglese + lingua scelta</span>
-      </div>`;
-    }
-  }
-
-  // ── Copy all ──────────────────────────────────────────────────
-  function copyAll() {
-    const allLangs = [
-      { code: 'en', label: 'ENGLISH' },
-      { code: 'fr', label: 'FRANÇAIS' },
-      { code: 'es', label: 'ESPAÑOL' },
-      { code: 'pt', label: 'PORTUGUÊS' },
-      { code: 'it', label: 'ITALIANO' },
-    ];
-    const activeLangs = selectedLang === 'en' ? ['en'] : ['en', selectedLang];
-    const active = allLangs.filter(l => activeLangs.includes(l.code));
-
-    const sections = [];
-    active.forEach(({ code, label }) => {
-      const cap = code.charAt(0).toUpperCase() + code.slice(1);
-      const abs = document.getElementById('abstract' + cap)?.innerText || '';
-      const sum = document.getElementById('summary' + cap)?.innerText || '';
-      const bullets = [...document.querySelectorAll(`#bullets${cap} .bullet-item span:last-child`)]
-        .map((el, i) => `${i+1}. ${el.textContent}`).join('\n');
-      if (abs) sections.push(`── ABSTRACT — ${label} ──\n\n${abs}`);
-      if (sum) sections.push(`── SUMMARY — ${label} ──\n\n${sum}`);
-      if (bullets) sections.push(`── KEY POINTS — ${label} ──\n\n${bullets}`);
-    });
-
-    navigator.clipboard.writeText(sections.join('\n\n\n')).then(() => {
-      const btn = document.querySelector('.btn-copy-all');
-      btn.textContent = 'Copied!';
-      setTimeout(() => btn.textContent = 'Copy all as text · Copier · Copiar · Copiar · Copia', 2000);
-    });
-  }
+// ── Init ──────────────────────────────────────────────────────────────────
+buildPicker();
 </script>
 
 </body>
 </html>
+
