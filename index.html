@@ -784,14 +784,32 @@
     });
   }
 
-  // Show only the columns for selected languages
+  // Show only English + selected language columns
   function updateResultColumns(langs) {
     const allLangs = ['en', 'fr', 'es', 'pt', 'it'];
     allLangs.forEach(lang => {
-      // Find all elements with data-lang attribute
-      document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
-        el.style.display = langs.includes(lang) ? '' : 'none';
+      const show = langs.includes(lang);
+      // Hide/show lang-col divs
+      document.querySelectorAll('.lang-col').forEach(el => {
+        if (el.querySelector('.dot-' + lang)) {
+          el.style.display = show ? '' : 'none';
+        }
       });
+      // Hide/show bullets-col divs
+      document.querySelectorAll('.bullets-col').forEach(el => {
+        if (el.querySelector('.dot-' + lang)) {
+          el.style.display = show ? '' : 'none';
+        }
+      });
+    });
+
+    // Update grid to show correct number of columns
+    const colCount = langs.length;
+    document.querySelectorAll('.lang-grid').forEach(el => {
+      el.style.gridTemplateColumns = `repeat(${colCount}, 1fr)`;
+    });
+    document.querySelectorAll('.bullets-grid').forEach(el => {
+      el.style.gridTemplateColumns = `repeat(${colCount}, 1fr)`;
     });
   }
 
