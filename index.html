@@ -289,18 +289,16 @@
 
   /* ── Language grid ── */
   .lang-grid-wrap, .bullets-grid-wrap {
-    overflow-x: auto;
     border: 1px solid var(--rule);
     border-radius: var(--radius-lg);
     margin-bottom: 1px;
+    overflow: hidden;
   }
   .lang-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(520px, 1fr));
-    gap: 0;
-    min-width: max-content;
-    background: var(--rule);
+    grid-template-columns: 1fr 1fr;
     gap: 1px;
+    background: var(--rule);
   }
   .lang-col {
     background: white; padding: 1.5rem 2rem;
@@ -331,9 +329,8 @@
   /* ── Bullets ── */
   .bullets-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(520px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1px; background: var(--rule);
-    min-width: max-content;
   }
   .bullets-col { background: white; padding: 1.5rem 2rem; }
   .bullet-list { list-style: none; }
@@ -464,8 +461,8 @@
 
 <section class="hero">
   <div class="hero-eyebrow">Scientific manuscript tool · Outil pour manuscrits scientifiques · Herramienta para manuscritos científicos</div>
-  <h1>Five languages.<br>One manuscript. Instant clarity.</h1>
-  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings — with precise terminology — in English, French, Spanish, Portuguese, and Italian.<br><small style="font-size:13px;color:var(--ink-3)">Déposez votre manuscrit · Suba su manuscrito · Carregue o seu manuscrito · Carica il tuo manoscritto</small></p>
+  <h1>Your language.<br>One manuscript. Instant clarity.</h1>
+  <p>Upload any English-language scientific paper and receive an accurate summary and 10 key findings in English plus your chosen language — with precise scientific terminology.</p>
   <div class="lang-flags">
     <span class="lang-flag en">English</span>
     <span class="lang-flag fr">Français</span>
@@ -520,12 +517,12 @@
       <h2>
         Select translation languages
         <span style="font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px">
-          English is always included · Le français est toujours inclus avec votre sélection · Seleccione idiomas adicionales
+          English is always included · Sélectionnez une langue · Seleccione un idioma · Selecione um idioma · Seleziona una lingua
         </span>
       </h2>
     </div>
     <div class="lang-selector-body">
-      <div class="lang-selector-note">English is always included. Select one or more additional languages:</div>
+      <div class="lang-selector-note">English is always included. Select one additional language to translate into:</div>
       <div class="lang-toggle-row">
         <div class="lang-toggle locked" title="Always included">
           <span class="toggle-dot"></span>
@@ -555,16 +552,16 @@
   <!-- Step 3: Run -->
   <button class="btn-run" id="runBtn" onclick="runSummarize()" style="margin-bottom:2rem;">
     <div class="btn-ticker">
-      <span>Summarize selected languages</span>
-      <span>Résumer les langues sélectionnées</span>
-      <span>Resumir los idiomas seleccionados</span>
-      <span>Resumir as línguas selecionadas</span>
-      <span>Riassumi nelle lingue selezionate</span>
-      <span>Summarize selected languages</span>
-      <span>Résumer les langues sélectionnées</span>
-      <span>Resumir los idiomas seleccionados</span>
-      <span>Resumir as línguas selecionadas</span>
-      <span>Riassumi nelle lingue selezionate</span>
+      <span>Summarize in English + selected language</span>
+      <span>Résumer en anglais + langue choisie</span>
+      <span>Resumir en inglés + idioma elegido</span>
+      <span>Resumir em inglês + língua escolhida</span>
+      <span>Riassumi in inglese + lingua scelta</span>
+      <span>Summarize in English + selected language</span>
+      <span>Résumer en anglais + langue choisie</span>
+      <span>Resumir en inglés + idioma elegido</span>
+      <span>Resumir em inglês + língua escolhida</span>
+      <span>Riassumi in inglese + lingua scelta</span>
     </div>
   </button>
   <div class="results" id="results">
@@ -710,17 +707,24 @@
 <script>
   const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
 
-  // ── Language selection state ──────────────────────────────────
-  const selectedLangs = new Set(); // 'en' always sent, extras toggled here
+  // ── Language selection — radio mode (one at a time) ──────────
+  let selectedLang = null; // null means English only
 
   function toggleLang(lang) {
-    const btn = document.getElementById('toggle-' + lang);
-    if (selectedLangs.has(lang)) {
-      selectedLangs.delete(lang);
-      btn.classList.remove('selected-' + lang);
+    const allLangs = ['fr', 'es', 'pt', 'it'];
+
+    if (selectedLang === lang) {
+      // Clicking the active one deselects it → English only
+      selectedLang = null;
+      document.getElementById('toggle-' + lang).classList.remove('selected-' + lang);
     } else {
-      selectedLangs.add(lang);
-      btn.classList.add('selected-' + lang);
+      // Deselect previous
+      if (selectedLang) {
+        document.getElementById('toggle-' + selectedLang).classList.remove('selected-' + selectedLang);
+      }
+      // Select new
+      selectedLang = lang;
+      document.getElementById('toggle-' + lang).classList.add('selected-' + lang);
     }
   }
 
@@ -808,7 +812,7 @@
       return;
     }
 
-    const langs = ['en', ...Array.from(selectedLangs)];
+    const langs = selectedLang ? ['en', selectedLang] : ['en'];
 
     const btn = document.getElementById('runBtn');
     btn.disabled = true;
@@ -868,16 +872,16 @@
     } finally {
       btn.disabled = false;
       btn.innerHTML = `<div class="btn-ticker">
-        <span>Summarize selected languages</span>
-        <span>Résumer les langues sélectionnées</span>
-        <span>Resumir los idiomas seleccionados</span>
-        <span>Resumir as línguas selecionadas</span>
-        <span>Riassumi nelle lingue selezionate</span>
-        <span>Summarize selected languages</span>
-        <span>Résumer les langues sélectionnées</span>
-        <span>Resumir los idiomas seleccionados</span>
-        <span>Resumir as línguas selecionadas</span>
-        <span>Riassumi nelle lingue selezionate</span>
+        <span>Summarize in English + selected language</span>
+        <span>Résumer en anglais + langue choisie</span>
+        <span>Resumir en inglés + idioma elegido</span>
+        <span>Resumir em inglês + língua escolhida</span>
+        <span>Riassumi in inglese + lingua scelta</span>
+        <span>Summarize in English + selected language</span>
+        <span>Résumer en anglais + langue choisie</span>
+        <span>Resumir en inglés + idioma elegido</span>
+        <span>Resumir em inglês + língua escolhida</span>
+        <span>Riassumi in inglese + lingua scelta</span>
       </div>`;
     }
   }
@@ -891,7 +895,7 @@
       { code: 'pt', label: 'PORTUGUÊS' },
       { code: 'it', label: 'ITALIANO' },
     ];
-    const activeLangs = ['en', ...Array.from(selectedLangs)];
+    const activeLangs = selectedLang ? ['en', selectedLang] : ['en'];
     const active = allLangs.filter(l => activeLangs.includes(l.code));
 
     const sections = [];
