@@ -354,7 +354,54 @@
   .num-pt { background: var(--accent-pt-light); color: var(--accent-pt); }
   .num-it { background: var(--accent-it-light); color: var(--accent-it); }
 
-  /* ── Multilingual UI tickers ── */
+  /* ── Language selector (Step 2) ── */
+  .lang-selector-card {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    background: white;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .lang-selector-body { padding: 1.25rem 1.5rem; }
+  .lang-selector-note {
+    font-size: 12px; color: var(--ink-3); margin-bottom: 1rem;
+  }
+  .lang-toggle-row {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  }
+  .lang-toggle {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 18px; border-radius: 99px;
+    border: 1.5px solid var(--rule);
+    background: var(--paper-2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
+    user-select: none;
+  }
+  .lang-toggle:hover { border-color: var(--ink-3); }
+  .lang-toggle.locked {
+    opacity: 0.7; cursor: default;
+    background: var(--accent-en-light);
+    border-color: rgba(26,77,143,0.3);
+    color: var(--accent-en);
+  }
+  .lang-toggle.selected-fr { background: var(--accent-fr-light); border-color: rgba(124,45,62,0.5); color: var(--accent-fr); }
+  .lang-toggle.selected-es { background: var(--accent-es-light); border-color: rgba(45,107,66,0.5); color: var(--accent-es); }
+  .lang-toggle.selected-pt { background: var(--accent-pt-light); border-color: rgba(139,94,0,0.5); color: var(--accent-pt); }
+  .lang-toggle.selected-it { background: var(--accent-it-light); border-color: rgba(92,45,124,0.5); color: var(--accent-it); }
+  .lang-toggle .toggle-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: currentColor; opacity: 0.5; flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  .lang-toggle.selected-fr .toggle-dot,
+  .lang-toggle.selected-es .toggle-dot,
+  .lang-toggle.selected-pt .toggle-dot,
+  .lang-toggle.selected-it .toggle-dot { opacity: 1; }
+  .lang-toggle-check {
+    font-size: 12px; margin-left: 2px;
+  }
   .ml-ticker-wrap {
     overflow: hidden; position: relative;
     display: inline-block;
@@ -463,25 +510,63 @@
       <textarea id="pasteArea" placeholder="Paste the full manuscript text here… / Collez le texte ici… / Pegue el texto aquí… / Cole o texto aqui… / Incolla il testo qui…"></textarea>
 
       <div class="error-box" id="errorBox"></div>
-
-      <button class="btn-run" id="runBtn" onclick="runSummarize()">
-        <div class="btn-ticker">
-          <span>Summarize in five languages</span>
-          <span>Résumer en cinq langues</span>
-          <span>Resumir en cinco idiomas</span>
-          <span>Resumir em cinco línguas</span>
-          <span>Riassumi in cinque lingue</span>
-          <span>Summarize in five languages</span>
-          <span>Résumer en cinq langues</span>
-          <span>Resumir en cinco idiomas</span>
-          <span>Resumir em cinco línguas</span>
-          <span>Riassumi in cinque lingue</span>
-        </div>
-      </button>
     </div>
   </div>
 
-  <!-- Results -->
+  <!-- Step 2: Language selector -->
+  <div class="lang-selector-card">
+    <div class="card-header">
+      <div class="step">2</div>
+      <h2>
+        Select translation languages
+        <span style="font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px">
+          English is always included · Le français est toujours inclus avec votre sélection · Seleccione idiomas adicionales
+        </span>
+      </h2>
+    </div>
+    <div class="lang-selector-body">
+      <div class="lang-selector-note">English is always included. Select one or more additional languages:</div>
+      <div class="lang-toggle-row">
+        <div class="lang-toggle locked" title="Always included">
+          <span class="toggle-dot"></span>
+          English
+          <span class="lang-toggle-check">✓</span>
+        </div>
+        <div class="lang-toggle" id="toggle-fr" onclick="toggleLang('fr')">
+          <span class="toggle-dot"></span>
+          Français
+        </div>
+        <div class="lang-toggle" id="toggle-es" onclick="toggleLang('es')">
+          <span class="toggle-dot"></span>
+          Español
+        </div>
+        <div class="lang-toggle" id="toggle-pt" onclick="toggleLang('pt')">
+          <span class="toggle-dot"></span>
+          Português
+        </div>
+        <div class="lang-toggle" id="toggle-it" onclick="toggleLang('it')">
+          <span class="toggle-dot"></span>
+          Italiano
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Run -->
+  <button class="btn-run" id="runBtn" onclick="runSummarize()" style="margin-bottom:2rem;">
+    <div class="btn-ticker">
+      <span>Summarize selected languages</span>
+      <span>Résumer les langues sélectionnées</span>
+      <span>Resumir los idiomas seleccionados</span>
+      <span>Resumir as línguas selecionadas</span>
+      <span>Riassumi nelle lingue selezionate</span>
+      <span>Summarize selected languages</span>
+      <span>Résumer les langues sélectionnées</span>
+      <span>Resumir los idiomas seleccionados</span>
+      <span>Resumir as línguas selecionadas</span>
+      <span>Riassumi nelle lingue selezionate</span>
+    </div>
+  </button>
   <div class="results" id="results">
     <div class="results-header">
       <div class="results-title">
@@ -494,35 +579,35 @@
     <div class="section-label">Abstract · Résumé · Resumen · Resumo · Sommario</div>
     <div class="lang-grid-wrap">
     <div class="lang-grid">
-      <div class="lang-col">
+      <div class="lang-col" data-lang="en">
         <div class="lang-col-header">
           <div class="lang-dot dot-en"></div>
           <span class="lang-name name-en">English (original)</span>
         </div>
         <div class="summary-text" id="abstractEn"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="fr">
         <div class="lang-col-header">
           <div class="lang-dot dot-fr"></div>
           <span class="lang-name name-fr">Français</span>
         </div>
         <div class="summary-text" id="abstractFr"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="es">
         <div class="lang-col-header">
           <div class="lang-dot dot-es"></div>
           <span class="lang-name name-es">Español</span>
         </div>
         <div class="summary-text" id="abstractEs"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="pt">
         <div class="lang-col-header">
           <div class="lang-dot dot-pt"></div>
           <span class="lang-name name-pt">Português</span>
         </div>
         <div class="summary-text" id="abstractPt"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="it">
         <div class="lang-col-header">
           <div class="lang-dot dot-it"></div>
           <span class="lang-name name-it">Italiano</span>
@@ -535,35 +620,35 @@
     <div class="section-label">Summary · Résumé · Resumen · Resumo · Riassunto</div>
     <div class="lang-grid-wrap">
     <div class="lang-grid">
-      <div class="lang-col">
+      <div class="lang-col" data-lang="en">
         <div class="lang-col-header">
           <div class="lang-dot dot-en"></div>
           <span class="lang-name name-en">English</span>
         </div>
         <div class="summary-text" id="summaryEn"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="fr">
         <div class="lang-col-header">
           <div class="lang-dot dot-fr"></div>
           <span class="lang-name name-fr">Français</span>
         </div>
         <div class="summary-text" id="summaryFr"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="es">
         <div class="lang-col-header">
           <div class="lang-dot dot-es"></div>
           <span class="lang-name name-es">Español</span>
         </div>
         <div class="summary-text" id="summaryEs"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="pt">
         <div class="lang-col-header">
           <div class="lang-dot dot-pt"></div>
           <span class="lang-name name-pt">Português</span>
         </div>
         <div class="summary-text" id="summaryPt"></div>
       </div>
-      <div class="lang-col">
+      <div class="lang-col" data-lang="it">
         <div class="lang-col-header">
           <div class="lang-dot dot-it"></div>
           <span class="lang-name name-it">Italiano</span>
@@ -576,7 +661,7 @@
     <div class="section-label">10 Key Points · 10 Points Clés · 10 Puntos Clave · 10 Pontos Principais · 10 Punti Chiave</div>
     <div class="bullets-grid-wrap">
     <div class="bullets-grid">
-      <div class="bullets-col">
+      <div class="bullets-col" data-lang="en">
         <div class="lang-col-header">
           <div class="lang-dot dot-en"></div>
           <span class="lang-name name-en">English</span>
@@ -623,10 +708,21 @@
 </footer>
 
 <script>
-  // ── Config ──────────────────────────────────────────────────
-  // Point this at your Cloudflare Worker URL after deploying worker.js
-  // Example: const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
   const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
+
+  // ── Language selection state ──────────────────────────────────
+  const selectedLangs = new Set(); // 'en' always sent, extras toggled here
+
+  function toggleLang(lang) {
+    const btn = document.getElementById('toggle-' + lang);
+    if (selectedLangs.has(lang)) {
+      selectedLangs.delete(lang);
+      btn.classList.remove('selected-' + lang);
+    } else {
+      selectedLangs.add(lang);
+      btn.classList.add('selected-' + lang);
+    }
+  }
 
   // ── File handling ────────────────────────────────────────────
   let fileBase64 = null, fileType = null;
@@ -682,11 +778,23 @@
 
   function setParagraphs(elId, text) {
     const el = document.getElementById(elId);
+    if (!el) return;
     el.innerHTML = '';
     (text || '').split(/\n+/).filter(p => p.trim()).forEach(p => {
       const para = document.createElement('p');
       para.textContent = p.trim();
       el.appendChild(para);
+    });
+  }
+
+  // Show only the columns for selected languages
+  function updateResultColumns(langs) {
+    const allLangs = ['en', 'fr', 'es', 'pt', 'it'];
+    allLangs.forEach(lang => {
+      // Find all elements with data-lang attribute
+      document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+        el.style.display = langs.includes(lang) ? '' : 'none';
+      });
     });
   }
 
@@ -700,19 +808,19 @@
       return;
     }
 
+    const langs = ['en', ...Array.from(selectedLangs)];
+
     const btn = document.getElementById('runBtn');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span style="position:relative;z-index:1;margin-left:8px">Analyzing… · Analyse en cours… · Analizando… · Analisando… · Analisi in corso…</span>';
     document.getElementById('results').classList.remove('visible');
 
     try {
-      // Build the payload to send to the Worker
-      const payload = {};
+      const payload = { languages: langs };
       if (fileBase64 && fileType === 'application/pdf') {
         payload.type = 'pdf';
         payload.data = fileBase64;
       } else if (fileBase64) {
-        // Text file — decode base64 to string
         payload.type = 'text';
         payload.text = decodeURIComponent(escape(atob(fileBase64)));
       } else {
@@ -733,6 +841,7 @@
 
       const parsed = await resp.json();
 
+      // Render all sections, show only selected language columns
       setParagraphs('abstractEn', parsed.abstract_en);
       setParagraphs('abstractFr', parsed.abstract_fr);
       setParagraphs('abstractEs', parsed.abstract_es);
@@ -749,52 +858,58 @@
       renderBullets('bulletsPt', parsed.bullets_pt, 'num-pt');
       renderBullets('bulletsIt', parsed.bullets_it, 'num-it');
 
+      updateResultColumns(langs);
+
       document.getElementById('results').classList.add('visible');
       document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     } catch (e) {
-      showError('Error: ' + e.message + '. Check your Worker URL is configured in index.html.');
+      showError('Error: ' + e.message);
     } finally {
       btn.disabled = false;
       btn.innerHTML = `<div class="btn-ticker">
-        <span>Summarize in five languages</span>
-        <span>Résumer en cinq langues</span>
-        <span>Resumir en cinco idiomas</span>
-        <span>Resumir em cinco línguas</span>
-        <span>Riassumi in cinque lingue</span>
-        <span>Summarize in five languages</span>
-        <span>Résumer en cinq langues</span>
-        <span>Resumir en cinco idiomas</span>
-        <span>Resumir em cinco línguas</span>
-        <span>Riassumi in cinque lingue</span>
+        <span>Summarize selected languages</span>
+        <span>Résumer les langues sélectionnées</span>
+        <span>Resumir los idiomas seleccionados</span>
+        <span>Resumir as línguas selecionadas</span>
+        <span>Riassumi nelle lingue selezionate</span>
+        <span>Summarize selected languages</span>
+        <span>Résumer les langues sélectionnées</span>
+        <span>Resumir los idiomas seleccionados</span>
+        <span>Resumir as línguas selecionadas</span>
+        <span>Riassumi nelle lingue selezionate</span>
       </div>`;
     }
   }
 
   // ── Copy all ──────────────────────────────────────────────────
   function copyAll() {
-    const sections = [
-      ['ABSTRACT — ENGLISH (ORIGINAL)', document.getElementById('abstractEn').innerText],
-      ['ABSTRACT — FRANÇAIS', document.getElementById('abstractFr').innerText],
-      ['ABSTRACT — ESPAÑOL', document.getElementById('abstractEs').innerText],
-      ['ABSTRACT — PORTUGUÊS', document.getElementById('abstractPt').innerText],
-      ['ABSTRACT — ITALIANO', document.getElementById('abstractIt').innerText],
-      ['SUMMARY — ENGLISH', document.getElementById('summaryEn').innerText],
-      ['SUMMARY — FRANÇAIS', document.getElementById('summaryFr').innerText],
-      ['SUMMARY — ESPAÑOL', document.getElementById('summaryEs').innerText],
-      ['SUMMARY — PORTUGUÊS', document.getElementById('summaryPt').innerText],
-      ['SUMMARY — ITALIANO', document.getElementById('summaryIt').innerText],
-      ['KEY POINTS — ENGLISH', [...document.querySelectorAll('#bulletsEn .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
-      ['KEY POINTS — FRANÇAIS', [...document.querySelectorAll('#bulletsFr .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
-      ['KEY POINTS — ESPAÑOL', [...document.querySelectorAll('#bulletsEs .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
-      ['KEY POINTS — PORTUGUÊS', [...document.querySelectorAll('#bulletsPt .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
-      ['KEY POINTS — ITALIANO', [...document.querySelectorAll('#bulletsIt .bullet-item span:last-child')].map((el,i) => `${i+1}. ${el.textContent}`).join('\n')],
+    const allLangs = [
+      { code: 'en', label: 'ENGLISH' },
+      { code: 'fr', label: 'FRANÇAIS' },
+      { code: 'es', label: 'ESPAÑOL' },
+      { code: 'pt', label: 'PORTUGUÊS' },
+      { code: 'it', label: 'ITALIANO' },
     ];
-    const text = sections.map(([h, b]) => `── ${h} ──\n\n${b}`).join('\n\n\n');
-    navigator.clipboard.writeText(text).then(() => {
+    const activeLangs = ['en', ...Array.from(selectedLangs)];
+    const active = allLangs.filter(l => activeLangs.includes(l.code));
+
+    const sections = [];
+    active.forEach(({ code, label }) => {
+      const cap = code.charAt(0).toUpperCase() + code.slice(1);
+      const abs = document.getElementById('abstract' + cap)?.innerText || '';
+      const sum = document.getElementById('summary' + cap)?.innerText || '';
+      const bullets = [...document.querySelectorAll(`#bullets${cap} .bullet-item span:last-child`)]
+        .map((el, i) => `${i+1}. ${el.textContent}`).join('\n');
+      if (abs) sections.push(`── ABSTRACT — ${label} ──\n\n${abs}`);
+      if (sum) sections.push(`── SUMMARY — ${label} ──\n\n${sum}`);
+      if (bullets) sections.push(`── KEY POINTS — ${label} ──\n\n${bullets}`);
+    });
+
+    navigator.clipboard.writeText(sections.join('\n\n\n')).then(() => {
       const btn = document.querySelector('.btn-copy-all');
       btn.textContent = 'Copied!';
-      setTimeout(() => btn.textContent = 'Copy all as text', 2000);
+      setTimeout(() => btn.textContent = 'Copy all as text · Copier · Copiar · Copiar · Copia', 2000);
     });
   }
 </script>
