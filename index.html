@@ -3,23 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SciSummarize (Beta) — Multilingual Scientific Manuscript Summarizer</title>
-<meta name="description" content="Free AI-powered multilingual scientific manuscript summarizer. Upload any English-language scientific paper and receive an accurate abstract translation, summary, and 10 key findings in your language.">
-<meta name="keywords" content="scientific manuscript summarizer, science translation, research paper translation, multilingual science tool, LMIC science access">
+<title>SciSummarize — Multilingual Abstract Translator</title>
+<meta name="description" content="Free AI tool. Upload any English-language scientific paper and receive an accurate abstract translation, three key points, and a plain-language version — in 22 languages.">
+<meta name="keywords" content="scientific abstract translator, science translation, manuscript translation, LMIC science access, plain language science">
 <meta name="author" content="bhaley1">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://bhaley1.github.io/manuscript-summarizer---beta/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bhaley1.github.io/manuscript-summarizer---beta/">
-<meta property="og:title" content="SciSummarize (Beta) — Multilingual Scientific Manuscript Summarizer">
-<meta property="og:description" content="Free AI tool for scientists. Upload a scientific paper and get an accurate summary in your language — French, Spanish, Arabic, Swahili, Hindi, and 17 more.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SciSummarize","url":"https://bhaley1.github.io/manuscript-summarizer---beta/","description":"Free AI-powered multilingual scientific manuscript summarizer supporting 22 languages.","applicationCategory":"ScienceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bradd Haley","url":"https://github.com/bhaley1"}}</script>
+<meta property="og:title" content="SciSummarize — Multilingual Abstract Translator">
+<meta property="og:description" content="Free AI tool. Translate any scientific abstract into your language — scientist-level and plain-language versions, plus three key points.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SciSummarize","url":"https://bhaley1.github.io/manuscript-summarizer---beta/","description":"Free multilingual abstract translator for scientific manuscripts. Supports 22 languages.","applicationCategory":"ScienceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bradd Haley","url":"https://github.com/bhaley1"}}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1V3KSK1G4Y"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1V3KSK1G4Y');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -31,74 +30,41 @@
 }
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;min-height:100vh;}
-
-/* ── Beta notice ── */
 .beta-bar{background:#fffbeb;border-bottom:1px solid #f0c040;padding:8px 1.5rem;text-align:center;font-size:12px;color:#7d5a00;}
 .beta-bar a{color:#7d5a00;font-weight:500;}
-
-/* ── Header ── */
 header{border-bottom:1px solid var(--rule);padding:0 2rem;background:var(--paper);position:sticky;top:0;z-index:200;}
 .header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
 .logo{font-family:'Lora',serif;font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
 .logo span{color:#7c2d3e;}
 .beta-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:#fff3cd;color:#7d5a00;border:1px solid #f0c040;border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:middle;}
 .header-lang{font-size:12px;color:var(--ink-3);letter-spacing:0.04em;}
-
-/* ── HERO ── */
 .hero{padding:4rem 2rem 3rem;background:var(--paper-2);border-bottom:1px solid var(--rule);text-align:center;}
 .hero-eyebrow{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:10px;}
 .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:var(--rule);}
 .hero h1{font-family:'Lora',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:600;line-height:1.15;letter-spacing:-0.025em;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto;}
-.hero-sub{font-size:15px;color:var(--ink-2);max-width:500px;margin:0 auto 2.5rem;font-weight:300;line-height:1.8;}
-
-/* ── Language picker ── */
+.hero-sub{font-size:15px;color:var(--ink-2);max-width:560px;margin:0 auto 2.5rem;font-weight:300;line-height:1.8;}
 .lang-picker-section{padding:2.5rem 2rem;background:var(--paper);border-bottom:1px solid var(--rule);}
 .lang-picker-inner{max-width:1000px;margin:0 auto;}
 .lang-picker-prompt{text-align:center;font-size:13px;color:var(--ink-3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem;}
 .lang-grid-picker{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
-.lang-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 20px;border-radius:99px;
-  border:1.5px solid var(--rule);
-  background:white;color:var(--ink-2);
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
-  cursor:pointer;transition:all 0.15s;
-  white-space:nowrap;
-}
+.lang-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:99px;border:1.5px solid var(--rule);background:white;color:var(--ink-2);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
 .lang-btn:hover{border-color:var(--ink-3);color:var(--ink);background:var(--paper-2);}
 .lang-btn.selected{background:var(--ink);color:white;border-color:var(--ink);}
 .lang-btn .lang-native{font-size:13px;opacity:0.85;}
 .lang-btn .lang-dot-sm{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-
-/* ── Main app ── */
 #appSection{display:none;max-width:1400px;margin:0 auto;padding:2.5rem 2rem 6rem;}
 #appSection.visible{display:block;animation:fadeUp 0.3s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-.selected-lang-bar{
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--ink);color:white;
-  border-radius:var(--radius-lg);padding:12px 20px;
-  margin-bottom:1.5rem;
-}
+.selected-lang-bar{display:flex;align-items:center;justify-content:space-between;background:var(--ink);color:white;border-radius:var(--radius-lg);padding:12px 20px;margin-bottom:1.5rem;}
 .selected-lang-bar .lang-name-display{font-size:15px;font-weight:500;}
-.btn-change-lang{
-  font-size:12px;color:rgba(255,255,255,0.7);
-  background:none;border:1px solid rgba(255,255,255,0.3);
-  border-radius:var(--radius);padding:4px 12px;cursor:pointer;
-  font-family:'DM Sans',sans-serif;transition:all 0.15s;
-}
+.btn-change-lang{font-size:12px;color:rgba(255,255,255,0.7);background:none;border:1px solid rgba(255,255,255,0.3);border-radius:var(--radius);padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
 .btn-change-lang:hover{color:white;border-color:rgba(255,255,255,0.6);}
-
-/* ── Cards ── */
 .card{border:1px solid var(--rule);border-radius:var(--radius-lg);background:white;overflow:hidden;margin-bottom:1.5rem;}
 .card-header{padding:1rem 1.5rem;border-bottom:1px solid var(--rule-2);display:flex;align-items:center;gap:10px;}
 .step-num{width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .card-header h2{font-size:14px;font-weight:500;color:var(--ink);}
 .card-header .card-sub{font-size:11px;font-weight:400;color:var(--ink-3);display:block;margin-top:2px;}
 .card-body{padding:1.5rem;}
-
-/* ── Drop zone ── */
 .drop-zone{border:1.5px dashed var(--paper-3);border-radius:var(--radius-lg);padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.15s,background 0.15s;background:var(--paper-2);position:relative;margin-bottom:1.25rem;}
 .drop-zone:hover,.drop-zone.drag{border-color:var(--ink-3);background:var(--paper-3);}
 .drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
@@ -115,50 +81,13 @@ header{border-bottom:1px solid var(--rule);padding:0 2rem;background:var(--paper
 textarea{width:100%;min-height:160px;resize:vertical;border:1px solid var(--rule);border-radius:var(--radius-lg);background:var(--paper-2);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px;line-height:1.7;transition:border-color 0.15s;}
 textarea:focus{outline:none;border-color:var(--ink-3);background:white;}
 textarea::placeholder{color:var(--ink-3);}
-
-/* ── Mode toggle ── */
-.mode-card{border:1px solid var(--rule);border-radius:var(--radius-lg);background:white;margin-bottom:1.5rem;overflow:hidden;}
-.mode-card-header{padding:1rem 1.5rem;border-bottom:1px solid var(--rule-2);display:flex;align-items:center;gap:10px;}
-.mode-options{display:grid;grid-template-columns:1fr 1fr;gap:0;}
-.mode-option{
-  padding:1.25rem 1.5rem;cursor:pointer;
-  border-right:1px solid var(--rule-2);
-  transition:background 0.15s;
-  position:relative;
-}
-.mode-option:last-child{border-right:none;}
-.mode-option:hover{background:var(--paper-2);}
-.mode-option.active-expert{background:#f0f4ff;}
-.mode-option.active-plain{background:#f0fff4;}
-.mode-option input[type="radio"]{position:absolute;opacity:0;}
-.mode-icon{font-size:22px;margin-bottom:6px;}
-.mode-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px;}
-.mode-desc{font-size:12px;color:var(--ink-3);line-height:1.5;}
-.mode-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-top:6px;}
-.tag-expert{background:#e8eff8;color:#1a4d8f;}
-.tag-plain{background:#e8f4ec;color:#2d6b42;}
-
-/* ── Run button ── */
-.btn-run{
-  width:60%;margin:0 auto;display:block;padding:12px;
-  background:var(--ink);color:white;border:none;border-radius:var(--radius-lg);
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
-  cursor:pointer;transition:opacity 0.15s;overflow:hidden;position:relative;height:46px;
-}
+.btn-run{width:60%;margin:0 auto;display:block;padding:14px;background:var(--ink);color:white;border:none;border-radius:var(--radius-lg);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:opacity 0.15s;height:50px;}
 .btn-run:hover:not(:disabled){opacity:0.85;}
-.btn-run:disabled{opacity:0.35;cursor:not-allowed;}
-.btn-ticker{position:absolute;inset:0;display:flex;align-items:center;white-space:nowrap;animation:tickerScroll 8s linear infinite;}
-.btn-ticker span{padding:0 1.5rem;font-size:14px;font-weight:500;opacity:0.92;}
-.btn-run:disabled .btn-ticker{animation-play-state:paused;}
-@keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.btn-run:disabled{opacity:0.4;cursor:not-allowed;}
 .spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);border-top-color:white;animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* ── Error ── */
 .error-box{display:none;background:#fdf0f0;border:1px solid #f0c0c0;border-radius:var(--radius-lg);padding:12px 16px;font-size:13px;color:#8b2020;margin-top:1rem;line-height:1.5;}
 .error-box.visible{display:block;}
-
-/* ── Results ── */
 .results{display:none;margin-top:2rem;}
 .results.visible{display:block;animation:fadeUp 0.35s ease;}
 .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--rule);}
@@ -166,13 +95,10 @@ textarea::placeholder{color:var(--ink-3);}
 .results-title span{font-size:13px;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--ink-3);display:block;margin-top:2px;}
 .btn-copy-all{font-size:12px;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:var(--radius);padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-copy-all:hover{color:var(--ink);}
-
-/* ── Section label ── */
 .section-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:1rem;margin-top:2rem;display:flex;align-items:center;gap:10px;}
 .section-label::after{content:'';flex:1;height:1px;background:var(--rule-2);}
-
-/* ── Two-column result grid ── */
-.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2px;}
+.section-icon{display:inline-block;font-size:14px;}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;}
 .result-col{background:white;padding:1.5rem 2rem;}
 .result-col.rtl{direction:rtl;text-align:right;}
 .result-col.rtl .col-header{flex-direction:row-reverse;}
@@ -182,36 +108,12 @@ textarea::placeholder{color:var(--ink-3);}
 .summary-text{font-size:14px;color:var(--ink-2);line-height:1.8;font-family:'Lora',serif;}
 .summary-text p+p{margin-top:0.85em;}
 .bullet-list{list-style:none;}
-.bullet-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);line-height:1.65;padding:8px 0;border-bottom:1px solid var(--rule-2);}
+.bullet-item{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-2);line-height:1.7;padding:10px 0;border-bottom:1px solid var(--rule-2);}
 .bullet-item:last-child{border-bottom:none;padding-bottom:0;}
-.bullet-num{flex-shrink:0;width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:500;margin-top:2px;display:flex;align-items:center;justify-content:center;}
-
-/* ── Glossary ── */
-.glossary-wrap{border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2px;}
-.glossary-table{width:100%;border-collapse:collapse;}
-.glossary-table th{background:var(--paper-2);padding:10px 16px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule);text-align:left;}
-.glossary-table td{padding:10px 16px;font-size:14px;color:var(--ink-2);border-bottom:1px solid var(--rule-2);vertical-align:top;}
-.glossary-table tr:last-child td{border-bottom:none;}
-.glossary-table tr:hover td{background:var(--paper-2);}
-.g-term{font-weight:500;color:var(--ink);}
-.g-def{color:var(--ink-3);font-size:12px;margin-top:2px;}
-
-/* ── Citation ── */
-.citation-wrap{border:1px solid var(--rule);border-radius:var(--radius-lg);overflow:hidden;}
-.citation-tabs{display:flex;border-bottom:1px solid var(--rule);background:var(--paper-2);}
-.cit-tab{padding:10px 20px;font-size:13px;font-weight:500;color:var(--ink-3);cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;transition:all 0.15s;}
-.cit-tab.active{color:var(--ink);border-bottom-color:var(--ink);}
-.citation-body{padding:1.25rem 1.5rem;}
-.citation-text{font-family:'Lora',serif;font-size:14px;color:var(--ink-2);line-height:1.8;background:var(--paper-2);border-radius:var(--radius);padding:12px 16px;margin-bottom:8px;}
-.citation-note{font-size:12px;color:var(--ink-3);}
-.btn-copy-cite{font-size:12px;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:var(--radius);padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;float:right;margin-top:-2px;}
-.btn-copy-cite:hover{color:var(--ink);}
-
-/* ── Footer ── */
+.bullet-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:600;margin-top:2px;display:flex;align-items:center;justify-content:center;}
+.section-intro{font-size:12px;color:var(--ink-3);margin-bottom:.75rem;font-style:italic;}
 footer{border-top:1px solid var(--rule);padding:2rem;text-align:center;font-size:12px;color:var(--ink-3);background:var(--paper-2);}
 footer a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;}
-
-/* ── Language accent colors ── */
 .c-en{color:#1a4d8f;}.bg-en{background:#e8eff8;}.dot-en{background:#1a4d8f;}
 .c-fr{color:#7c2d3e;}.bg-fr{background:#f7eaec;}.dot-fr{background:#7c2d3e;}
 .c-es{color:#2d6b42;}.bg-es{background:#e8f4ec;}.dot-es{background:#2d6b42;}
@@ -234,12 +136,8 @@ footer a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;
 .c-rw{color:#3d5c00;}.bg-rw{background:#f0ffe0;}.dot-rw{background:#3d5c00;}
 .c-rn{color:#5c3d00;}.bg-rn{background:#fff3e0;}.dot-rn{background:#5c3d00;}
 .c-ny{color:#00405c;}.bg-ny{background:#e0f0ff;}.dot-ny{background:#00405c;}
-
-/* ── Responsive ── */
 @media(max-width:700px){
   .result-grid{grid-template-columns:1fr;}
-  .mode-options{grid-template-columns:1fr;}
-  .mode-option{border-right:none;border-bottom:1px solid var(--rule-2);}
   .hero h1{font-size:2rem;}
   .btn-run{width:90%;}
 }
@@ -259,33 +157,25 @@ footer a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow" id="heroEyebrow">Scientific Manuscript Tool</div>
-  <h1 id="heroTitle">Your language.<br>One manuscript.<br>Instant clarity.</h1>
-  <p class="hero-sub" id="heroSub">Upload any English-language scientific paper and receive an accurate summary and key findings in your language — with precise scientific terminology.</p>
+  <div class="hero-eyebrow" id="heroEyebrow">Scientific Abstract Translator</div>
+  <h1 id="heroTitle">Your language.<br>One abstract.<br>Three views.</h1>
+  <p class="hero-sub" id="heroSub">Upload any English-language scientific paper and receive the abstract translated for scientists, three key points, and a plain-language version — all in your language.</p>
 </section>
 
-<!-- LANGUAGE PICKER -->
 <section class="lang-picker-section">
   <div class="lang-picker-inner">
     <div class="lang-picker-prompt" id="pickerPrompt">SELECT YOUR LANGUAGE · CHOISISSEZ VOTRE LANGUE · SELECCIONE SU IDIOMA</div>
-    <div class="lang-grid-picker" id="langGridPicker">
-      <!-- Buttons injected by JS -->
-    </div>
+    <div class="lang-grid-picker" id="langGridPicker"></div>
   </div>
 </section>
 
-<!-- APP (shown after language selected) -->
 <div id="appSection">
-
-  <!-- Selected language bar -->
   <div class="selected-lang-bar">
     <span class="lang-name-display" id="selectedLangDisplay"></span>
     <button class="btn-change-lang" id="btnChangeLang" onclick="changeLang()"></button>
   </div>
 
-  <!-- Step 1: Upload -->
   <div class="card">
     <div class="card-header">
       <div class="step-num">1</div>
@@ -308,114 +198,62 @@ footer a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;
     </div>
   </div>
 
-  <!-- Step 2: Mode -->
-  <div class="mode-card">
-    <div class="mode-card-header">
-      <div class="step-num">2</div>
-      <h2 id="step2Title">Choose your summary style<span class="card-sub" id="step2Sub">Select how detailed you want the results</span></h2>
-    </div>
-    <div class="mode-options">
-      <div class="mode-option active-expert" id="modeExpert" onclick="setMode('expert')">
-        <div class="mode-icon">🎓</div>
-        <div class="mode-title" id="expertTitle">Expert</div>
-        <div class="mode-desc" id="expertDesc">Technical language · 10 key points · For researchers</div>
-        <span class="mode-tag tag-expert" id="expertTag">Researchers</span>
-      </div>
-      <div class="mode-option" id="modePlain" onclick="setMode('plain')">
-        <div class="mode-icon">👥</div>
-        <div class="mode-title" id="plainTitle">General Public</div>
-        <div class="mode-desc" id="plainDesc">Plain language · 3 key takeaways · For everyone</div>
-        <span class="mode-tag tag-plain" id="plainTag">Everyone</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 3: Run -->
   <button class="btn-run" id="runBtn" onclick="runSummarize()">
-    <div class="btn-ticker" id="btnTicker">
-      <!-- filled by JS -->
-    </div>
+    <span id="runBtnLabel">Translate abstract</span>
   </button>
 
-  <!-- Results -->
   <div class="results" id="results">
     <div class="results-header">
       <div class="results-title">
         <span id="resultsTitle">Results</span>
-        <span id="resultsSubtitle">Résultats · Resultados · نتائج</span>
+        <span id="resultsSubtitle">Three views of the abstract</span>
       </div>
-      <button class="btn-copy-all" onclick="copyAll()" id="btnCopyAll">Copy all as text</button>
+      <button class="btn-copy-all" onclick="copyAll()" id="btnCopyAll">Copy all</button>
     </div>
 
-    <!-- Abstract -->
-    <div class="section-label" id="labelAbstract">Abstract</div>
+    <!-- 1. Scientist abstract -->
+    <div class="section-label"><span class="section-icon">🎓</span><span id="labelScientist">Scientist's abstract</span></div>
+    <div class="section-intro" id="introScientist">The original abstract, translated with precise scientific terminology.</div>
     <div class="result-grid">
       <div class="result-col">
         <div class="col-header"><div class="col-dot dot-en"></div><span class="col-lang-name c-en">English (original)</span></div>
         <div class="summary-text" id="abstractEn"></div>
       </div>
-      <div class="result-col" id="colAbstractLang">
-        <div class="col-header"><div class="col-dot" id="dotAbstractLang"></div><span class="col-lang-name" id="nameAbstractLang"></span></div>
-        <div class="summary-text" id="abstractLang"></div>
+      <div class="result-col" id="colScientist">
+        <div class="col-header"><div class="col-dot" id="dotScientist"></div><span class="col-lang-name" id="nameScientist"></span></div>
+        <div class="summary-text" id="abstractScientist"></div>
       </div>
     </div>
 
-    <!-- Summary -->
-    <div class="section-label" id="labelSummary">Summary</div>
+    <!-- 2. Key points -->
+    <div class="section-label"><span class="section-icon">🔑</span><span id="labelKeyPoints">Three key points</span></div>
+    <div class="section-intro" id="introKeyPoints">The most important findings from the abstract.</div>
     <div class="result-grid">
       <div class="result-col">
         <div class="col-header"><div class="col-dot dot-en"></div><span class="col-lang-name c-en">English</span></div>
-        <div class="summary-text" id="summaryEn"></div>
+        <ul class="bullet-list" id="keyPointsEn"></ul>
       </div>
-      <div class="result-col" id="colSummaryLang">
-        <div class="col-header"><div class="col-dot" id="dotSummaryLang"></div><span class="col-lang-name" id="nameSummaryLang"></span></div>
-        <div class="summary-text" id="summaryLang"></div>
+      <div class="result-col" id="colKeyPoints">
+        <div class="col-header"><div class="col-dot" id="dotKeyPoints"></div><span class="col-lang-name" id="nameKeyPoints"></span></div>
+        <ul class="bullet-list" id="keyPointsLang"></ul>
       </div>
     </div>
 
-    <!-- Key Points -->
-    <div class="section-label" id="labelBullets">Key Points</div>
+    <!-- 3. Plain version -->
+    <div class="section-label"><span class="section-icon">👥</span><span id="labelPlain">Plain-language version</span></div>
+    <div class="section-intro" id="introPlain">The same abstract, rewritten for a general audience (8th–12th grade reading level).</div>
     <div class="result-grid">
       <div class="result-col">
         <div class="col-header"><div class="col-dot dot-en"></div><span class="col-lang-name c-en">English</span></div>
-        <ul class="bullet-list" id="bulletsEn"></ul>
+        <div class="summary-text" id="plainEn"></div>
       </div>
-      <div class="result-col" id="colBulletsLang">
-        <div class="col-header"><div class="col-dot" id="dotBulletsLang"></div><span class="col-lang-name" id="nameBulletsLang"></span></div>
-        <ul class="bullet-list" id="bulletsLang"></ul>
-      </div>
-    </div>
-
-    <!-- Glossary -->
-    <div class="section-label" id="labelGlossary">🔑 Key Terms</div>
-    <div class="glossary-wrap" id="glossaryWrap">
-      <table class="glossary-table">
-        <thead><tr>
-          <th id="glossaryH1">Scientific Term</th>
-          <th id="glossaryH2">Plain English Definition</th>
-          <th id="glossaryH3">Translation</th>
-        </tr></thead>
-        <tbody id="glossaryBody"></tbody>
-      </table>
-    </div>
-
-    <!-- Citation -->
-    <div class="section-label" id="labelCitation">📎 Cite This Paper</div>
-    <div class="citation-wrap">
-      <div class="citation-tabs">
-        <button class="cit-tab active" onclick="showCitation('apa')">APA</button>
-        <button class="cit-tab" onclick="showCitation('vancouver')">Vancouver</button>
-        <button class="cit-tab" onclick="showCitation('harvard')">Harvard</button>
-      </div>
-      <div class="citation-body">
-        <button class="btn-copy-cite" onclick="copyCitation()" id="btnCopyCite">Copy</button>
-        <div class="citation-text" id="citationText"></div>
-        <div class="citation-note" id="citationNote"></div>
+      <div class="result-col" id="colPlain">
+        <div class="col-header"><div class="col-dot" id="dotPlain"></div><span class="col-lang-name" id="namePlain"></span></div>
+        <div class="summary-text" id="plainLang"></div>
       </div>
     </div>
-
-  </div><!-- /results -->
-</div><!-- /appSection -->
+  </div>
+</div>
 
 <footer>
   <p>SciSummarize uses the <a href="https://www.anthropic.com" target="_blank">Anthropic Claude API</a>.
@@ -427,7 +265,6 @@ footer a{color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;
 <script>
 const API_ENDPOINT = 'https://scisummarize.bhaley1.workers.dev/summarize';
 
-// ── Language definitions ──────────────────────────────────────────────────
 const LANGS = [
   {code:'en', native:'English',      english:'English',         dir:'ltr', color:'en'},
   {code:'fr', native:'Français',     english:'French',          dir:'ltr', color:'fr'},
@@ -453,47 +290,38 @@ const LANGS = [
   {code:'ny', native:'Chichewa',     english:'Chichewa',        dir:'ltr', color:'ny'},
 ];
 
-// ── UI translations ───────────────────────────────────────────────────────
-// Each language has translations for every UI string
 const UI = {
-  en:{heroEyebrow:'Scientific Manuscript Tool',heroTitle:'Your language.<br>One manuscript.<br>Instant clarity.',heroSub:'Upload any English-language scientific paper and receive an accurate summary and key findings in your language — with precise scientific terminology.',pickerPrompt:'SELECT YOUR LANGUAGE',step1Title:'Upload or paste your manuscript',step1Sub:'PDF, .txt, or .md — or paste text below',dropLabel:'Drop a file here',dropSub:'Supported: .pdf, .txt, .md — or click to browse',orDivider:'or paste text',pastePlaceholder:'Paste the full manuscript text here…',step2Title:'Choose your summary style',step2Sub:'Select how detailed you want the results',expertTitle:'Expert',expertDesc:'Technical language · 10 key points · For researchers',expertTag:'Researchers',plainTitle:'General Public',plainDesc:'Plain language · 3 key takeaways · For everyone',plainTag:'Everyone',btnRun:'Summarize in English + {lang}',btnAnalyzing:'Analyzing manuscript…',btnChange:'Change language',resultsTitle:'Results',labelAbstract:'Abstract',labelSummary:'Summary',labelBullets:'Key Points',labelGlossary:'🔑 Key Terms',labelCitation:'📎 Cite This Paper',glossaryH1:'Scientific Term',glossaryH2:'Plain Definition',glossaryH3:'Translation',btnCopyAll:'Copy all as text',btnCopyCite:'Copy',errNoFile:'Please upload a file or paste manuscript text.',errNoLang:'Please select a language first.'},
-  fr:{heroEyebrow:'Outil pour manuscrits scientifiques',heroTitle:'Votre langue.<br>Un manuscrit.<br>Une clarté instantanée.',heroSub:'Déposez tout article scientifique en anglais et recevez un résumé précis et les points clés dans votre langue.',pickerPrompt:'SÉLECTIONNEZ VOTRE LANGUE',step1Title:'Déposez ou collez votre manuscrit',step1Sub:'PDF, .txt ou .md — ou collez le texte ci-dessous',dropLabel:'Déposez un fichier ici',dropSub:'Formats : .pdf, .txt, .md — ou cliquez pour parcourir',orDivider:'ou coller le texte',pastePlaceholder:'Collez le texte complet du manuscrit ici…',step2Title:'Choisissez votre style de résumé',step2Sub:'Sélectionnez le niveau de détail souhaité',expertTitle:'Expert',expertDesc:'Langage technique · 10 points clés · Pour les chercheurs',expertTag:'Chercheurs',plainTitle:'Grand public',plainDesc:'Langage simple · 3 points essentiels · Pour tous',plainTag:'Pour tous',btnRun:'Résumer en anglais + français',btnAnalyzing:'Analyse en cours…',btnChange:'Changer de langue',resultsTitle:'Résultats',labelAbstract:'Résumé (Abstract)',labelSummary:'Sommaire',labelBullets:'Points clés',labelGlossary:'🔑 Termes clés',labelCitation:'📎 Citer cet article',glossaryH1:'Terme scientifique',glossaryH2:'Définition simple',glossaryH3:'Traduction',btnCopyAll:'Tout copier',btnCopyCite:'Copier',errNoFile:'Veuillez déposer un fichier ou coller le texte du manuscrit.',errNoLang:'Veuillez d\'abord sélectionner une langue.'},
-  es:{heroEyebrow:'Herramienta para manuscritos científicos',heroTitle:'Su idioma.<br>Un manuscrito.<br>Claridad instantánea.',heroSub:'Cargue cualquier artículo científico en inglés y reciba un resumen preciso y los hallazgos clave en su idioma.',pickerPrompt:'SELECCIONE SU IDIOMA',step1Title:'Cargue o pegue su manuscrito',step1Sub:'PDF, .txt o .md — o pegue el texto abajo',dropLabel:'Suelte un archivo aquí',dropSub:'Compatible: .pdf, .txt, .md — o haga clic para buscar',orDivider:'o pegar texto',pastePlaceholder:'Pegue el texto completo del manuscrito aquí…',step2Title:'Elija su estilo de resumen',step2Sub:'Seleccione el nivel de detalle que desea',expertTitle:'Experto',expertDesc:'Lenguaje técnico · 10 puntos clave · Para investigadores',expertTag:'Investigadores',plainTitle:'Público general',plainDesc:'Lenguaje sencillo · 3 conclusiones · Para todos',plainTag:'Para todos',btnRun:'Resumir en inglés + español',btnAnalyzing:'Analizando…',btnChange:'Cambiar idioma',resultsTitle:'Resultados',labelAbstract:'Resumen (Abstract)',labelSummary:'Sumario',labelBullets:'Puntos clave',labelGlossary:'🔑 Términos clave',labelCitation:'📎 Citar este artículo',glossaryH1:'Término científico',glossaryH2:'Definición simple',glossaryH3:'Traducción',btnCopyAll:'Copiar todo',btnCopyCite:'Copiar',errNoFile:'Por favor cargue un archivo o pegue el texto.',errNoLang:'Por favor seleccione un idioma primero.'},
-  pt:{heroEyebrow:'Ferramenta para manuscritos científicos',heroTitle:'A sua língua.<br>Um manuscrito.<br>Clareza imediata.',heroSub:'Carregue qualquer artigo científico em inglês e receba um resumo preciso e os pontos-chave na sua língua.',pickerPrompt:'SELECIONE O SEU IDIOMA',step1Title:'Carregue ou cole o seu manuscrito',step1Sub:'PDF, .txt ou .md — ou cole o texto abaixo',dropLabel:'Largue um ficheiro aqui',dropSub:'Suportado: .pdf, .txt, .md — ou clique para procurar',orDivider:'ou colar texto',pastePlaceholder:'Cole o texto completo do manuscrito aqui…',step2Title:'Escolha o seu estilo de resumo',step2Sub:'Selecione o nível de detalhe pretendido',expertTitle:'Especialista',expertDesc:'Linguagem técnica · 10 pontos-chave · Para investigadores',expertTag:'Investigadores',plainTitle:'Público geral',plainDesc:'Linguagem simples · 3 conclusões · Para todos',plainTag:'Para todos',btnRun:'Resumir em inglês + português',btnAnalyzing:'A analisar…',btnChange:'Mudar de idioma',resultsTitle:'Resultados',labelAbstract:'Resumo (Abstract)',labelSummary:'Sumário',labelBullets:'Pontos-chave',labelGlossary:'🔑 Termos-chave',labelCitation:'📎 Citar este artigo',glossaryH1:'Termo científico',glossaryH2:'Definição simples',glossaryH3:'Tradução',btnCopyAll:'Copiar tudo',btnCopyCite:'Copiar',errNoFile:'Por favor carregue um ficheiro ou cole o texto.',errNoLang:'Por favor selecione um idioma primeiro.'},
-  it:{heroEyebrow:'Strumento per manoscritti scientifici',heroTitle:'La tua lingua.<br>Un manoscritto.<br>Chiarezza immediata.',heroSub:'Carica qualsiasi articolo scientifico in inglese e ricevi un riassunto accurato e i punti chiave nella tua lingua.',pickerPrompt:'SELEZIONA LA TUA LINGUA',step1Title:'Carica o incolla il tuo manoscritto',step1Sub:'PDF, .txt o .md — o incolla il testo sotto',dropLabel:'Trascina un file qui',dropSub:'Supportati: .pdf, .txt, .md — o clicca per sfogliare',orDivider:'o incolla il testo',pastePlaceholder:'Incolla qui il testo completo del manoscritto…',step2Title:'Scegli il tuo stile di riassunto',step2Sub:'Seleziona il livello di dettaglio desiderato',expertTitle:'Esperto',expertDesc:'Linguaggio tecnico · 10 punti chiave · Per ricercatori',expertTag:'Ricercatori',plainTitle:'Pubblico generale',plainDesc:'Linguaggio semplice · 3 punti principali · Per tutti',plainTag:'Per tutti',btnRun:'Riassumi in inglese + italiano',btnAnalyzing:'Analisi in corso…',btnChange:'Cambia lingua',resultsTitle:'Risultati',labelAbstract:'Abstract',labelSummary:'Riassunto',labelBullets:'Punti chiave',labelGlossary:'🔑 Termini chiave',labelCitation:'📎 Cita questo articolo',glossaryH1:'Termine scientifico',glossaryH2:'Definizione semplice',glossaryH3:'Traduzione',btnCopyAll:'Copia tutto',btnCopyCite:'Copia',errNoFile:'Carica un file o incolla il testo del manoscritto.',errNoLang:'Seleziona prima una lingua.'},
-  ar:{heroEyebrow:'أداة للمخطوطات العلمية',heroTitle:'لغتك.<br>مخطوطة واحدة.<br>وضوح فوري.',heroSub:'قم بتحميل أي ورقة علمية باللغة الإنجليزية واحصل على ملخص دقيق والنتائج الرئيسية بلغتك.',pickerPrompt:'اختر لغتك',step1Title:'حمّل أو الصق مخطوطتك',step1Sub:'PDF أو .txt أو .md — أو الصق النص أدناه',dropLabel:'أسقط الملف هنا',dropSub:'المدعوم: .pdf, .txt, .md — أو انقر للتصفح',orDivider:'أو الصق النص',pastePlaceholder:'الصق النص الكامل للمخطوطة هنا…',step2Title:'اختر أسلوب الملخص',step2Sub:'حدد مستوى التفاصيل المطلوب',expertTitle:'خبير',expertDesc:'لغة تقنية · ١٠ نقاط رئيسية · للباحثين',expertTag:'للباحثين',plainTitle:'عموم الجمهور',plainDesc:'لغة بسيطة · ٣ نقاط أساسية · للجميع',plainTag:'للجميع',btnRun:'تلخيص بالإنجليزية + العربية',btnAnalyzing:'جارٍ التحليل…',btnChange:'تغيير اللغة',resultsTitle:'النتائج',labelAbstract:'الملخص',labelSummary:'الملخص التفصيلي',labelBullets:'النقاط الرئيسية',labelGlossary:'🔑 المصطلحات الرئيسية',labelCitation:'📎 الاستشهاد بهذه الورقة',glossaryH1:'المصطلح العلمي',glossaryH2:'تعريف مبسط',glossaryH3:'الترجمة',btnCopyAll:'نسخ الكل',btnCopyCite:'نسخ',errNoFile:'يرجى تحميل ملف أو لصق نص المخطوطة.',errNoLang:'يرجى اختيار لغة أولاً.'},
-  zh:{heroEyebrow:'科学手稿工具',heroTitle:'您的语言。<br>一篇论文。<br>即时清晰。',heroSub:'上传任何英文科学论文，以您选择的语言获得准确的摘要和关键发现。',pickerPrompt:'请选择您的语言',step1Title:'上传或粘贴您的手稿',step1Sub:'支持PDF、.txt或.md格式——或在下方粘贴文本',dropLabel:'将文件拖放到此处',dropSub:'支持：.pdf, .txt, .md——或点击浏览',orDivider:'或粘贴文本',pastePlaceholder:'请在此粘贴完整的手稿文本…',step2Title:'选择摘要风格',step2Sub:'选择您需要的详细程度',expertTitle:'专家模式',expertDesc:'专业术语 · 10个要点 · 面向研究人员',expertTag:'研究人员',plainTitle:'大众模式',plainDesc:'通俗语言 · 3个要点 · 面向所有人',plainTag:'所有人',btnRun:'生成英文+中文摘要',btnAnalyzing:'正在分析…',btnChange:'更换语言',resultsTitle:'结果',labelAbstract:'摘要',labelSummary:'总结',labelBullets:'要点',labelGlossary:'🔑 关键术语',labelCitation:'📎 引用此论文',glossaryH1:'科学术语',glossaryH2:'简明定义',glossaryH3:'翻译',btnCopyAll:'复制全部',btnCopyCite:'复制',errNoFile:'请上传文件或粘贴手稿文本。',errNoLang:'请先选择语言。'},
-  sw:{heroEyebrow:'Zana ya Maandishi ya Kisayansi',heroTitle:'Lugha yako.<br>Maandishi moja.<br>Uwazi wa haraka.',heroSub:'Pakia makala yoyote ya kisayansi kwa Kiingereza na upokee muhtasari sahihi na matokeo muhimu kwa lugha yako.',pickerPrompt:'CHAGUA LUGHA YAKO',step1Title:'Pakia au bandika maandishi yako',step1Sub:'PDF, .txt au .md — au bandika maandishi hapa chini',dropLabel:'Buruta faili hapa',dropSub:'Inayoungwa mkono: .pdf, .txt, .md — au bonyeza kuvinjari',orDivider:'au bandika maandishi',pastePlaceholder:'Bandika maandishi kamili ya makala hapa…',step2Title:'Chagua mtindo wa muhtasari',step2Sub:'Chagua kiwango cha undani unacotaka',expertTitle:'Mtaalamu',expertDesc:'Lugha ya kitaalamu · Pointi 10 · Kwa watafiti',expertTag:'Watafiti',plainTitle:'Umma wa Watu',plainDesc:'Lugha rahisi · Pointi 3 · Kwa kila mtu',plainTag:'Kwa wote',btnRun:'Fanya muhtasari kwa Kiingereza + Kiswahili',btnAnalyzing:'Inachambua…',btnChange:'Badilisha lugha',resultsTitle:'Matokeo',labelAbstract:'Muhtasari',labelSummary:'Maelezo',labelBullets:'Pointi Muhimu',labelGlossary:'🔑 Maneno Muhimu',labelCitation:'📎 Taja Makala Hii',glossaryH1:'Neno la kisayansi',glossaryH2:'Maelezo rahisi',glossaryH3:'Tafsiri',btnCopyAll:'Nakili yote',btnCopyCite:'Nakili',errNoFile:'Tafadhali pakia faili au bandika maandishi.',errNoLang:'Tafadhali chagua lugha kwanza.'},
-  am:{heroEyebrow:'የሳይንሳዊ ጽሑፍ መሣሪያ',heroTitle:'ቋንቋዎ።<br>አንድ ጽሑፍ።<br>ፈጣን ግልፅነት።',heroSub:'ማንኛውም የእንግሊዝኛ ሳይንሳዊ ጽሑፍ ሰቅለው በቋንቋዎ ትክክለኛ ማጠቃለያ ያግኙ።',pickerPrompt:'ቋንቋዎን ይምረጡ',step1Title:'ጽሑፍዎን ይስቀሉ ወይም ይለጥፉ',step1Sub:'PDF, .txt ወይም .md — ወይም ጽሑፍ ከዚህ በታች ይለጥፉ',dropLabel:'ፋይሉን እዚህ ይጣሉ',dropSub:'የሚደገፉ: .pdf, .txt, .md — ወይም ለማሰሰ ጠቅ ያድርጉ',orDivider:'ወይም ጽሑፍ ይለጥፉ',pastePlaceholder:'የጽሑፉን ሙሉ ጽሑፍ እዚህ ይለጥፉ…',step2Title:'የማጠቃለያ ዘዴ ይምረጡ',step2Sub:'የሚፈልጉትን የዝርዝር ደረጃ ይምረጡ',expertTitle:'ባለሙያ',expertDesc:'ቴክኒካዊ ቋንቋ · 10 ነጥቦች · ለተመራማሪዎች',expertTag:'ተመራማሪዎች',plainTitle:'ለሁሉም',plainDesc:'ቀላል ቋንቋ · 3 ዋና ነጥቦች · ለሁሉም',plainTag:'ለሁሉም',btnRun:'በእንግሊዝኛ + አማርኛ ያጠቃልሉ',btnAnalyzing:'እየተተነተነ ነው…',btnChange:'ቋንቋ ይቀይሩ',resultsTitle:'ውጤቶች',labelAbstract:'ማጠቃለያ',labelSummary:'ዝርዝር ማጠቃለያ',labelBullets:'ዋና ነጥቦች',labelGlossary:'🔑 ዋና ቃላት',labelCitation:'📎 ይህን ጽሑፍ ይጥቀሱ',glossaryH1:'ሳይንሳዊ ቃል',glossaryH2:'ቀላል ትርጉም',glossaryH3:'ትርጉም',btnCopyAll:'ሁሉንም ቅዳ',btnCopyCite:'ቅዳ',errNoFile:'እባክዎ ፋይል ይስቀሉ ወይም ጽሑፍ ይለጥፉ።',errNoLang:'እባክዎ መጀመሪያ ቋንቋ ይምረጡ።'},
-  hi:{heroEyebrow:'वैज्ञानिक पांडुलिपि उपकरण',heroTitle:'आपकी भाषा।<br>एक पांडुलिपि।<br>तत्काल स्पष्टता।',heroSub:'कोई भी अंग्रेजी वैज्ञानिक पेपर अपलोड करें और अपनी भाषा में सटीक सारांश और मुख्य निष्कर्ष प्राप्त करें।',pickerPrompt:'अपनी भाषा चुनें',step1Title:'अपनी पांडुलिपि अपलोड करें या पेस्ट करें',step1Sub:'PDF, .txt या .md — या नीचे टेक्स्ट पेस्ट करें',dropLabel:'यहाँ फ़ाइल छोड़ें',dropSub:'समर्थित: .pdf, .txt, .md — या ब्राउज़ करने के लिए क्लिक करें',orDivider:'या टेक्स्ट पेस्ट करें',pastePlaceholder:'यहाँ पांडुलिपि का पूरा टेक्स्ट पेस्ट करें…',step2Title:'अपना सारांश शैली चुनें',step2Sub:'वांछित विस्तार स्तर चुनें',expertTitle:'विशेषज्ञ',expertDesc:'तकनीकी भाषा · 10 मुख्य बिंदु · शोधकर्ताओं के लिए',expertTag:'शोधकर्ता',plainTitle:'सामान्य जन',plainDesc:'सरल भाषा · 3 मुख्य निष्कर्ष · सभी के लिए',plainTag:'सभी के लिए',btnRun:'अंग्रेजी + हिंदी में सारांश',btnAnalyzing:'विश्लेषण हो रहा है…',btnChange:'भाषा बदलें',resultsTitle:'परिणाम',labelAbstract:'सार (Abstract)',labelSummary:'सारांश',labelBullets:'मुख्य बिंदु',labelGlossary:'🔑 मुख्य शब्द',labelCitation:'📎 इस पेपर को उद्धृत करें',glossaryH1:'वैज्ञानिक शब्द',glossaryH2:'सरल परिभाषा',glossaryH3:'अनुवाद',btnCopyAll:'सब कुछ कॉपी करें',btnCopyCite:'कॉपी',errNoFile:'कृपया फ़ाइल अपलोड करें या टेक्स्ट पेस्ट करें।',errNoLang:'कृपया पहले एक भाषा चुनें।'},
-  bn:{heroEyebrow:'বৈজ্ঞানিক পাণ্ডুলিপি সরঞ্জাম',heroTitle:'আপনার ভাষা।<br>একটি পাণ্ডুলিপি।<br>তাৎক্ষণিক স্পষ্টতা।',heroSub:'যেকোনো ইংরেজি বৈজ্ঞানিক পেপার আপলোড করুন এবং আপনার ভাষায় সঠিক সারসংক্ষেপ ও মূল ফলাফল পান।',pickerPrompt:'আপনার ভাষা নির্বাচন করুন',step1Title:'আপনার পাণ্ডুলিপি আপলোড বা পেস্ট করুন',step1Sub:'PDF, .txt বা .md — অথবা নিচে টেক্সট পেস্ট করুন',dropLabel:'এখানে ফাইল ছেড়ে দিন',dropSub:'সমর্থিত: .pdf, .txt, .md — বা ব্রাউজ করতে ক্লিক করুন',orDivider:'অথবা টেক্সট পেস্ট করুন',pastePlaceholder:'এখানে পাণ্ডুলিপির সম্পূর্ণ টেক্সট পেস্ট করুন…',step2Title:'আপনার সারসংক্ষেপ শৈলী বেছে নিন',step2Sub:'আপনি যে বিস্তারিত স্তর চান তা নির্বাচন করুন',expertTitle:'বিশেষজ্ঞ',expertDesc:'প্রযুক্তিগত ভাষা · ১০টি মূল বিষয় · গবেষকদের জন্য',expertTag:'গবেষকরা',plainTitle:'সাধারণ জনগণ',plainDesc:'সহজ ভাষা · ৩টি মূল বিষয় · সবার জন্য',plainTag:'সবার জন্য',btnRun:'ইংরেজি + বাংলায় সারসংক্ষেপ',btnAnalyzing:'বিশ্লেষণ হচ্ছে…',btnChange:'ভাষা পরিবর্তন করুন',resultsTitle:'ফলাফল',labelAbstract:'সার (Abstract)',labelSummary:'সারসংক্ষেপ',labelBullets:'মূল বিষয়',labelGlossary:'🔑 মূল শব্দ',labelCitation:'📎 এই পেপার উদ্ধৃত করুন',glossaryH1:'বৈজ্ঞানিক শব্দ',glossaryH2:'সহজ সংজ্ঞা',glossaryH3:'অনুবাদ',btnCopyAll:'সব কপি করুন',btnCopyCite:'কপি',errNoFile:'অনুগ্রহ করে একটি ফাইল আপলোড করুন বা টেক্সট পেস্ট করুন।',errNoLang:'অনুগ্রহ করে প্রথমে একটি ভাষা নির্বাচন করুন।'},
-  id:{heroEyebrow:'Alat Manuskrip Ilmiah',heroTitle:'Bahasa Anda.<br>Satu manuskrip.<br>Kejelasan instan.',heroSub:'Unggah makalah ilmiah berbahasa Inggris apa pun dan terima ringkasan akurat serta temuan utama dalam bahasa Anda.',pickerPrompt:'PILIH BAHASA ANDA',step1Title:'Unggah atau tempel manuskrip Anda',step1Sub:'PDF, .txt, atau .md — atau tempel teks di bawah',dropLabel:'Seret file ke sini',dropSub:'Didukung: .pdf, .txt, .md — atau klik untuk menelusuri',orDivider:'atau tempel teks',pastePlaceholder:'Tempel teks lengkap manuskrip di sini…',step2Title:'Pilih gaya ringkasan Anda',step2Sub:'Pilih tingkat detail yang Anda inginkan',expertTitle:'Ahli',expertDesc:'Bahasa teknis · 10 poin utama · Untuk peneliti',expertTag:'Peneliti',plainTitle:'Umum',plainDesc:'Bahasa sederhana · 3 poin utama · Untuk semua',plainTag:'Untuk semua',btnRun:'Rangkum dalam Bahasa Inggris + Indonesia',btnAnalyzing:'Sedang menganalisis…',btnChange:'Ganti bahasa',resultsTitle:'Hasil',labelAbstract:'Abstrak',labelSummary:'Ringkasan',labelBullets:'Poin Utama',labelGlossary:'🔑 Istilah Utama',labelCitation:'📎 Kutip Makalah Ini',glossaryH1:'Istilah ilmiah',glossaryH2:'Definisi sederhana',glossaryH3:'Terjemahan',btnCopyAll:'Salin semua',btnCopyCite:'Salin',errNoFile:'Harap unggah file atau tempel teks manuskrip.',errNoLang:'Harap pilih bahasa terlebih dahulu.'},
-  uk:{heroEyebrow:'Інструмент для наукових рукописів',heroTitle:'Ваша мова.<br>Один рукопис.<br>Миттєва ясність.',heroSub:'Завантажте будь-яку англомовну наукову статтю та отримайте точний підсумок і ключові висновки вашою мовою.',pickerPrompt:'ОБЕРІТЬ ВАШУ МОВУ',step1Title:'Завантажте або вставте ваш рукопис',step1Sub:'PDF, .txt або .md — або вставте текст нижче',dropLabel:'Перетягніть файл сюди',dropSub:'Підтримується: .pdf, .txt, .md — або натисніть для перегляду',orDivider:'або вставте текст',pastePlaceholder:'Вставте повний текст рукопису тут…',step2Title:'Оберіть стиль підсумку',step2Sub:'Виберіть рівень деталізації',expertTitle:'Експерт',expertDesc:'Технічна мова · 10 ключових пунктів · Для дослідників',expertTag:'Дослідники',plainTitle:'Широка аудиторія',plainDesc:'Проста мова · 3 ключові висновки · Для всіх',plainTag:'Для всіх',btnRun:'Підсумувати англійською + українською',btnAnalyzing:'Аналізується…',btnChange:'Змінити мову',resultsTitle:'Результати',labelAbstract:'Реферат',labelSummary:'Підсумок',labelBullets:'Ключові пункти',labelGlossary:'🔑 Ключові терміни',labelCitation:'📎 Цитувати цю статтю',glossaryH1:'Науковий термін',glossaryH2:'Просте визначення',glossaryH3:'Переклад',btnCopyAll:'Копіювати все',btnCopyCite:'Копіювати',errNoFile:'Будь ласка, завантажте файл або вставте текст.',errNoLang:'Будь ласка, спочатку оберіть мову.'},
+  en:{heroEyebrow:'Scientific Abstract Translator',heroTitle:'Your language.<br>One abstract.<br>Three views.',heroSub:'Upload any English-language scientific paper and receive the abstract translated for scientists, three key points, and a plain-language version.',pickerPrompt:'SELECT YOUR LANGUAGE',step1Title:'Upload or paste your manuscript',step1Sub:'PDF, .txt, or .md — or paste text below',dropLabel:'Drop a file here',dropSub:'Supported: .pdf, .txt, .md — or click to browse',orDivider:'or paste text',pastePlaceholder:'Paste the full manuscript text here…',btnRun:'Translate abstract',btnAnalyzing:'Extracting & translating…',btnChange:'Change language',resultsTitle:'Three views of the abstract',labelScientist:"Scientist's abstract",introScientist:'The original abstract, translated with precise scientific terminology.',labelKeyPoints:'Three key points',introKeyPoints:'The most important findings from the abstract.',labelPlain:'Plain-language version',introPlain:'The same abstract, rewritten for a general audience (8th–12th grade reading level).',btnCopyAll:'Copy all',errNoFile:'Please upload a file or paste manuscript text.',errNoLang:'Please select a language first.'},
+  fr:{heroEyebrow:'Traducteur de résumés scientifiques',heroTitle:'Votre langue.<br>Un résumé.<br>Trois vues.',heroSub:"Déposez tout article scientifique en anglais et recevez le résumé traduit pour scientifiques, trois points clés et une version en langage simple.",pickerPrompt:'SÉLECTIONNEZ VOTRE LANGUE',step1Title:'Déposez ou collez votre manuscrit',step1Sub:'PDF, .txt ou .md — ou collez le texte ci-dessous',dropLabel:'Déposez un fichier ici',dropSub:'Formats : .pdf, .txt, .md — ou cliquez pour parcourir',orDivider:'ou coller le texte',pastePlaceholder:'Collez le texte complet du manuscrit ici…',btnRun:'Traduire le résumé',btnAnalyzing:'Extraction & traduction…',btnChange:'Changer de langue',resultsTitle:'Trois vues du résumé',labelScientist:'Résumé scientifique',introScientist:'Le résumé original, traduit avec une terminologie scientifique précise.',labelKeyPoints:'Trois points clés',introKeyPoints:'Les résultats les plus importants du résumé.',labelPlain:'Version en langage simple',introPlain:'Le même résumé, réécrit pour le grand public (niveau collège–lycée).',btnCopyAll:'Tout copier',errNoFile:'Veuillez déposer un fichier ou coller le texte du manuscrit.',errNoLang:"Veuillez d'abord sélectionner une langue."},
+  es:{heroEyebrow:'Traductor de resúmenes científicos',heroTitle:'Su idioma.<br>Un resumen.<br>Tres vistas.',heroSub:'Cargue cualquier artículo científico en inglés y reciba el resumen traducido para científicos, tres puntos clave y una versión en lenguaje sencillo.',pickerPrompt:'SELECCIONE SU IDIOMA',step1Title:'Cargue o pegue su manuscrito',step1Sub:'PDF, .txt o .md — o pegue el texto abajo',dropLabel:'Suelte un archivo aquí',dropSub:'Compatible: .pdf, .txt, .md — o haga clic para buscar',orDivider:'o pegar texto',pastePlaceholder:'Pegue el texto completo del manuscrito aquí…',btnRun:'Traducir resumen',btnAnalyzing:'Extrayendo y traduciendo…',btnChange:'Cambiar idioma',resultsTitle:'Tres vistas del resumen',labelScientist:'Resumen científico',introScientist:'El resumen original, traducido con terminología científica precisa.',labelKeyPoints:'Tres puntos clave',introKeyPoints:'Los hallazgos más importantes del resumen.',labelPlain:'Versión en lenguaje sencillo',introPlain:'El mismo resumen, reescrito para el público general (nivel secundario).',btnCopyAll:'Copiar todo',errNoFile:'Por favor cargue un archivo o pegue el texto.',errNoLang:'Por favor seleccione un idioma primero.'},
+  pt:{heroEyebrow:'Tradutor de resumos científicos',heroTitle:'A sua língua.<br>Um resumo.<br>Três vistas.',heroSub:'Carregue qualquer artigo científico em inglês e receba o resumo traduzido para cientistas, três pontos-chave e uma versão em linguagem simples.',pickerPrompt:'SELECIONE O SEU IDIOMA',step1Title:'Carregue ou cole o seu manuscrito',step1Sub:'PDF, .txt ou .md — ou cole o texto abaixo',dropLabel:'Largue um ficheiro aqui',dropSub:'Suportado: .pdf, .txt, .md — ou clique para procurar',orDivider:'ou colar texto',pastePlaceholder:'Cole o texto completo do manuscrito aqui…',btnRun:'Traduzir resumo',btnAnalyzing:'A extrair e traduzir…',btnChange:'Mudar de idioma',resultsTitle:'Três vistas do resumo',labelScientist:'Resumo científico',introScientist:'O resumo original, traduzido com terminologia científica precisa.',labelKeyPoints:'Três pontos-chave',introKeyPoints:'Os achados mais importantes do resumo.',labelPlain:'Versão em linguagem simples',introPlain:'O mesmo resumo, reescrito para o público geral (nível secundário).',btnCopyAll:'Copiar tudo',errNoFile:'Por favor carregue um ficheiro ou cole o texto.',errNoLang:'Por favor selecione um idioma primeiro.'},
+  it:{heroEyebrow:'Traduttore di abstract scientifici',heroTitle:'La tua lingua.<br>Un abstract.<br>Tre viste.',heroSub:'Carica qualsiasi articolo scientifico in inglese e ricevi l\'abstract tradotto per scienziati, tre punti chiave e una versione in linguaggio semplice.',pickerPrompt:'SELEZIONA LA TUA LINGUA',step1Title:'Carica o incolla il tuo manoscritto',step1Sub:'PDF, .txt o .md — o incolla il testo sotto',dropLabel:'Trascina un file qui',dropSub:'Supportati: .pdf, .txt, .md — o clicca per sfogliare',orDivider:'o incolla il testo',pastePlaceholder:'Incolla qui il testo completo del manoscritto…',btnRun:'Traduci abstract',btnAnalyzing:'Estrazione e traduzione…',btnChange:'Cambia lingua',resultsTitle:'Tre viste dell\'abstract',labelScientist:'Abstract scientifico',introScientist:'L\'abstract originale, tradotto con terminologia scientifica precisa.',labelKeyPoints:'Tre punti chiave',introKeyPoints:'I risultati più importanti dell\'abstract.',labelPlain:'Versione in linguaggio semplice',introPlain:'Lo stesso abstract, riscritto per il grande pubblico (livello scuola superiore).',btnCopyAll:'Copia tutto',errNoFile:'Carica un file o incolla il testo del manoscritto.',errNoLang:'Seleziona prima una lingua.'},
+  ar:{heroEyebrow:'مترجم الملخصات العلمية',heroTitle:'لغتك.<br>ملخص واحد.<br>ثلاث رؤى.',heroSub:'قم بتحميل أي ورقة علمية باللغة الإنجليزية واحصل على الملخص مترجماً للعلماء، وثلاث نقاط رئيسية، ونسخة بلغة بسيطة.',pickerPrompt:'اختر لغتك',step1Title:'حمّل أو الصق مخطوطتك',step1Sub:'PDF أو .txt أو .md — أو الصق النص أدناه',dropLabel:'أسقط الملف هنا',dropSub:'المدعوم: .pdf, .txt, .md — أو انقر للتصفح',orDivider:'أو الصق النص',pastePlaceholder:'الصق النص الكامل للمخطوطة هنا…',btnRun:'ترجمة الملخص',btnAnalyzing:'الاستخراج والترجمة…',btnChange:'تغيير اللغة',resultsTitle:'ثلاث رؤى للملخص',labelScientist:'الملخص العلمي',introScientist:'الملخص الأصلي، مترجم بمصطلحات علمية دقيقة.',labelKeyPoints:'ثلاث نقاط رئيسية',introKeyPoints:'أهم النتائج من الملخص.',labelPlain:'نسخة بلغة بسيطة',introPlain:'نفس الملخص، معاد كتابته للجمهور العام (مستوى المدرسة الثانوية).',btnCopyAll:'نسخ الكل',errNoFile:'يرجى تحميل ملف أو لصق نص المخطوطة.',errNoLang:'يرجى اختيار لغة أولاً.'},
+  zh:{heroEyebrow:'科学摘要翻译器',heroTitle:'您的语言。<br>一份摘要。<br>三种视角。',heroSub:'上传任何英文科学论文，获得为科学家翻译的摘要、三个要点和通俗易懂的版本。',pickerPrompt:'请选择您的语言',step1Title:'上传或粘贴您的手稿',step1Sub:'支持PDF、.txt或.md格式——或在下方粘贴文本',dropLabel:'将文件拖放到此处',dropSub:'支持：.pdf, .txt, .md——或点击浏览',orDivider:'或粘贴文本',pastePlaceholder:'请在此粘贴完整的手稿文本…',btnRun:'翻译摘要',btnAnalyzing:'提取和翻译中…',btnChange:'更换语言',resultsTitle:'摘要的三种视角',labelScientist:'科学家版摘要',introScientist:'原始摘要，使用精确的科学术语翻译。',labelKeyPoints:'三个要点',introKeyPoints:'摘要中最重要的发现。',labelPlain:'通俗版本',introPlain:'同样的摘要，为大众改写（8-12年级阅读水平）。',btnCopyAll:'复制全部',errNoFile:'请上传文件或粘贴手稿文本。',errNoLang:'请先选择语言。'},
+  sw:{heroEyebrow:'Mfasiri wa Muhtasari wa Kisayansi',heroTitle:'Lugha yako.<br>Muhtasari mmoja.<br>Maoni matatu.',heroSub:'Pakia makala yoyote ya kisayansi kwa Kiingereza na upokee muhtasari uliotafsiriwa kwa wanasayansi, pointi tatu muhimu, na toleo la lugha rahisi.',pickerPrompt:'CHAGUA LUGHA YAKO',step1Title:'Pakia au bandika maandishi yako',step1Sub:'PDF, .txt au .md — au bandika maandishi hapa chini',dropLabel:'Buruta faili hapa',dropSub:'Inayoungwa mkono: .pdf, .txt, .md — au bonyeza kuvinjari',orDivider:'au bandika maandishi',pastePlaceholder:'Bandika maandishi kamili ya makala hapa…',btnRun:'Tafsiri muhtasari',btnAnalyzing:'Inaondoa na kutafsiri…',btnChange:'Badilisha lugha',resultsTitle:'Maoni matatu ya muhtasari',labelScientist:'Muhtasari wa kisayansi',introScientist:'Muhtasari wa asili, uliotafsiriwa kwa istilahi sahihi za kisayansi.',labelKeyPoints:'Pointi tatu muhimu',introKeyPoints:'Matokeo muhimu zaidi kutoka kwa muhtasari.',labelPlain:'Toleo la lugha rahisi',introPlain:'Muhtasari uleule, ulioandikwa upya kwa hadhira ya jumla.',btnCopyAll:'Nakili yote',errNoFile:'Tafadhali pakia faili au bandika maandishi.',errNoLang:'Tafadhali chagua lugha kwanza.'},
+  am:{heroEyebrow:'የሳይንሳዊ ማጠቃለያ ተርጓሚ',heroTitle:'ቋንቋዎ።<br>አንድ ማጠቃለያ።<br>ሶስት እይታዎች።',heroSub:'ማንኛውም የእንግሊዝኛ ሳይንሳዊ ጽሑፍ ሰቅለው ለሳይንቲስቶች የተተረጎመ ማጠቃለያ፣ ሶስት ቁልፍ ነጥቦች እና ቀላል ቋንቋ ስሪት ያግኙ።',pickerPrompt:'ቋንቋዎን ይምረጡ',step1Title:'ጽሑፍዎን ይስቀሉ ወይም ይለጥፉ',step1Sub:'PDF, .txt ወይም .md — ወይም ጽሑፍ ከዚህ በታች ይለጥፉ',dropLabel:'ፋይሉን እዚህ ይጣሉ',dropSub:'የሚደገፉ: .pdf, .txt, .md',orDivider:'ወይም ጽሑፍ ይለጥፉ',pastePlaceholder:'የጽሑፉን ሙሉ ጽሑፍ እዚህ ይለጥፉ…',btnRun:'ማጠቃለያ ተርጉም',btnAnalyzing:'እያወጣ እና እየተተረጎመ…',btnChange:'ቋንቋ ይቀይሩ',resultsTitle:'ሶስት የማጠቃለያ እይታዎች',labelScientist:'ሳይንሳዊ ማጠቃለያ',introScientist:'የመጀመሪያው ማጠቃለያ፣ በትክክለኛ ሳይንሳዊ ቃላት የተተረጎመ።',labelKeyPoints:'ሶስት ቁልፍ ነጥቦች',introKeyPoints:'ከማጠቃለያው በጣም አስፈላጊ ግኝቶች።',labelPlain:'ቀላል ቋንቋ ስሪት',introPlain:'ተመሳሳይ ማጠቃለያ፣ ለአጠቃላይ ተመልካቾች እንደገና የተጻፈ።',btnCopyAll:'ሁሉንም ቅዳ',errNoFile:'እባክዎ ፋይል ይስቀሉ ወይም ጽሑፍ ይለጥፉ።',errNoLang:'እባክዎ መጀመሪያ ቋንቋ ይምረጡ።'},
+  hi:{heroEyebrow:'वैज्ञानिक सार अनुवादक',heroTitle:'आपकी भाषा।<br>एक सार।<br>तीन दृष्टिकोण।',heroSub:'कोई भी अंग्रेजी वैज्ञानिक पेपर अपलोड करें और वैज्ञानिकों के लिए अनुवादित सार, तीन मुख्य बिंदु और सरल भाषा संस्करण प्राप्त करें।',pickerPrompt:'अपनी भाषा चुनें',step1Title:'अपनी पांडुलिपि अपलोड करें या पेस्ट करें',step1Sub:'PDF, .txt या .md — या नीचे टेक्स्ट पेस्ट करें',dropLabel:'यहाँ फ़ाइल छोड़ें',dropSub:'समर्थित: .pdf, .txt, .md',orDivider:'या टेक्स्ट पेस्ट करें',pastePlaceholder:'यहाँ पांडुलिपि का पूरा टेक्स्ट पेस्ट करें…',btnRun:'सार का अनुवाद करें',btnAnalyzing:'निकाला और अनुवादित किया जा रहा है…',btnChange:'भाषा बदलें',resultsTitle:'सार के तीन दृष्टिकोण',labelScientist:'वैज्ञानिक सार',introScientist:'मूल सार, सटीक वैज्ञानिक शब्दावली के साथ अनुवादित।',labelKeyPoints:'तीन मुख्य बिंदु',introKeyPoints:'सार से सबसे महत्वपूर्ण निष्कर्ष।',labelPlain:'सरल भाषा संस्करण',introPlain:'वही सार, सामान्य दर्शकों के लिए फिर से लिखा गया।',btnCopyAll:'सब कुछ कॉपी करें',errNoFile:'कृपया फ़ाइल अपलोड करें या टेक्स्ट पेस्ट करें।',errNoLang:'कृपया पहले एक भाषा चुनें।'},
+  bn:{heroEyebrow:'বৈজ্ঞানিক সারসংক্ষেপ অনুবাদক',heroTitle:'আপনার ভাষা।<br>একটি সারসংক্ষেপ।<br>তিনটি দৃষ্টিভঙ্গি।',heroSub:'যেকোনো ইংরেজি বৈজ্ঞানিক পেপার আপলোড করুন এবং বিজ্ঞানীদের জন্য অনূদিত সারসংক্ষেপ, তিনটি মূল বিষয় এবং সহজ ভাষার সংস্করণ পান।',pickerPrompt:'আপনার ভাষা নির্বাচন করুন',step1Title:'আপনার পাণ্ডুলিপি আপলোড বা পেস্ট করুন',step1Sub:'PDF, .txt বা .md',dropLabel:'এখানে ফাইল ছেড়ে দিন',dropSub:'সমর্থিত: .pdf, .txt, .md',orDivider:'অথবা টেক্সট পেস্ট করুন',pastePlaceholder:'এখানে পাণ্ডুলিপির সম্পূর্ণ টেক্সট পেস্ট করুন…',btnRun:'সারসংক্ষেপ অনুবাদ করুন',btnAnalyzing:'নিষ্কাশন এবং অনুবাদ হচ্ছে…',btnChange:'ভাষা পরিবর্তন করুন',resultsTitle:'সারসংক্ষেপের তিনটি দৃষ্টিভঙ্গি',labelScientist:'বৈজ্ঞানিক সারসংক্ষেপ',introScientist:'মূল সারসংক্ষেপ, সঠিক বৈজ্ঞানিক পরিভাষা সহ অনূদিত।',labelKeyPoints:'তিনটি মূল বিষয়',introKeyPoints:'সারসংক্ষেপ থেকে সবচেয়ে গুরুত্বপূর্ণ ফলাফল।',labelPlain:'সহজ ভাষার সংস্করণ',introPlain:'একই সারসংক্ষেপ, সাধারণ পাঠকদের জন্য পুনর্লিখিত।',btnCopyAll:'সব কপি করুন',errNoFile:'অনুগ্রহ করে একটি ফাইল আপলোড করুন বা টেক্সট পেস্ট করুন।',errNoLang:'অনুগ্রহ করে প্রথমে একটি ভাষা নির্বাচন করুন।'},
+  id:{heroEyebrow:'Penerjemah Abstrak Ilmiah',heroTitle:'Bahasa Anda.<br>Satu abstrak.<br>Tiga sudut pandang.',heroSub:'Unggah makalah ilmiah berbahasa Inggris dan terima abstrak yang diterjemahkan untuk ilmuwan, tiga poin utama, dan versi bahasa sederhana.',pickerPrompt:'PILIH BAHASA ANDA',step1Title:'Unggah atau tempel manuskrip Anda',step1Sub:'PDF, .txt, atau .md',dropLabel:'Seret file ke sini',dropSub:'Didukung: .pdf, .txt, .md',orDivider:'atau tempel teks',pastePlaceholder:'Tempel teks lengkap manuskrip di sini…',btnRun:'Terjemahkan abstrak',btnAnalyzing:'Mengekstrak dan menerjemahkan…',btnChange:'Ganti bahasa',resultsTitle:'Tiga sudut pandang abstrak',labelScientist:'Abstrak ilmiah',introScientist:'Abstrak asli, diterjemahkan dengan terminologi ilmiah yang tepat.',labelKeyPoints:'Tiga poin utama',introKeyPoints:'Temuan terpenting dari abstrak.',labelPlain:'Versi bahasa sederhana',introPlain:'Abstrak yang sama, ditulis ulang untuk audiens umum.',btnCopyAll:'Salin semua',errNoFile:'Harap unggah file atau tempel teks manuskrip.',errNoLang:'Harap pilih bahasa terlebih dahulu.'},
+  uk:{heroEyebrow:'Перекладач наукових анотацій',heroTitle:'Ваша мова.<br>Одна анотація.<br>Три погляди.',heroSub:'Завантажте будь-яку англомовну наукову статтю та отримайте анотацію, перекладену для науковців, три ключові пункти та версію простою мовою.',pickerPrompt:'ОБЕРІТЬ ВАШУ МОВУ',step1Title:'Завантажте або вставте ваш рукопис',step1Sub:'PDF, .txt або .md',dropLabel:'Перетягніть файл сюди',dropSub:'Підтримується: .pdf, .txt, .md',orDivider:'або вставте текст',pastePlaceholder:'Вставте повний текст рукопису тут…',btnRun:'Перекласти анотацію',btnAnalyzing:'Витяг та переклад…',btnChange:'Змінити мову',resultsTitle:'Три погляди на анотацію',labelScientist:'Наукова анотація',introScientist:'Оригінальна анотація, перекладена з точною науковою термінологією.',labelKeyPoints:'Три ключові пункти',introKeyPoints:'Найважливіші висновки з анотації.',labelPlain:'Версія простою мовою',introPlain:'Та сама анотація, переписана для широкої аудиторії.',btnCopyAll:'Копіювати все',errNoFile:'Будь ласка, завантажте файл або вставте текст.',errNoLang:'Будь ласка, спочатку оберіть мову.'},
 };
 
-// Fallback to English for languages without full UI translation
 const FALLBACK_CODES = ['ha','yo','ln','mg','ne','tl','rw','rn','ny'];
 FALLBACK_CODES.forEach(code => { UI[code] = {...UI.en}; });
-// Set run button text for each
-UI.ha.btnRun = 'Taƙaita a Turanci + Hausa';
-UI.yo.btnRun = 'Ṣe akopọ ni Gẹẹsi + Yorùbá';
-UI.ln.btnRun = 'Kotia na Lingelesi + Lingála';
-UI.mg.btnRun = 'Manambara amin\'ny Anglisy + Malagasy';
-UI.ne.btnRun = 'अंग्रेजी + नेपालीमा सारांश';
-UI.tl.btnRun = 'I-summarize sa Ingles + Tagalog';
-UI.rw.btnRun = 'Gusobanura mu Cyongereza + Kinyarwanda';
-UI.rn.btnRun = 'Gusobanura mu Giingereza + Ikirundi';
-UI.ny.btnRun = 'Fupikitsa mu Chingerezi + Chichewa';
+UI.ha.btnRun = 'Fassara taƙaitaccen bayani';
+UI.yo.btnRun = 'Tumọ akopọ';
+UI.ln.btnRun = 'Kobongola mokuse';
+UI.mg.btnRun = 'Adikao ny famintinana';
+UI.ne.btnRun = 'सारांश अनुवाद गर्नुहोस्';
+UI.tl.btnRun = 'I-translate ang abstract';
+UI.rw.btnRun = 'Hindura incamake';
+UI.rn.btnRun = 'Hindura incamake';
+UI.ny.btnRun = 'Masulira chidule';
 
-// ── State ─────────────────────────────────────────────────────────────────
 let selectedLang = null;
-let currentMode  = 'expert';
-let fileBase64   = null;
-let fileType     = null;
-let citations    = {apa:'',vancouver:'',harvard:'',authors:''};
-let activeCiteStyle = 'apa';
+let fileBase64 = null;
+let fileType = null;
 
-// ── Build language picker ─────────────────────────────────────────────────
 function buildPicker() {
   const grid = document.getElementById('langGridPicker');
   LANGS.forEach(lang => {
@@ -506,98 +334,58 @@ function buildPicker() {
   });
 }
 
-// ── Apply UI language ─────────────────────────────────────────────────────
 function applyUI(code) {
   const u = UI[code] || UI.en;
   const lang = LANGS.find(l => l.code === code);
-
-  // Page direction
   document.documentElement.lang = code;
   document.documentElement.dir = lang.dir;
-
-  // Hero
   setText('heroEyebrow', u.heroEyebrow);
   setHTML('heroTitle', u.heroTitle);
   setText('heroSub', u.heroSub);
   setText('pickerPrompt', u.pickerPrompt);
-
-  // App section
   setText('step1Title', u.step1Title);
   setText('step1Sub', u.step1Sub);
   setHTML('dropLabel', `<strong>${u.dropLabel}</strong>`);
   setText('dropSub', u.dropSub);
   setText('orDivider', u.orDivider);
   document.getElementById('pasteArea').placeholder = u.pastePlaceholder;
-  setText('step2Title', u.step2Title);
-  setText('step2Sub', u.step2Sub);
-  setText('expertTitle', u.expertTitle);
-  setText('expertDesc', u.expertDesc);
-  setText('expertTag', u.expertTag);
-  setText('plainTitle', u.plainTitle);
-  setText('plainDesc', u.plainDesc);
-  setText('plainTag', u.plainTag);
   setText('btnChangeLang', u.btnChange);
   setText('headerLangDisplay', lang.native);
   setText('selectedLangDisplay', `${lang.native} — ${lang.english}`);
-
-  // Results labels
+  setText('runBtnLabel', u.btnRun);
   setText('resultsTitle', u.resultsTitle);
-  setText('labelAbstract', u.labelAbstract);
-  setText('labelSummary', u.labelSummary);
-  setText('labelBullets', u.labelBullets);
-  setText('labelGlossary', u.labelGlossary);
-  setText('labelCitation', u.labelCitation);
-  setText('glossaryH1', u.glossaryH1);
-  setText('glossaryH2', u.glossaryH2);
-  setText('glossaryH3', u.glossaryH3);
+  setText('resultsSubtitle', '');
+  setText('labelScientist', u.labelScientist);
+  setText('introScientist', u.introScientist);
+  setText('labelKeyPoints', u.labelKeyPoints);
+  setText('introKeyPoints', u.introKeyPoints);
+  setText('labelPlain', u.labelPlain);
+  setText('introPlain', u.introPlain);
   setText('btnCopyAll', u.btnCopyAll);
-  setText('btnCopyCite', u.btnCopyCite);
 
-  // Language column headers for result columns
   const dotClass = `dot-${lang.color}`;
   const nameClass = `col-lang-name c-${lang.color}`;
-  ['Abstract','Summary','Bullets'].forEach(section => {
-    const dot  = document.getElementById(`dot${section}Lang`);
-    const name = document.getElementById(`name${section}Lang`);
-    const col  = document.getElementById(`col${section}Lang`);
-    if (dot)  { dot.className  = 'col-dot ' + dotClass; }
+  ['Scientist','KeyPoints','Plain'].forEach(section => {
+    const dot = document.getElementById('dot' + section);
+    const name = document.getElementById('name' + section);
+    const col = document.getElementById('col' + section);
+    if (dot) dot.className = 'col-dot ' + dotClass;
     if (name) { name.className = nameClass; name.textContent = lang.native; }
     if (col && lang.dir === 'rtl') col.classList.add('rtl');
     else if (col) col.classList.remove('rtl');
   });
-
-  // Glossary translation header
-  const gh3 = document.getElementById('glossaryH3');
-  if (gh3) gh3.textContent = code !== 'en' ? `${u.glossaryH3} (${lang.native})` : u.glossaryH3;
-
-  // Run button ticker
-  buildRunButton(u, lang);
-}
-
-function buildRunButton(u, lang) {
-  const ticker = document.getElementById('btnTicker');
-  const text = u.btnRun.replace('{lang}', lang.native);
-  // Duplicate for seamless loop
-  ticker.innerHTML = `<span>${text}</span><span>${text}</span>`;
 }
 
 function setText(id, text) { const el = document.getElementById(id); if (el) el.textContent = text; }
 function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
 
-// ── Select language ───────────────────────────────────────────────────────
 function selectLang(code) {
   selectedLang = code;
-
-  // Update button states
   LANGS.forEach(l => {
     const btn = document.getElementById('langBtn-' + l.code);
     if (btn) btn.classList.toggle('selected', l.code === code);
   });
-
-  // Apply UI
   applyUI(code);
-
-  // Show app section
   const app = document.getElementById('appSection');
   app.classList.add('visible');
   app.scrollIntoView({behavior:'smooth', block:'start'});
@@ -614,15 +402,7 @@ function changeLang() {
   selectedLang = null;
 }
 
-// ── Mode toggle ───────────────────────────────────────────────────────────
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('modeExpert').className = 'mode-option' + (mode === 'expert' ? ' active-expert' : '');
-  document.getElementById('modePlain').className  = 'mode-option' + (mode === 'plain'  ? ' active-plain'  : '');
-}
-
-// ── File handling ─────────────────────────────────────────────────────────
-const dropZone  = document.getElementById('dropZone');
+const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
 dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag'); });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
@@ -640,14 +420,15 @@ function handleFile(f) {
   reader.readAsDataURL(f);
 }
 
-// ── UI helpers ────────────────────────────────────────────────────────────
 function showError(msg) { const b = document.getElementById('errorBox'); b.textContent = msg; b.classList.add('visible'); }
-function clearError()   { document.getElementById('errorBox').classList.remove('visible'); }
+function clearError() { document.getElementById('errorBox').classList.remove('visible'); }
 
 function setParagraphs(id, text) {
   const el = document.getElementById(id); if (!el) return;
   el.innerHTML = '';
-  (text||'').split(/\n+/).filter(p=>p.trim()).forEach(p => { const para = document.createElement('p'); para.textContent = p.trim(); el.appendChild(para); });
+  (text||'').split(/\n+/).filter(p=>p.trim()).forEach(p => {
+    const para = document.createElement('p'); para.textContent = p.trim(); el.appendChild(para);
+  });
 }
 
 function renderBullets(id, items, colorCode) {
@@ -655,37 +436,14 @@ function renderBullets(id, items, colorCode) {
   ul.innerHTML = '';
   (items||[]).forEach((item, i) => {
     const li = document.createElement('li'); li.className = 'bullet-item';
-    const num = document.createElement('span'); num.className = `bullet-num bg-${colorCode} c-${colorCode}`; num.textContent = i+1;
+    const num = document.createElement('span');
+    num.className = `bullet-num bg-${colorCode} c-${colorCode}`;
+    num.textContent = i+1;
     const txt = document.createElement('span'); txt.textContent = item;
     li.appendChild(num); li.appendChild(txt); ul.appendChild(li);
   });
 }
 
-function renderGlossary(glossaryEn, glossaryLang) {
-  const tbody = document.getElementById('glossaryBody'); if (!tbody) return;
-  tbody.innerHTML = '';
-  (glossaryEn||[]).forEach((item, i) => {
-    const tr = document.createElement('tr');
-    const trans = (glossaryLang&&glossaryLang[i]) ? (glossaryLang[i].translation||'') : '';
-    tr.innerHTML = `<td><div class="g-term">${item.term||''}</div><div class="g-def">${item.definition||''}</div></td><td>${item.definition||''}</td><td>${trans}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-// ── Citation ──────────────────────────────────────────────────────────────
-function showCitation(style) {
-  activeCiteStyle = style;
-  document.querySelectorAll('.cit-tab').forEach(t => t.classList.toggle('active', t.textContent.toLowerCase() === style));
-  const el = document.getElementById('citationText'); if (el) el.textContent = citations[style]||'';
-  const note = document.getElementById('citationNote'); if (note&&citations.authors) note.textContent = `In-text: (${citations.authors})`;
-}
-function copyCitation() {
-  navigator.clipboard.writeText(citations[activeCiteStyle]||'').then(() => {
-    const btn = document.getElementById('btnCopyCite'); btn.textContent = '✓'; setTimeout(() => { if(selectedLang) btn.textContent = (UI[selectedLang]||UI.en).btnCopyCite; }, 1500);
-  });
-}
-
-// ── Main summarize ────────────────────────────────────────────────────────
 async function runSummarize() {
   clearError();
   const u = UI[selectedLang] || UI.en;
@@ -701,73 +459,57 @@ async function runSummarize() {
 
   try {
     const payload = {languages: langs};
-    if (fileBase64 && fileType === 'application/pdf') { payload.type='pdf'; payload.data=fileBase64; }
-    else if (fileBase64) { payload.type='text'; payload.text=decodeURIComponent(escape(atob(fileBase64))); }
-    else { payload.type='text'; payload.text=pasteText; }
+    if (fileBase64 && fileType === 'application/pdf') {
+      payload.type = 'pdf'; payload.data = fileBase64;
+    } else if (fileBase64) {
+      payload.type = 'text'; payload.text = decodeURIComponent(escape(atob(fileBase64)));
+    } else {
+      payload.type = 'text'; payload.text = pasteText;
+    }
 
     const resp = await fetch(API_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
-    if (!resp.ok) { const err = await resp.json().catch(()=>({})); throw new Error((err.error||'Error '+resp.status)+(err.detail?' — '+err.detail:'')); }
+    if (!resp.ok) {
+      const err = await resp.json().catch(()=>({}));
+      throw new Error((err.error||'Error '+resp.status));
+    }
     const p = await resp.json();
-
     const lang = LANGS.find(l => l.code === selectedLang);
-    const isExpert = currentMode === 'expert';
     const colorCode = lang ? lang.color : selectedLang;
 
-    // Abstract
     setParagraphs('abstractEn', p.abstract_en);
-    setParagraphs('abstractLang', selectedLang !== 'en' ? p['abstract_'+selectedLang] : p.abstract_en);
-
-    // Summary (expert or plain)
-    const sumEnKey  = isExpert ? 'summary_expert_en'           : 'summary_plain_en';
-    const sumLangKey= isExpert ? 'summary_expert_'+selectedLang : 'summary_plain_'+selectedLang;
-    setParagraphs('summaryEn',   p[sumEnKey]);
-    setParagraphs('summaryLang', selectedLang !== 'en' ? p[sumLangKey] : p[sumEnKey]);
-
-    // Bullets (expert or plain)
-    const bulEnKey  = isExpert ? 'bullets_expert_en'           : 'bullets_plain_en';
-    const bulLangKey= isExpert ? 'bullets_expert_'+selectedLang : 'bullets_plain_'+selectedLang;
-    renderBullets('bulletsEn',   p[bulEnKey],   'en');
-    renderBullets('bulletsLang', selectedLang !== 'en' ? p[bulLangKey] : p[bulEnKey], colorCode);
-
-    // Glossary
-    renderGlossary(p.glossary_en, selectedLang !== 'en' ? p['glossary_'+selectedLang] : null);
-
-    // Citations
-    citations = {apa:p.citation_apa||'', vancouver:p.citation_vancouver||'', harvard:p.citation_harvard||'', authors:p.citation_authors||''};
-    showCitation('apa');
+    setParagraphs('abstractScientist', selectedLang !== 'en' ? p.abstract_scientist : p.abstract_en);
+    renderBullets('keyPointsEn', p.key_points_en, 'en');
+    renderBullets('keyPointsLang', selectedLang !== 'en' ? p.key_points_lang : p.key_points_en, colorCode);
+    setParagraphs('plainEn', p.abstract_plain_en);
+    setParagraphs('plainLang', selectedLang !== 'en' ? p.abstract_plain_lang : p.abstract_plain_en);
 
     document.getElementById('results').classList.add('visible');
     document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
-
   } catch(e) {
     showError('Error: ' + e.message);
   } finally {
     btn.disabled = false;
     const u2 = UI[selectedLang]||UI.en;
-    const lang2 = LANGS.find(l=>l.code===selectedLang);
-    buildRunButton(u2, lang2||LANGS[0]);
+    btn.innerHTML = `<span id="runBtnLabel">${u2.btnRun}</span>`;
   }
 }
 
-// ── Copy all ──────────────────────────────────────────────────────────────
 function copyAll() {
-  const isExpert = currentMode === 'expert';
   const lang = LANGS.find(l=>l.code===selectedLang);
   const sections = [];
-  const absEn   = document.getElementById('abstractEn')?.innerText||'';
-  const absLang = document.getElementById('abstractLang')?.innerText||'';
-  const sumEn   = document.getElementById('summaryEn')?.innerText||'';
-  const sumLang = document.getElementById('summaryLang')?.innerText||'';
-  const bulEn   = [...(document.getElementById('bulletsEn')?.querySelectorAll('.bullet-item span:last-child')||[])].map((el,i)=>`${i+1}. ${el.textContent}`).join('\n');
-  const bulLang = [...(document.getElementById('bulletsLang')?.querySelectorAll('.bullet-item span:last-child')||[])].map((el,i)=>`${i+1}. ${el.textContent}`).join('\n');
+  const absEn = document.getElementById('abstractEn')?.innerText || '';
+  const absLang = document.getElementById('abstractScientist')?.innerText || '';
+  const bulEn = [...(document.getElementById('keyPointsEn')?.querySelectorAll('.bullet-item span:last-child')||[])].map((el,i)=>`${i+1}. ${el.textContent}`).join('\n');
+  const bulLang = [...(document.getElementById('keyPointsLang')?.querySelectorAll('.bullet-item span:last-child')||[])].map((el,i)=>`${i+1}. ${el.textContent}`).join('\n');
+  const plainEn = document.getElementById('plainEn')?.innerText || '';
+  const plainLang = document.getElementById('plainLang')?.innerText || '';
 
-  if (absEn)   sections.push(`── ABSTRACT (English) ──\n\n${absEn}`);
-  if (absLang && selectedLang!=='en') sections.push(`── ABSTRACT (${lang?.native}) ──\n\n${absLang}`);
-  if (sumEn)   sections.push(`── SUMMARY (English) ──\n\n${sumEn}`);
-  if (sumLang && selectedLang!=='en') sections.push(`── SUMMARY (${lang?.native}) ──\n\n${sumLang}`);
-  if (bulEn)   sections.push(`── KEY POINTS (English) ──\n\n${bulEn}`);
-  if (bulLang && selectedLang!=='en') sections.push(`── KEY POINTS (${lang?.native}) ──\n\n${bulLang}`);
-  if (citations.apa) sections.push(`── CITATION (APA) ──\n\n${citations.apa}\n\nVancouver: ${citations.vancouver}\n\nHarvard: ${citations.harvard}`);
+  if (absEn) sections.push(`── SCIENTIST'S ABSTRACT (English) ──\n\n${absEn}`);
+  if (absLang && selectedLang !== 'en') sections.push(`── SCIENTIST'S ABSTRACT (${lang?.native}) ──\n\n${absLang}`);
+  if (bulEn) sections.push(`── KEY POINTS (English) ──\n\n${bulEn}`);
+  if (bulLang && selectedLang !== 'en') sections.push(`── KEY POINTS (${lang?.native}) ──\n\n${bulLang}`);
+  if (plainEn) sections.push(`── PLAIN-LANGUAGE VERSION (English) ──\n\n${plainEn}`);
+  if (plainLang && selectedLang !== 'en') sections.push(`── PLAIN-LANGUAGE VERSION (${lang?.native}) ──\n\n${plainLang}`);
 
   navigator.clipboard.writeText(sections.join('\n\n\n')).then(() => {
     const btn = document.getElementById('btnCopyAll');
@@ -776,9 +518,7 @@ function copyAll() {
   });
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────
 buildPicker();
 </script>
-
 </body>
 </html>
